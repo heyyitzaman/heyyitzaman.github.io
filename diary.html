@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Diary - YourName</title>
+    <link rel="stylesheet" href="css/base.css">
+    <link rel="stylesheet" href="css/layout.css">
+    <link rel="stylesheet" href="css/components.css">
+    <link rel="stylesheet" href="css/animations.css">
+    <style>
+        .card {
+            padding: 1rem;
+            border-radius: var(--radius);
+            background: var(--card);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            margin-bottom: 1rem;
+        }
+
+        .card img {
+            width: 100%;
+            border-radius: var(--radius);
+            margin-bottom: 0.5rem;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(15, 23, 42, 0.85);
+            justify-content: center;
+            align-items: center;
+            z-index: 100;
+        }
+
+        .modal.active {
+            display: flex;
+        }
+
+        .modal-content {
+            background: var(--card);
+            border-radius: var(--radius);
+            padding: 2rem;
+            max-width: 700px;
+            width: 90%;
+            max-height: 80vh;
+            overflow-y: auto;
+            animation: fadeIn 0.4s ease;
+            position: relative;
+        }
+
+        /* Close button fixed relative to modal viewport */
+        .modal .close {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--accent);
+            z-index: 101;
+            background: var(--card);
+            border-radius: 50%;
+            padding: 0.2rem 0.5rem;
+        }
+
+        .modal-content img {
+            width: 100%;
+            border-radius: var(--radius);
+            margin-bottom: 1rem;
+        }
+
+        .card h3,
+        .modal-content h2 {
+            margin: 0.5rem 0;
+        }
+
+        .muted {
+            color: #94a3b8;
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+
+<body data-page="diary">
+    <div class="cursor-dot" id="cursorDot"></div>
+
+    <header class="nav">
+        <div class="container nav-inner">
+            <h2>Aman Pandey</h2>
+            <button class="hamburger" id="hamburger">
+                <span></span>
+                <span></span>
+            </button>
+
+            <nav id="mobileNav">
+                <a href="index.html">Home</a>
+                <a href="about.html">Journey</a>
+                <a href="blog.html">Blog</a>
+                <a href="diary.html">Diary</a>
+                <span class="theme-toggle" id="themeToggle">☀ / 🌙</span>
+            </nav>
+
+        </div>
+    </header>
+
+    <main class="container fade-in">
+        <h1>Diary</h1>
+        <p class="muted">Click "Read more" to view the full diary entry.</p>
+
+        <div class="grid grid-2" id="diary-grid"></div>
+        <div id="modals-container"></div>
+    </main>
+
+    <footer class="container muted">
+        Press <strong>B</strong> → Blog · <strong>H</strong> → Home · <strong>J</strong> → My Journey
+    </footer>
+    <script src="js/diary_entries.js"></script>
+    <script src="js/base.js" defer></script>
+    <script>
+        const grid = document.getElementById('diary-grid');
+        const modalsContainer = document.getElementById('modals-container');
+
+        diaryEntries.forEach(entry => {
+            // Card with optional image
+            const card = document.createElement('div');
+            card.classList.add('card');
+            card.innerHTML = `
+    ${entry.image ? `<img src="${entry.image}" alt="${entry.title}">` : ""}
+    <h3>${entry.title}</h3>
+    <p class="muted">${entry.date}</p>
+    <p>${entry.snippet}</p>
+    <button class="button" data-modal="${entry.id}">Read more →</button>
+  `;
+            grid.appendChild(card);
+
+            // Modal with rich content
+            const modal = document.createElement('div');
+            modal.classList.add('modal');
+            modal.id = entry.id;
+            modal.innerHTML = `
+    <span class="close">&times;</span>
+    <div class="modal-content">
+      ${entry.image ? `<img src="${entry.image}" alt="${entry.title}">` : ""}
+      <h2>${entry.title}</h2>
+      <p class="muted">${entry.date}</p>
+      ${entry.full}
+    </div>
+  `;
+            modalsContainer.appendChild(modal);
+        });
+
+        // Open modal
+        document.querySelectorAll('.button').forEach(btn => {
+            btn.addEventListener('click', () => {
+                const modalId = btn.dataset.modal;
+                document.getElementById(modalId).classList.add('active');
+            });
+        });
+
+        // Close modal
+        document.querySelectorAll('.modal').forEach(modal => {
+            modal.addEventListener('click', e => {
+                if (e.target.classList.contains('modal') || e.target.classList.contains('close')) {
+                    modal.classList.remove('active');
+                }
+            });
+        });
+        document.addEventListener('keydown', e => {
+            if (e.key.toLowerCase() === 'b') location.href = 'blog.html';
+            if (e.key.toLowerCase() === 'h') location.href = 'index.html';
+            if (e.key.toLowerCase() === 'j') location.href = 'about.html';
+        });
+    </script>
+
+</body>
+
+</html>

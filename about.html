@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>My Journey</title>
+	<link rel="stylesheet" href="css/base.css">
+	<link rel="stylesheet" href="css/layout.css">
+	<link rel="stylesheet" href="css/components.css">
+	<link rel="stylesheet" href="css/animations.css">
+</head>
+
+<body data-page="journey">
+	<div class="cursor-dot" id="cursorDot"></div>
+
+	<header class="nav">
+		<div class="container nav-inner">
+			<h2>Aman Pandey</h2>
+			<button class="hamburger" id="hamburger">
+				<span></span>
+				<span></span>
+			</button>
+
+			<nav id="mobileNav">
+				<a href="index.html">Home</a>
+				<a href="about.html">Journey</a>
+				<a href="blog.html">Blog</a>
+				<a href="diary.html">Diary</a>
+				<span class="theme-toggle" id="themeToggle">☀ / 🌙</span>
+			</nav>
+
+		</div>
+	</header>
+
+	<main class="container fade-in">
+		<h1>My Journey</h1>
+		<p class="muted">From my first line of code to building this portfolio.</p>
+
+		<div class="grid grid-2">
+			<div class="card">
+				<h3>2018 - First Steps</h3>
+				<p>Started learning programming. Hello world!</p>
+			</div>
+			<div class="card">
+				<h3>2019 - First Project</h3>
+				<p>Built my first web application. Learned HTML, CSS basics.</p>
+			</div>
+			<div class="card">
+				<h3>2020 - Deep Dive</h3>
+				<p>Explored algorithms, data structures, and backend development.</p>
+			</div>
+			<div class="card">
+				<h3>2025 - Portfolio Live</h3>
+				<p>Built this website from scratch, responsive, and deployed via GitHub Pages.</p>
+			</div>
+		</div>
+	</main>
+	<footer class="container muted">
+		Press <strong>B</strong> → Blog · <strong>D</strong> → Diary · <strong>H</strong> → Home
+	</footer>
+	<script src="js/base.js" defer></script>
+	<script>
+		document.addEventListener('keydown', e => {
+			if (e.key.toLowerCase() === 'b') location.href = 'blog.html';
+			if (e.key.toLowerCase() === 'd') location.href = 'diary.html';
+			if (e.key.toLowerCase() === 'h') location.href = 'index.html';
+		});
+	</script>
+
+</body>
+
+</html>
