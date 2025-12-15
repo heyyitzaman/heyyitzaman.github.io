@@ -38,27 +38,27 @@
 		<a href="https://github.com/heyyitzaman" target="_blank" data-tooltip="GitHub">
 			<i data-lucide="github"></i>
 		</a>
-	
+
 		<a href="https://linkedin.com/in/iamanchandrapandey" target="_blank" data-tooltip="LinkedIn">
 			<i data-lucide="linkedin"></i>
 		</a>
-	
+
 		<a href="https://instagram.com/heyyitzaman" target="_blank" data-tooltip="Instagram">
 			<i data-lucide="instagram"></i>
 		</a>
-	
+
 		<a href="https://twitter.com/heyyitzaman" target="_blank" data-tooltip="Twitter / X">
 			<i data-lucide="twitter"></i>
 		</a>
-	
+
 		<a href="https://iamanpandey.medium.com/about" target="_blank" data-tooltip="Medium">
 			<i data-lucide="pen-tool"></i>
 		</a>
-	
+
 		<a href="https://leetcode.com/iaman_pandey" target="_blank" data-tooltip="LeetCode">
 			<i data-lucide="code"></i>
 		</a>
-	
+
 		<a href="mailto:iamancpandey@gmail.com" data-tooltip="Email">
 			<i data-lucide="mail"></i>
 		</a>
@@ -84,10 +84,10 @@
 		const modalsContainer = document.getElementById('modals-container');
 
 		blogs.forEach(entry => {
-				// Card with overview image
-				const card = document.createElement('div');
-				card.className = 'card';
-				card.innerHTML = `
+			// Card with overview image
+			const card = document.createElement('div');
+			card.className = 'card';
+			card.innerHTML = `
 				${entry.overviewImage ? `<img src="${entry.overviewImage}" alt="${entry.title}">` : ""}
 				<h3>${entry.title}</h3>
 				<p class="muted">by ${entry.author} • ${entry.date} • ${entry.readTime}</p>
@@ -95,13 +95,13 @@
 				<p class="muted">Category: ${entry.category}</p>
 				<button class="button" data-modal="${entry.id}">Read more →</button>
 			`;
-				grid.appendChild(card);
+			grid.appendChild(card);
 
 				// Modal with main image and rich content
-				const modal = document.createElement('div');
-				modal.className = 'modal';
-				modal.id = entry.id;
-				modal.innerHTML = `
+			const modal = document.createElement('div');
+			modal.className = 'modal';
+			modal.id = entry.id;
+			modal.innerHTML = `
 				<span class="close">&times;</span>
 				<div class="modal-content">
 					<article class="blog-content">
@@ -113,37 +113,69 @@
 							<h3>References</h3>
 							<ul>
 								${entry.references.map(r =>
-					`<li><a href="${r.url}" target="_blank">${r.text}</a></li>`
-				).join("")}
+				`<li><a href="${r.url}" target="_blank">${r.text}</a></li>`
+			).join("")}
 							</ul>
 						` : ""}
 					</article>
 				</div>
 			`;
-				modalsContainer.appendChild(modal);
-			});
+			modalsContainer.appendChild(modal);
+		});
 
 
 		// Open modal
 		document.querySelectorAll('.button').forEach(btn => {
 			btn.addEventListener('click', () => {
 				const modalId = btn.dataset.modal;
-				document.getElementById(modalId).classList.add('active');
+				const modal = document.getElementById(modalId);
+				modal.classList.add('active');
+				// Prevent body scroll when modal is open
+				document.body.style.overflow = 'hidden';
 			});
 		});
 
-		// Close modal
+		// Close modal function
+		function closeModal(modal) {
+			modal.classList.remove('active');
+			// Restore body scroll
+			document.body.style.overflow = '';
+		}
+
+		// Close modal on click
 		document.querySelectorAll('.modal').forEach(modal => {
+			// Close on overlay click
 			modal.addEventListener('click', e => {
-				if (e.target.classList.contains('modal') || e.target.classList.contains('close')) {
-					modal.classList.remove('active');
+				if (e.target.classList.contains('modal')) {
+					closeModal(modal);
 				}
 			});
+
+			// Close on close button click
+			const closeBtn = modal.querySelector('.close');
+			if (closeBtn) {
+				closeBtn.addEventListener('click', () => {
+					closeModal(modal);
+				});
+			}
 		});
+
+		// Close modal on Escape key
 		document.addEventListener('keydown', e => {
-			if (e.key.toLowerCase() === 'h') location.href = 'index.html';
-			if (e.key.toLowerCase() === 'd') location.href = 'diary.html';
-			if (e.key.toLowerCase() === 'j') location.href = 'about.html';
+			if (e.key === 'Escape') {
+				const activeModal = document.querySelector('.modal.active');
+				if (activeModal) {
+					closeModal(activeModal);
+					return;
+				}
+			}
+
+			// Keyboard shortcuts (only when modal is not open)
+			if (!document.querySelector('.modal.active')) {
+				if (e.key.toLowerCase() === 'h') location.href = 'index.html';
+				if (e.key.toLowerCase() === 'd') location.href = 'diary.html';
+				if (e.key.toLowerCase() === 'j') location.href = 'about.html';
+			}
 		});
 	</script>
 
