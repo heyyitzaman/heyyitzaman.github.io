@@ -2,20 +2,22 @@
 <html lang="en">
 
 <head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Blog - YourName</title>
-	<link rel="stylesheet" href="css/base.css">
-	<link rel="stylesheet" href="css/layout.css">
-	<link rel="stylesheet" href="css/components.css">
-	<link rel="stylesheet" href="css/animations.css">
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<title>Blog - Aman Pandey</title>
+
+	<link rel="stylesheet" href="css/base.css" />
+	<link rel="stylesheet" href="css/layout.css" />
+	<link rel="stylesheet" href="css/components.css" />
+	<link rel="stylesheet" href="css/animations.css" />
+
 	<script src="https://unpkg.com/lucide@latest"></script>
 </head>
 
 <body data-page="blog">
 	<div class="ambient-bg" aria-hidden="true"></div>
-
 	<div class="cursor-dot" id="cursorDot"></div>
+
 	<header class="nav">
 		<div class="container nav-inner">
 			<h2>Aman Pandey</h2>
@@ -78,107 +80,69 @@
 
 	<script src="js/blogs.js"></script>
 	<script src="js/base.js" defer></script>
+
 	<script>
+		document.addEventListener("DOMContentLoaded", () => {
+			lucide.createIcons();
 
-		const grid = document.getElementById('blog-grid');
-		const modalsContainer = document.getElementById('modals-container');
+			const grid = document.getElementById("blog-grid");
+			const modalsContainer = document.getElementById("modals-container");
 
-		blogs.forEach(entry => {
-			// Card with overview image
-			const card = document.createElement('div');
-			card.className = 'card';
-			card.innerHTML = `
-				${entry.overviewImage ? `<img src="${entry.overviewImage}" alt="${entry.title}">` : ""}
-				<h3>${entry.title}</h3>
-				<p class="muted">by ${entry.author} • ${entry.date} • ${entry.readTime}</p>
-				<p>${entry.snippet}</p>
-				<p class="muted">Category: ${entry.category}</p>
-				<button class="button" data-modal="${entry.id}">Read more →</button>
-			`;
-			grid.appendChild(card);
+			blogs.forEach(entry => {
+				const card = document.createElement("div");
+				card.className = "card";
+				card.innerHTML = `
+					${entry.overviewImage ? `<img src="${entry.overviewImage}" alt="${entry.title}">` : ""}
+					<h3>${entry.title}</h3>
+					<p class="muted">by ${entry.author} • ${entry.date} • ${entry.readTime}</p>
+					<p>${entry.snippet}</p>
+					<button class="button" data-modal="${entry.id}">Read more →</button>
+				`;
+				grid.appendChild(card);
 
-				// Modal with main image and rich content
-			const modal = document.createElement('div');
-			modal.className = 'modal';
-			modal.id = entry.id;
-			modal.innerHTML = `
-				<span class="close">&times;</span>
-				<div class="modal-content">
-					<article class="blog-content">
+				const modal = document.createElement("div");
+				modal.className = "modal";
+				modal.id = entry.id;
+				modal.setAttribute("role", "dialog");
+				modal.innerHTML = `
+					<div class="modal-content">
+						<button class="close" aria-label="Close modal">&times;</button>
 						${entry.mainImage ? `<img src="${entry.mainImage}" alt="${entry.title}">` : ""}
 						<h2>${entry.title}</h2>
 						<p class="muted">by ${entry.author} • ${entry.date} • ${entry.readTime}</p>
 						${entry.full}
-						${entry.references ? `
-							<h3>References</h3>
-							<ul>
-								${entry.references.map(r =>
-				`<li><a href="${r.url}" target="_blank">${r.text}</a></li>`
-			).join("")}
-							</ul>
-						` : ""}
-					</article>
-				</div>
-			`;
-			modalsContainer.appendChild(modal);
-		});
-
-
-		// Open modal
-		document.querySelectorAll('.button').forEach(btn => {
-			btn.addEventListener('click', () => {
-				const modalId = btn.dataset.modal;
-				const modal = document.getElementById(modalId);
-				modal.classList.add('active');
-				// Prevent body scroll when modal is open
-				document.body.style.overflow = 'hidden';
-			});
-		});
-
-		// Close modal function
-		function closeModal(modal) {
-			modal.classList.remove('active');
-			// Restore body scroll
-			document.body.style.overflow = '';
-		}
-
-		// Close modal on click
-		document.querySelectorAll('.modal').forEach(modal => {
-			// Close on overlay click
-			modal.addEventListener('click', e => {
-				if (e.target.classList.contains('modal')) {
-					closeModal(modal);
-				}
+					</div>
+				`;
+				modalsContainer.appendChild(modal);
 			});
 
-			// Close on close button click
-			const closeBtn = modal.querySelector('.close');
-			if (closeBtn) {
-				closeBtn.addEventListener('click', () => {
+			grid.querySelectorAll(".button").forEach(btn => {
+				btn.addEventListener("click", () => {
+					document.getElementById(btn.dataset.modal).classList.add("active");
+				});
+			});
+
+			function closeModal(modal) {
+				modal.classList.remove("active");
+			}
+
+			document.querySelectorAll(".modal").forEach(modal => {
+				modal.addEventListener("mousedown", e => {
+					if (e.target === modal) closeModal(modal);
+				});
+				modal.querySelector(".close").addEventListener("click", () => {
 					closeModal(modal);
 				});
-			}
-		});
+			});
 
-		// Close modal on Escape key
-		document.addEventListener('keydown', e => {
-			if (e.key === 'Escape') {
-				const activeModal = document.querySelector('.modal.active');
-				if (activeModal) {
-					closeModal(activeModal);
-					return;
+			document.addEventListener("keydown", e => {
+				if (e.key === "Escape") {
+					const activeModal = document.querySelector(".modal.active");
+					if (activeModal) closeModal(activeModal);
 				}
-			}
-
-			// Keyboard shortcuts (only when modal is not open)
-			if (!document.querySelector('.modal.active')) {
-				if (e.key.toLowerCase() === 'h') location.href = 'index.html';
-				if (e.key.toLowerCase() === 'd') location.href = 'diary.html';
-				if (e.key.toLowerCase() === 'j') location.href = 'about.html';
-			}
+			});
 		});
 	</script>
-
 </body>
 
 </html>
