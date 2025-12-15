@@ -1,3 +1,9 @@
+document.addEventListener('DOMContentLoaded', () => {
+    if (window.lucide) {
+        lucide.createIcons();
+    }
+});
+
 /* =========================
    Cursor Dot
 ========================= */
@@ -65,3 +71,15 @@
         if (e.key.toLowerCase() === 'j') location.href = 'about.html';
     });
 })();
+
+document.querySelectorAll("a").forEach(link => {
+    if (link.href.startsWith(location.origin)) {
+        link.addEventListener("click", e => {
+            e.preventDefault();
+            document.body.style.opacity = 0;
+            setTimeout(() => {
+                location.href = link.href;
+            }, 200);
+        });
+    }
+});

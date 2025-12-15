@@ -9,98 +9,11 @@
 	<link rel="stylesheet" href="css/layout.css">
 	<link rel="stylesheet" href="css/components.css">
 	<link rel="stylesheet" href="css/animations.css">
-	<style>
-		.card {
-			padding: 1rem;
-			border-radius: var(--radius);
-			background: var(--card);
-			box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-			display: flex;
-			flex-direction: column;
-			justify-content: space-between;
-			margin-bottom: 1rem;
-		}
-
-		.card img {
-			width: 100%;
-			border-radius: var(--radius);
-			margin-bottom: 0.5rem;
-		}
-
-		.modal {
-			display: none;
-			position: fixed;
-			inset: 0;
-			background: rgba(15, 23, 42, 0.85);
-			justify-content: center;
-			align-items: center;
-			z-index: 100;
-		}
-
-		.modal.active {
-			display: flex;
-		}
-
-		.modal-content {
-			background: var(--card);
-			border-radius: var(--radius);
-			padding: 2rem;
-			max-width: 700px;
-			width: 90%;
-			max-height: 80vh;
-			overflow-y: auto;
-			animation: fadeIn 0.4s ease;
-			position: relative;
-		}
-
-		/* Close button fixed relative to modal viewport */
-		.modal .close {
-			position: absolute;
-			top: 1rem;
-			right: 1rem;
-			font-size: 1.5rem;
-			cursor: pointer;
-			color: var(--accent);
-			z-index: 101;
-			background: var(--card);
-			border-radius: 50%;
-			padding: 0.2rem 0.5rem;
-		}
-
-		.modal-content img {
-			width: 100%;
-			border-radius: var(--radius);
-			margin-bottom: 1rem;
-		}
-
-		.card h3,
-		.modal-content h2 {
-			margin: 0.5rem 0;
-		}
-
-		.muted {
-			color: #94a3b8;
-			font-size: 0.9rem;
-		}
-
-		ul,
-		ol {
-			padding-left: 1.2rem;
-			margin-bottom: 1rem;
-		}
-
-		a {
-			color: #22d3ee;
-			text-decoration: none;
-		}
-
-		a:hover {
-			text-decoration: underline;
-		}
-	</style>
+	<script src="https://unpkg.com/lucide@latest"></script>
 </head>
 
 <body data-page="blog">
+	<div class="ambient-bg" aria-hidden="true"></div>
 
 	<div class="cursor-dot" id="cursorDot"></div>
 	<header class="nav">
@@ -121,6 +34,36 @@
 
 		</div>
 	</header>
+	<div class="social-rail">
+		<a href="https://github.com/heyyitzaman" target="_blank" data-tooltip="GitHub">
+			<i data-lucide="github"></i>
+		</a>
+	
+		<a href="https://linkedin.com/in/iamanchandrapandey" target="_blank" data-tooltip="LinkedIn">
+			<i data-lucide="linkedin"></i>
+		</a>
+	
+		<a href="https://instagram.com/heyyitzaman" target="_blank" data-tooltip="Instagram">
+			<i data-lucide="instagram"></i>
+		</a>
+	
+		<a href="https://twitter.com/heyyitzaman" target="_blank" data-tooltip="Twitter / X">
+			<i data-lucide="twitter"></i>
+		</a>
+	
+		<a href="https://iamanpandey.medium.com/about" target="_blank" data-tooltip="Medium">
+			<i data-lucide="pen-tool"></i>
+		</a>
+	
+		<a href="https://leetcode.com/iaman_pandey" target="_blank" data-tooltip="LeetCode">
+			<i data-lucide="code"></i>
+		</a>
+	
+		<a href="mailto:iamancpandey@gmail.com" data-tooltip="Email">
+			<i data-lucide="mail"></i>
+		</a>
+	</div>
+
 
 	<main class="container fade-in">
 		<h1>Blog</h1>
@@ -141,35 +84,45 @@
 		const modalsContainer = document.getElementById('modals-container');
 
 		blogs.forEach(entry => {
-			// Card with overview image
-			const card = document.createElement('div');
-			card.classList.add('card');
-			card.innerHTML = `
-    ${entry.overviewImage ? `<img src="${entry.overviewImage}" alt="${entry.title}">` : ""}
-    <h3>${entry.title}</h3>
-    <p class="muted">by ${entry.author} • ${entry.date} • ${entry.readTime}</p>
-    <p>${entry.snippet}</p>
-    <p class="muted">Category: ${entry.category}</p>
-    <button class="button" data-modal="${entry.id}">Read more →</button>
-  `;
-			grid.appendChild(card);
+				// Card with overview image
+				const card = document.createElement('div');
+				card.className = 'card';
+				card.innerHTML = `
+				${entry.overviewImage ? `<img src="${entry.overviewImage}" alt="${entry.title}">` : ""}
+				<h3>${entry.title}</h3>
+				<p class="muted">by ${entry.author} • ${entry.date} • ${entry.readTime}</p>
+				<p>${entry.snippet}</p>
+				<p class="muted">Category: ${entry.category}</p>
+				<button class="button" data-modal="${entry.id}">Read more →</button>
+			`;
+				grid.appendChild(card);
 
-			// Modal with main image and rich content
-			const modal = document.createElement('div');
-			modal.classList.add('modal');
-			modal.id = entry.id;
-			modal.innerHTML = `
-    <span class="close">&times;</span>
-    <div class="modal-content">
-      ${entry.mainImage ? `<img src="${entry.mainImage}" alt="${entry.title}">` : ""}
-      <h2>${entry.title}</h2>
-      <p class="muted">by ${entry.author} • ${entry.date} • ${entry.readTime}</p>
-      ${entry.full}
-      ${entry.references ? `<h4>References:</h4><ul>${entry.references.map(r => `<li><a href="${r.url}" target="_blank">${r.text}</a></li>`).join('')}</ul>` : ""}
-    </div>
-  `;
-			modalsContainer.appendChild(modal);
-		});
+				// Modal with main image and rich content
+				const modal = document.createElement('div');
+				modal.className = 'modal';
+				modal.id = entry.id;
+				modal.innerHTML = `
+				<span class="close">&times;</span>
+				<div class="modal-content">
+					<article class="blog-content">
+						${entry.mainImage ? `<img src="${entry.mainImage}" alt="${entry.title}">` : ""}
+						<h2>${entry.title}</h2>
+						<p class="muted">by ${entry.author} • ${entry.date} • ${entry.readTime}</p>
+						${entry.full}
+						${entry.references ? `
+							<h3>References</h3>
+							<ul>
+								${entry.references.map(r =>
+					`<li><a href="${r.url}" target="_blank">${r.text}</a></li>`
+				).join("")}
+							</ul>
+						` : ""}
+					</article>
+				</div>
+			`;
+				modalsContainer.appendChild(modal);
+			});
+
 
 		// Open modal
 		document.querySelectorAll('.button').forEach(btn => {

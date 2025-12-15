@@ -10,10 +10,11 @@
 	<link rel="stylesheet" href="css/layout.css" />
 	<link rel="stylesheet" href="css/components.css" />
 	<link rel="stylesheet" href="css/animations.css" />
-
+	<script src="https://unpkg.com/lucide@latest"></script>
 </head>
 
 <body data-page="home">
+	<div class="ambient-bg" aria-hidden="true"></div>
 
 	<div class="cursor-dot" id="cursorDot"></div>
 
@@ -29,16 +30,50 @@
 				<a href="about.html">Journey</a>
 				<a href="blog.html">Blog</a>
 				<a href="diary.html">Diary</a>
+				<a href="https://drive.google.com/file/d/1L0g-sQzcmg9HBibbiKZ7Adzu91hb_usw/view?usp=sharing"
+					target="_blank">
+					View Resume
+				</a>
 				<span class="theme-toggle" id="themeToggle">☀ / 🌙</span>
 			</nav>
-
 		</div>
 	</header>
 
-	<!-- Floating Draggable Quotes Layer -->
-	<div id="floatingQuotes"></div>
+	<!-- Social Rail -->
+	<div class="social-rail">
+		<a href="https://github.com/heyyitzaman" target="_blank" data-tooltip="GitHub">
+			<i data-lucide="github"></i>
+		</a>
+
+		<a href="https://linkedin.com/in/iamanchandrapandey" target="_blank" data-tooltip="LinkedIn">
+			<i data-lucide="linkedin"></i>
+		</a>
+
+		<a href="https://instagram.com/heyyitzaman" target="_blank" data-tooltip="Instagram">
+			<i data-lucide="instagram"></i>
+		</a>
+
+		<a href="https://twitter.com/heyyitzaman" target="_blank" data-tooltip="Twitter / X">
+			<i data-lucide="twitter"></i>
+		</a>
+
+		<a href="https://iamanpandey.medium.com/about" target="_blank" data-tooltip="Medium">
+			<i data-lucide="pen-tool"></i>
+		</a>
+
+		<a href="https://leetcode.com/iaman_pandey" target="_blank" data-tooltip="LeetCode">
+			<i data-lucide="code"></i>
+		</a>
+
+		<a href="mailto:iamancpandey@gmail.com" data-tooltip="Email">
+			<i data-lucide="mail"></i>
+		</a>
+	</div>
+
+
 
 	<main class="container">
+		<!-- INTRO -->
 		<section>
 			<h1>
 				<span id="greeting"></span><br />
@@ -64,50 +99,38 @@
 			<div class="grid grid-2">
 				<div class="card">
 					<h3>Engineering</h3>
-					<p class="muted">
-						I like backend systems, architecture, and understanding
-						why things behave the way they do — not just making them work.
-					</p>
+					<p class="muted">I like backend systems, architecture, and understanding why things behave the way
+						they do — not just making them work.</p>
 				</div>
 
 				<div class="card">
 					<h3>Writing & reflection</h3>
-					<p class="muted">
-						Writing helps me notice patterns in my thinking.
-						This site is a quiet place to reflect, not to perform.
-					</p>
+					<p class="muted">Writing helps me notice patterns in my thinking. This site is a quiet place to
+						reflect, not to perform.</p>
 				</div>
 
 				<div class="card">
 					<h3>Learning & teaching</h3>
-					<p class="muted">
-						I enjoy breaking down complex ideas like system design, DSA, and Java
-						into bite-sized lessons, and mentoring others along the way.
-					</p>
+					<p class="muted">I enjoy breaking down complex ideas like system design, DSA, and Java into
+						bite-sized lessons, and mentoring others along the way.</p>
 				</div>
 
 				<div class="card">
 					<h3>Self-growth</h3>
-					<p class="muted">
-						I focus on reducing overthinking, building inner peace, and embracing
-						steady, joyful growth while trusting my own journey.
-					</p>
+					<p class="muted">I focus on reducing overthinking, building inner peace, and embracing steady,
+						joyful growth while trusting my own journey.</p>
 				</div>
 
 				<div class="card">
 					<h3>Problem-solving</h3>
-					<p class="muted">
-						I thrive on dissecting problems, debugging tricky issues,
-						and finding elegant solutions that scale.
-					</p>
+					<p class="muted">I thrive on dissecting problems, debugging tricky issues, and finding elegant
+						solutions that scale.</p>
 				</div>
 
 				<div class="card">
 					<h3>Technology & innovation</h3>
-					<p class="muted">
-						Exploring new tools, frameworks, and approaches that make systems
-						more efficient and secure fascinates me.
-					</p>
+					<p class="muted">Exploring new tools, frameworks, and approaches that make systems more efficient
+						and secure fascinates me.</p>
 				</div>
 			</div>
 		</section>
@@ -119,10 +142,8 @@
 			<div class="grid grid-2">
 				<div class="card">
 					<h3>Blog</h3>
-					<p class="muted">
-						Structured thoughts on learning, systems,
-						engineering concepts, and ideas worth exploring deeply.
-					</p>
+					<p class="muted">Structured thoughts on learning, systems, engineering concepts, and ideas worth
+						exploring deeply.</p>
 					<span class="button" onclick="location.href='blog.html'">
 						Read the blog →
 					</span>
@@ -130,9 +151,7 @@
 
 				<div class="card">
 					<h3>Diary Entry</h3>
-					<p class="muted">
-						Short, honest notes.
-						No editing. No structure. Just moments captured as they are.
+					<p class="muted">Short, honest notes. No editing. No structure. Just moments captured as they are.
 					</p>
 					<span class="button" onclick="location.href='diary.html'">
 						Open diary →
@@ -142,25 +161,29 @@
 		</section>
 
 	</main>
-
-	<footer class="container muted">
-		Press <strong>B</strong> → Blog · <strong>D</strong> → Diary · <strong>J</strong> → My Journey
+	<footer class="container muted" style="margin-top:2rem;">
+		<!-- Keyboard shortcuts -->
+		<div style="margin-bottom:0.5rem;">
+			Press <strong>B</strong> → Blog · <strong>D</strong> → Diary · <strong>J</strong> → My Journey
+		</div>
 	</footer>
 
+
 	<script src="js/base.js" defer></script>
+
+	<!-- --- Dynamic greeting, animated text, and floating quotes --- -->
 	<script>
 		// Greeting
 		const h = new Date().getHours();
 		document.getElementById('greeting').textContent =
 			h < 12 ? 'Good morning.' : h < 16 ? 'Good afternoon.' : 'Good evening.';
 
-		// Dynamic text with fade
+		// Dynamic text
 		const words = ['learning slowly', 'building systems', 'writing to think'];
 		let i = 0;
 		const el = document.getElementById('dynamicText');
 		el.textContent = words[0];
 		el.style.transition = 'opacity 0.3s ease';
-
 		function animateWord() {
 			el.style.opacity = 0;
 			setTimeout(() => {
@@ -177,221 +200,7 @@
 			if (e.key.toLowerCase() === 'd') location.href = 'diary.html';
 			if (e.key.toLowerCase() === 'j') location.href = 'about.html';
 		});
-
-
-		// Floating draggable quotes with authors
-		const quotes = [
-			{ text: "We are all in the gutter, but some of us are looking at the stars.", author: "Oscar Wilde" },
-			{ text: "And those who were seen dancing were thought to be insane by those who could not hear the music.", author: "Friedrich Nietzsche" },
-			{ text: "Art enables us to find ourselves and lose ourselves at the same time.", author: "Thomas Merton" },
-			{ text: "Creativity is intelligence having fun.", author: "Albert Einstein" },
-			{ text: "Programs must be written for people to read, and only incidentally for machines to execute.", author: "Harold Abelson" },
-			{ text: "Good code is its own best documentation.", author: "Steve McConnell" },
-			{ text: "The unexamined life is not worth living.", author: "Socrates" },
-			{ text: "Your work is going to fill a large part of your life, and the only way to be truly satisfied is to do what you believe is great work.", author: "Steve Jobs" }
-		];
-
-		const floatingQuotes = document.getElementById('floatingQuotes');
-		const STORAGE_KEY = 'floatingQuotesState';
-		const savedState = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
-		function clampPosition(x, y, el) {
-			const rect = el.getBoundingClientRect();
-			const margin = 20;
-
-			return {
-				x: Math.max(margin, Math.min(x, window.innerWidth - rect.width - margin)),
-				y: Math.max(margin, Math.min(y, window.innerHeight - rect.height - margin))
-			};
-		}
-
-		quotes.forEach((q, index) => {
-			const div = document.createElement('div');
-			div.className = 'floating-quote';
-			div.innerHTML = `${q.text}<span class="author">— ${q.author}</span>`;
-
-			const saved = savedState[index];
-
-			const top = saved?.top ?? `${Math.random() * 70 + 10}%`;
-			const left = saved?.left ?? `${Math.random() * 70 + 10}%`;
-			const rotation = saved?.rotation ?? (Math.random() * 30 - 15);
-
-			div.style.top = top;
-			div.style.left = left;
-			div.style.transform = `rotate(${rotation}deg)`;
-
-			floatingQuotes.appendChild(div);
-
-			// Touch support
-			div.addEventListener('touchstart', e => {
-				const touch = e.touches[0];
-				const rect = div.getBoundingClientRect();
-
-				const offsetX = touch.clientX - rect.left;
-				const offsetY = touch.clientY - rect.top;
-
-				div.style.zIndex = 3;
-
-				function onMove(e) {
-					const t = e.touches[0];
-					let x = t.clientX - offsetX;
-					let y = t.clientY - offsetY;
-
-					const pos = clampPosition(x, y, div);
-					div.style.left = `${pos.x}px`;
-					div.style.top = `${pos.y}px`;
-				}
-
-				function onEnd() {
-					div.style.zIndex = 2;
-					saveState();
-					document.removeEventListener('touchmove', onMove);
-					document.removeEventListener('touchend', onEnd);
-				}
-
-				document.addEventListener('touchmove', onMove, { passive: false });
-				document.addEventListener('touchend', onEnd);
-			});
-			div.onclick = e => {
-				e.stopPropagation();
-
-				document.querySelectorAll('.floating-quote').forEach(q => {
-					q.classList.remove('focused', 'blur');
-				});
-
-				div.classList.add('focused');
-
-				document.querySelectorAll('.floating-quote').forEach(q => {
-					if (q !== div) q.classList.add('blur');
-				});
-			};
-
-
-			// Theme-aware hover focus
-			div.onmouseenter = () => {
-				const light = document.documentElement.getAttribute('data-theme') === 'light';
-				div.style.opacity = light ? '0.65' : '0.55';
-			};
-
-			div.onmouseleave = () => {
-				const light = document.documentElement.getAttribute('data-theme') === 'light';
-				div.style.opacity = light ? '0.45' : '0.35';
-			};
-
-			// Drag logic
-			div.onmousedown = e => {
-				e.preventDefault();
-				div.style.zIndex = 3;
-
-				const rect = div.getBoundingClientRect();
-				const offsetX = e.clientX - rect.left;
-				const offsetY = e.clientY - rect.top;
-				document.body.style.userSelect = 'none';
-
-				function onMove(e) {
-					const rect = div.getBoundingClientRect();
-					const margin = 20; // always-visible grab area
-
-					let x = e.clientX - offsetX;
-					let y = e.clientY - offsetY;
-
-					// Clamp horizontally
-					x = Math.max(
-						margin,
-						Math.min(x, window.innerWidth - rect.width - margin)
-					);
-
-					// Clamp vertically
-					y = Math.max(
-						margin,
-						Math.min(y, window.innerHeight - rect.height - margin)
-					);
-
-					div.style.left = `${x}px`;
-					div.style.top = `${y}px`;
-				}
-
-				function onUp() {
-					div.style.zIndex = 2;
-					saveState();
-					document.body.style.userSelect = '';
-					document.removeEventListener('mousemove', onMove);
-					document.removeEventListener('mouseup', onUp);
-				}
-
-				document.addEventListener('mousemove', onMove);
-				document.addEventListener('mouseup', onUp);
-			};
-			div.ondblclick = e => {
-				e.stopPropagation();
-
-				div.style.top = `${Math.random() * 70 + 10}%`;
-				div.style.left = `${Math.random() * 70 + 10}%`;
-
-				saveState();
-			};
-		});
-
-		// Save positions + rotation
-		function saveState() {
-			const state = [...document.querySelectorAll('.floating-quote')].map(q => ({
-				top: q.style.top,
-				left: q.style.left,
-				rotation: q.style.transform.match(/-?\d+/)?.[0] || 0
-			}));
-			localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
-		}
-
-		// Reflow if quote goes off-screen
-		window.addEventListener('resize', () => {
-			document.querySelectorAll('.floating-quote').forEach(q => {
-				const r = q.getBoundingClientRect();
-				if (r.right < 0 || r.bottom < 0 || r.left > window.innerWidth || r.top > window.innerHeight) {
-					q.style.top = `${Math.random() * 70 + 10}%`;
-					q.style.left = `${Math.random() * 70 + 10}%`;
-				}
-			});
-			saveState();
-		});
-		const interactiveSelectors = 'button, .button, a';
-
-		function updateQuoteVisibility() {
-			const interactives = document.querySelectorAll(interactiveSelectors);
-			const quotes = document.querySelectorAll('.floating-quote');
-
-			quotes.forEach(q => {
-				const qr = q.getBoundingClientRect();
-				let overlaps = false;
-
-				interactives.forEach(el => {
-					const er = el.getBoundingClientRect();
-					const overlap =
-						qr.left < er.right &&
-						qr.right > er.left &&
-						qr.top < er.bottom &&
-						qr.bottom > er.top;
-
-					if (overlap) overlaps = true;
-				});
-
-				q.classList.toggle('dimmed', overlaps);
-			});
-		}
-
-		// Run on drag, resize, and scroll
-		document.addEventListener('mousemove', updateQuoteVisibility);
-		window.addEventListener('resize', updateQuoteVisibility);
-		window.addEventListener('scroll', updateQuoteVisibility);
-
-		// Initial check
-		updateQuoteVisibility();
-		document.addEventListener('click', () => {
-				document.querySelectorAll('.floating-quote').forEach(q => {
-					q.classList.remove('focused', 'blur');
-				});
-			});
-
 	</script>
-
 </body>
 
 </html>

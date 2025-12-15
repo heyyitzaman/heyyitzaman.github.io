@@ -1,42 +1,52 @@
+/* =========================
+   Navbar (GLOBAL & UNIFORM)
+========================= */
+
 .nav {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
-  z-index: 10;
+  height: var(--nav-height);
+  z-index: 100;
 
   background: color-mix(in srgb, var(--bg) 88%, transparent);
   backdrop-filter: blur(10px);
   border-bottom: 1px solid color-mix(in srgb, var(--fg) 8%, transparent);
 }
 
+/* Inner container */
 .nav-inner {
+  height: 100%;
   display: flex;
   justify-content: space-between;
   align-items: center;
-
-  height: 64px;
-  /* controls navbar height */
 }
 
+/* Brand */
 .nav h2 {
   font-size: 1.25rem;
   font-weight: 600;
   margin: 0;
+  white-space: nowrap;
 }
 
+/* Nav links */
 .nav nav {
   display: flex;
   align-items: center;
   gap: 1.5rem;
 }
 
+/* Links */
 .nav a {
   color: var(--fg);
   position: relative;
   padding-bottom: 4px;
+  font-size: 0.95rem;
 }
 
+/* Underline animation */
 .nav a::after {
   content: "";
   position: absolute;
@@ -45,19 +55,43 @@
   height: 2px;
   width: 0;
   background: var(--accent);
-  transition: width 0.3s ease;
+  transition: width 0.25s ease;
 }
 
 .nav a:hover::after {
   width: 100%;
 }
 
+/* Active page underline */
 body[data-page="home"] .nav a[href="index.html"]::after,
 body[data-page="blog"] .nav a[href="blog.html"]::after,
 body[data-page="diary"] .nav a[href="diary.html"]::after,
 body[data-page="journey"] .nav a[href="about.html"]::after {
   width: 100%;
 }
+
+/* Theme toggle */
+.theme-toggle {
+  margin-left: 1.2rem;
+  cursor: pointer;
+  user-select: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  transition: transform 0.4s ease, opacity 0.3s ease;
+}
+
+[data-theme="light"] .theme-toggle {
+  transform: rotate(180deg);
+}
+
+.theme-toggle:hover {
+  opacity: 0.75;
+}
+
+/* =========================
+   Hamburger (Mobile)
+========================= */
 
 .hamburger {
   display: none;
@@ -84,6 +118,10 @@ body[data-page="journey"] .nav a[href="about.html"]::after {
   transform: translateY(-7px) rotate(-45deg);
 }
 
+/* =========================
+   Mobile Nav
+========================= */
+
 @media (max-width: 768px) {
   .hamburger {
     display: block;
@@ -91,13 +129,14 @@ body[data-page="journey"] .nav a[href="about.html"]::after {
 
   .nav nav {
     position: absolute;
-    top: 64px;
+    top: var(--nav-height);
     left: 0;
     width: 100%;
     background: var(--bg);
     border-bottom: 1px solid color-mix(in srgb, var(--fg) 10%, transparent);
 
     flex-direction: column;
+    align-items: flex-start;
     gap: 1rem;
     padding: 1.2rem 1.5rem;
 
@@ -123,74 +162,7 @@ body[data-page="journey"] .nav a[href="about.html"]::after {
 
 .button:hover {
   transform: scale(1.05);
-    box-shadow: 0 8px 20px rgba(56, 189, 248, 0.3);
-}
-
-/* Floating Quotes Layer */
-#floatingQuotes {
-  position: fixed;
-  inset: 0;
-  pointer-events: none;
-  z-index: 2;
-}
-
-/* Base quote style */
-.floating-quote {
-  position: absolute;
-  pointer-events: auto;
-  z-index: 2;
-
-  max-width: 260px;
-  padding: 0.6rem 1rem;
-  border-radius: 10px;
-
-  background: color-mix(in srgb, var(--card) 60%, transparent);
-  color: color-mix(in srgb, var(--fg) 35%, transparent);
-
-  font-style: italic;
-  line-height: 1.35;
-  user-select: none;
-  cursor: grab;
-
-  backdrop-filter: blur(2px);
-  opacity: 0.35;
-
-  transition: opacity 0.2s ease, transform 0.2s ease;
-}
-
-.floating-quote .author {
-  display: block;
-  margin-top: 0.4rem;
-  font-size: 0.8rem;
-  font-style: normal;
-  text-align: right;
-  color: color-mix(in srgb, var(--muted) 50%, transparent);
-}
-
-.floating-quote.dimmed {
-  opacity: 0.12;
-  filter: blur(1px);
-}
-
-.floating-quote.focused {
-  opacity: 0.85 !important;
-  z-index: 4;
-}
-
-.floating-quote.blur {
-  opacity: 0.15 !important;
-  pointer-events: none;
-}
-
-/* Light mode tuning */
-[data-theme="light"] .floating-quote {
-  background: color-mix(in srgb, var(--card) 85%, transparent);
-  color: color-mix(in srgb, var(--fg) 55%, transparent);
-  opacity: 0.45;
-}
-
-[data-theme="light"] .floating-quote .author {
-  color: color-mix(in srgb, var(--muted) 65%, transparent);
+  box-shadow: 0 8px 20px rgba(56, 189, 248, 0.3);
 }
 
 .card {
@@ -209,20 +181,151 @@ body[data-page="journey"] .nav a[href="about.html"]::after {
   box-shadow: 0 12px 25px rgba(56, 189, 248, 0.3);
 }
 
-.theme-toggle {
-  margin-left: 1.5rem;
-  cursor: pointer;
-  user-select: none;
-  display: inline-flex;
-  align-items: center;
-  gap: 0.3rem;
-  transition: transform 0.4s ease, opacity 0.3s ease;
+.card img {
+  width: 100%;
+  border-radius: var(--radius);
+  margin-bottom: 0.5rem;
 }
 
-[data-theme="light"] .theme-toggle {
-  transform: rotate(180deg);
+/* =========================
+   Diary Page Styling
+========================= */
+
+body[data-page="diary"] {
+  --diary-width: 680px;
 }
 
-.theme-toggle:hover {
-  opacity: 0.8;
+/* Diary container */
+body[data-page="diary"] .diary {
+  max-width: var(--diary-width);
+  margin: 2rem auto 0;
+}
+
+/* Diary title */
+body[data-page="diary"] h1 {
+  max-width: var(--diary-width);
+  margin: 0 auto 0.5rem;
+  font-weight: 600;
+}
+
+/* Diary subtitle */
+body[data-page="diary"] .muted {
+  max-width: var(--diary-width);
+  margin: 0 auto 2.5rem;
+}
+
+/* Individual entry */
+.diary-entry {
+  position: relative;
+  padding-left: 1.4rem;
+  margin-bottom: 3.5rem;
+  border-left: 2px solid color-mix(in srgb, var(--accent) 35%, transparent);
+  transition: transform 0.25s ease, opacity 0.25s ease;
+  animation: diaryFade 0.6s ease forwards;
+  opacity: 0;
+}
+.diary:hover .diary-entry {
+  opacity: 0.4;
+}
+.diary:hover .diary-entry:hover {
+  opacity: 1;
+  transform: translateX(6px);
+}
+
+/* Timeline dot */
+.diary-entry::before {
+  content: "";
+  position: absolute;
+  left: -6px;
+  top: 0.45rem;
+  width: 10px;
+  height: 10px;
+  background: var(--accent);
+  border-radius: 50%;
+}
+
+/* Date */
+.diary-entry .muted {
+  font-size: 0.8rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin-bottom: 0.4rem;
+}
+
+/* Title */
+.diary-entry h3 {
+  font-weight: 500;
+  margin-bottom: 0.4rem;
+}
+
+/* Snippet */
+.diary-entry p {
+  font-size: 1.05rem;
+  line-height: 1.9;
+}
+
+.diary-entry:nth-child(1) {
+  animation-delay: 0.1s;
+}
+
+.diary-entry:nth-child(2) {
+  animation-delay: 0.2s;
+}
+
+.diary-entry:nth-child(3) {
+  animation-delay: 0.3s;
+}
+
+@keyframes diaryFade {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+body[data-page="diary"] .button {
+  position: relative;
+}
+
+body[data-page="diary"] .button::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -2px;
+  width: 0;
+  height: 1px;
+  background: currentColor;
+  transition: width 0.25s ease;
+}
+
+body[data-page="diary"] .button:hover::after {
+  width: 100%;
+}
+
+/* Modal typography (diary tone) */
+body[data-page="diary"] .modal-content {
+  max-width: 640px;
+  font-size: 1.05rem;
+  line-height: 1.9;
+}
+
+body[data-page="diary"] .modal-content h2 {
+  font-weight: 500;
+  margin-bottom: 0.6rem;
+}
+
+/* Light mode – paper feel */
+[data-theme="light"] body[data-page="diary"] {
+  background: linear-gradient(to bottom, #f8fafc, #eef2f7);
+}
+
+[data-theme="light"] body[data-page="diary"] .diary {
+  background: rgba(255, 255, 255, 0.65);
+  padding: 2rem 2rem 1rem;
+  border-radius: var(--radius);
 }
