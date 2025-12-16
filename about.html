@@ -13,8 +13,7 @@
     <script src="https://unpkg.com/lucide@latest"></script>
 
     <style>
-
-        /* Resume-specific styles */
+        /* Resume page specific styles */
         .resume-hero {
             text-align: center;
             padding: 4rem 0 3rem;
@@ -27,19 +26,7 @@
             width: 180px;
             height: 180px;
             margin: 0 auto 2rem;
-            animation: floatImage 3s ease-in-out infinite;
-        }
-
-        @keyframes floatImage {
-
-            0%,
-            100% {
-                transform: translateY(0px);
-            }
-
-            50% {
-                transform: translateY(-20px);
-            }
+            animation: float 3s ease-in-out infinite;
         }
 
         .profile-image {
@@ -51,16 +38,6 @@
             background: linear-gradient(white, white) padding-box,
                 linear-gradient(135deg, #667eea, #764ba2) border-box;
             animation: rotateBorder 3s linear infinite;
-        }
-
-        @keyframes rotateBorder {
-            0% {
-                filter: hue-rotate(0deg);
-            }
-
-            100% {
-                filter: hue-rotate(360deg);
-            }
         }
 
         .profile-image-container::before {
@@ -77,104 +54,16 @@
             animation: pulse 2s ease-in-out infinite;
         }
 
-        @keyframes pulse {
-
-            0%,
-            100% {
-                transform: scale(1);
-                opacity: 0.3;
-            }
-
-            50% {
-                transform: scale(1.1);
-                opacity: 0.5;
-            }
-        }
-
         .resume-hero h1 {
             font-size: 3rem;
             margin-bottom: 0.5rem;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
             animation: gradientShift 3s ease infinite;
-        }
-
-        @keyframes gradientShift {
-
-            0%,
-            100% {
-                filter: hue-rotate(0deg);
-            }
-
-            50% {
-                filter: hue-rotate(20deg);
-            }
         }
 
         .tagline {
             font-size: 1.25rem;
             opacity: 0.7;
             margin-bottom: 1rem;
-        }
-
-        .typing-effect {
-            display: inline-block;
-            border-right: 2px solid #667eea;
-            animation: blink 0.7s infinite;
-            min-height: 1.5rem;
-        }
-
-        @keyframes blink {
-
-            0%,
-            50% {
-                border-color: #667eea;
-            }
-
-            51%,
-            100% {
-                border-color: transparent;
-            }
-        }
-
-        .stats-container {
-            display: flex;
-            justify-content: center;
-            gap: 2rem;
-            margin: 2rem 0;
-            flex-wrap: wrap;
-        }
-
-        .stat-item {
-            text-align: center;
-            padding: 1rem 2rem;
-            background: rgba(102, 126, 234, 0.1);
-            border-radius: 12px;
-            border: 1px solid rgba(102, 126, 234, 0.2);
-            transition: all 0.3s ease;
-        }
-
-        .stat-item:hover {
-            transform: translateY(-5px);
-            background: rgba(102, 126, 234, 0.2);
-            box-shadow: 0 8px 24px rgba(102, 126, 234, 0.3);
-        }
-
-        .stat-number {
-            font-size: 2rem;
-            font-weight: bold;
-            background: linear-gradient(135deg, #667eea, #764ba2);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        .stat-label {
-            opacity: 0.7;
-            font-size: 0.9rem;
-            margin-top: 0.25rem;
         }
 
         .section {
@@ -196,7 +85,6 @@
                 opacity: 0;
                 transform: translateX(-30px);
             }
-
             to {
                 opacity: 1;
                 transform: translateX(0);
@@ -222,398 +110,7 @@
             }
         }
 
-        /* Experience Timeline */
-        .timeline {
-            position: relative;
-            padding-left: 2rem;
-        }
-
-        .timeline::before {
-            content: '';
-            position: absolute;
-            left: 0;
-            top: 0;
-            bottom: 0;
-            width: 2px;
-            background: linear-gradient(180deg, #667eea, #764ba2);
-        }
-
-        .experience-card {
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 12px;
-            padding: 1.5rem;
-            margin-bottom: 2rem;
-            position: relative;
-            transition: all 0.3s ease;
-            backdrop-filter: blur(10px);
-        }
-
-        .experience-card::before {
-            content: '';
-            position: absolute;
-            left: -2.5rem;
-            top: 1.5rem;
-            width: 12px;
-            height: 12px;
-            background: #667eea;
-            border-radius: 50%;
-            border: 3px solid rgba(102, 126, 234, 0.3);
-            animation: pulse 2s ease-in-out infinite;
-        }
-
-        .experience-card:hover {
-            transform: translateX(12px);
-            border-color: rgba(102, 126, 234, 0.4);
-            box-shadow: 0 12px 32px rgba(102, 126, 234, 0.2);
-        }
-
-        .experience-card:hover::before {
-            background: #764ba2;
-            box-shadow: 0 0 20px rgba(118, 75, 162, 0.6);
-        }
-
-        .experience-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-start;
-            margin-bottom: 1rem;
-            flex-wrap: wrap;
-            gap: 1rem;
-        }
-
-        .experience-title h3 {
-            font-size: 1.25rem;
-            margin-bottom: 0.25rem;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .company {
-            color: #667eea;
-            font-weight: 500;
-        }
-
-        .duration {
-            opacity: 0.6;
-            font-size: 0.9rem;
-            white-space: nowrap;
-            display: flex;
-            align-items: center;
-            gap: 0.3rem;
-        }
-
-        .tech-tags {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.5rem;
-            margin-top: 1rem;
-        }
-
-        .tech-tag {
-            background: rgba(102, 126, 234, 0.2);
-            padding: 0.25rem 0.75rem;
-            border-radius: 20px;
-            font-size: 0.85rem;
-            border: 1px solid rgba(102, 126, 234, 0.3);
-            transition: all 0.3s ease;
-            cursor: pointer;
-        }
-
-        .tech-tag:hover {
-            background: rgba(102, 126, 234, 0.4);
-            transform: translateY(-2px) scale(1.05);
-            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
-        }
-
-        /* Skills Grid with Progress */
-        .skills-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 1.5rem;
-        }
-
-        .skill-category {
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 12px;
-            padding: 1.5rem;
-            transition: all 0.3s ease;
-            backdrop-filter: blur(10px);
-        }
-
-        .skill-category:hover {
-            transform: translateY(-8px) scale(1.02);
-            border-color: rgba(102, 126, 234, 0.3);
-            box-shadow: 0 12px 32px rgba(102, 126, 234, 0.2);
-        }
-
-        .skill-category h4 {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            margin-bottom: 1.5rem;
-            font-size: 1.1rem;
-        }
-
-        .skill-item-wrapper {
-            margin-bottom: 1rem;
-        }
-
-        .skill-item-header {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 0.5rem;
-            font-size: 0.9rem;
-        }
-
-        .skill-progress-bar {
-            height: 6px;
-            background: rgba(102, 126, 234, 0.2);
-            border-radius: 10px;
-            overflow: hidden;
-        }
-
-        .skill-progress-fill {
-            height: 100%;
-            background: linear-gradient(90deg, #667eea, #764ba2);
-            border-radius: 10px;
-            transition: width 1s ease-out;
-            width: 0;
-        }
-
-        /* Projects with 3D Effect */
-        .projects-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 2rem;
-        }
-
-        .project-card {
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 12px;
-            padding: 0;
-            overflow: hidden;
-            transition: all 0.4s ease;
-            cursor: pointer;
-            position: relative;
-            backdrop-filter: blur(10px);
-        }
-
-        .project-image {
-            width: 100%;
-            height: 180px;
-            object-fit: cover;
-            transition: transform 0.4s ease;
-        }
-
-        .project-card:hover .project-image {
-            transform: scale(1.1);
-        }
-
-        .project-content {
-            padding: 1.5rem;
-        }
-
-        .project-card:hover {
-            transform: translateY(-12px);
-            border-color: rgba(102, 126, 234, 0.4);
-            box-shadow: 0 20px 40px rgba(102, 126, 234, 0.3);
-        }
-
-        .project-card h4 {
-            font-size: 1.2rem;
-            margin-bottom: 0.75rem;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .project-badge {
-            position: absolute;
-            top: 1rem;
-            right: 1rem;
-            background: rgba(102, 126, 234, 0.9);
-            padding: 0.3rem 0.8rem;
-            border-radius: 20px;
-            font-size: 0.75rem;
-            font-weight: bold;
-            backdrop-filter: blur(10px);
-        }
-
-        .project-links {
-            display: flex;
-            gap: 1rem;
-            margin-top: 1rem;
-        }
-
-        .project-link {
-            display: flex;
-            align-items: center;
-            gap: 0.3rem;
-            color: #667eea;
-            text-decoration: none;
-            font-size: 0.9rem;
-            transition: all 0.2s ease;
-            padding: 0.4rem 0.8rem;
-            border-radius: 6px;
-            background: rgba(102, 126, 234, 0.1);
-        }
-
-        .project-link:hover {
-            background: rgba(102, 126, 234, 0.3);
-            transform: translateX(3px);
-        }
-
-        /* Achievements with Icons */
-        .achievements-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 1.5rem;
-        }
-
-        .achievement-card {
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 12px;
-            padding: 1.5rem;
-            text-align: center;
-            transition: all 0.3s ease;
-            backdrop-filter: blur(10px);
-        }
-
-        .achievement-card:hover {
-            transform: translateY(-8px) rotate(2deg);
-            border-color: rgba(102, 126, 234, 0.4);
-            box-shadow: 0 12px 32px rgba(102, 126, 234, 0.3);
-        }
-
-        .achievement-icon-wrapper {
-            width: 80px;
-            height: 80px;
-            margin: 0 auto 1rem;
-            background: linear-gradient(135deg, #667eea, #764ba2);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            animation: rotate 10s linear infinite;
-        }
-
-        @keyframes rotate {
-            from {
-                transform: rotate(0deg);
-            }
-
-            to {
-                transform: rotate(360deg);
-            }
-        }
-
-        .achievement-icon-wrapper:hover {
-            animation-play-state: paused;
-        }
-
-        .achievement-icon-wrapper img {
-            width: 50px;
-            height: 50px;
-            filter: brightness(0) invert(1);
-        }
-
-        .achievement-card h4 {
-            margin-bottom: 0.5rem;
-            font-size: 1.1rem;
-        }
-
-        .achievement-card p {
-            opacity: 0.7;
-            font-size: 0.9rem;
-        }
-
-        /* Download Button */
-        .download-btn {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            padding: 0.75rem 1.5rem;
-            border-radius: 8px;
-            text-decoration: none;
-            transition: all 0.3s ease;
-            border: none;
-            cursor: pointer;
-            font-size: 1rem;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .download-btn::before {
-            content: '';
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            width: 0;
-            height: 0;
-            background: rgba(255, 255, 255, 0.3);
-            border-radius: 50%;
-            transform: translate(-50%, -50%);
-            transition: width 0.6s, height 0.6s;
-        }
-
-        .download-btn:hover::before {
-            width: 300px;
-            height: 300px;
-        }
-
-        .download-btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 12px 32px rgba(102, 126, 234, 0.5);
-        }
-
-        .download-btn span {
-            position: relative;
-            z-index: 1;
-        }
-
-        /* Education with Icons */
-        .education-grid {
-            display: grid;
-            gap: 1.5rem;
-        }
-
-        .education-item {
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 12px;
-            padding: 1.5rem;
-            display: flex;
-            gap: 1.5rem;
-            align-items: center;
-            transition: all 0.3s ease;
-            backdrop-filter: blur(10px);
-        }
-
-        .education-item:hover {
-            transform: translateX(8px);
-            border-color: rgba(102, 126, 234, 0.3);
-            box-shadow: 0 8px 24px rgba(102, 126, 234, 0.2);
-        }
-
-        .education-icon {
-            width: 60px;
-            height: 60px;
-            background: linear-gradient(135deg, #667eea, #764ba2);
-            border-radius: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            flex-shrink: 0;
-        }
-
-        /* Responsive */
+        /* Mobile responsive */
         @media (max-width: 768px) {
             .resume-hero h1 {
                 font-size: 2rem;
@@ -621,14 +118,6 @@
 
             .section-title {
                 font-size: 1.5rem;
-            }
-
-            .timeline {
-                padding-left: 1.5rem;
-            }
-
-            .experience-card::before {
-                left: -2rem;
             }
 
             .stats-container {
@@ -698,25 +187,25 @@
             <div class="profile-image-container">
                 <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=Aman" alt="Aman Pandey" class="profile-image">
             </div>
-            <h1>Software Developer</h1>
+            <h1 class="gradient-text">Software Developer</h1>
             <p class="tagline">Building elegant solutions with modern technologies</p>
             <div class="typing-effect" id="typingText"></div>
 
             <div class="stats-container">
-                <div class="stat-item">
-                    <div class="stat-number" data-target="5">0</div>
+                <div class="stat-item hover-lift">
+                    <div class="stat-number counter-animated" data-target="5">0</div>
                     <div class="stat-label">Years Experience</div>
                 </div>
-                <div class="stat-item">
-                    <div class="stat-number" data-target="50">0</div>
+                <div class="stat-item hover-lift">
+                    <div class="stat-number counter-animated" data-target="50">0</div>
                     <div class="stat-label">Projects Completed</div>
                 </div>
-                <div class="stat-item">
-                    <div class="stat-number" data-target="20">0</div>
+                <div class="stat-item hover-lift">
+                    <div class="stat-number counter-animated" data-target="20">0</div>
                     <div class="stat-label">Tech Articles</div>
                 </div>
-                <div class="stat-item">
-                    <div class="stat-number" data-target="500">0</div>
+                <div class="stat-item hover-lift">
+                    <div class="stat-number counter-animated" data-target="500">0</div>
                     <div class="stat-label">GitHub Stars</div>
                 </div>
             </div>
@@ -727,7 +216,7 @@
             </a>
         </div>
 
-        <section class="section">
+        <section class="section reveal">
             <h2 class="section-title">
                 <i data-lucide="briefcase"
                     style="display: inline; width: 28px; height: 28px; vertical-align: middle; margin-right: 8px;"></i>
@@ -735,7 +224,7 @@
             </h2>
 
             <div class="timeline">
-                <div class="experience-card">
+                <div class="experience-card timeline-item hover-lift">
                     <div class="experience-header">
                         <div class="experience-title">
                             <h3><i data-lucide="star"></i> Senior Software Developer</h3>
@@ -756,7 +245,7 @@
                     </div>
                 </div>
 
-                <div class="experience-card">
+                <div class="experience-card timeline-item hover-lift">
                     <div class="experience-header">
                         <div class="experience-title">
                             <h3><i data-lucide="code-2"></i> Software Developer</h3>
@@ -776,7 +265,7 @@
                     </div>
                 </div>
 
-                <div class="experience-card">
+                <div class="experience-card timeline-item hover-lift">
                     <div class="experience-header">
                         <div class="experience-title">
                             <h3><i data-lucide="coffee"></i> Junior Developer</h3>
@@ -798,7 +287,7 @@
             </div>
         </section>
 
-        <section class="section">
+        <section class="section reveal">
             <h2 class="section-title">
                 <i data-lucide="code-2"
                     style="display: inline; width: 28px; height: 28px; vertical-align: middle; margin-right: 8px;"></i>
@@ -806,7 +295,7 @@
             </h2>
 
             <div class="skills-grid">
-                <div class="skill-category">
+                <div class="skill-category hover-lift">
                     <h4><i data-lucide="layout"></i> Frontend Development</h4>
                     <div class="skill-item-wrapper">
                         <div class="skill-item-header">
@@ -855,7 +344,7 @@
                     </div>
                 </div>
 
-                <div class="skill-category">
+                <div class="skill-category hover-lift">
                     <h4><i data-lucide="cloud"></i> DevOps & Tools</h4>
                     <div class="skill-item-wrapper">
                         <div class="skill-item-header">
@@ -888,7 +377,7 @@
             </div>
         </section>
 
-        <section class="section">
+        <section class="section reveal">
             <h2 class="section-title">
                 <i data-lucide="rocket"
                     style="display: inline; width: 28px; height: 28px; vertical-align: middle; margin-right: 8px;"></i>
@@ -896,7 +385,7 @@
             </h2>
 
             <div class="projects-grid">
-                <div class="project-card">
+                <div class="project-card hover-lift">
                     <img src="https://images.unsplash.com/photo-1557821552-17105176677c?w=600&h=400&fit=crop"
                         alt="E-Commerce Platform" class="project-image">
                     <span class="project-badge">⭐ Featured</span>
@@ -918,7 +407,7 @@
                     </div>
                 </div>
 
-                <div class="project-card">
+                <div class="project-card hover-lift">
                     <img src="https://images.unsplash.com/photo-1611746872915-64382b5c76da?w=600&h=400&fit=crop"
                         alt="Chat Application" class="project-image">
                     <span class="project-badge">🔥 Popular</span>
@@ -939,7 +428,7 @@
                     </div>
                 </div>
 
-                <div class="project-card">
+                <div class="project-card hover-lift">
                     <img src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=600&h=400&fit=crop"
                         alt="Task Management" class="project-image">
                     <span class="project-badge">✨ New</span>
@@ -963,7 +452,7 @@
             </div>
         </section>
 
-        <section class="section">
+        <section class="section reveal">
             <h2 class="section-title">
                 <i data-lucide="trophy"
                     style="display: inline; width: 28px; height: 28px; vertical-align: middle; margin-right: 8px;"></i>
@@ -971,7 +460,7 @@
             </h2>
 
             <div class="achievements-grid">
-                <div class="achievement-card">
+                <div class="achievement-card hover-lift">
                     <div class="achievement-icon-wrapper">
                         <img src="https://cdn-icons-png.flaticon.com/512/1534/1534938.png" alt="Award">
                     </div>
@@ -979,7 +468,7 @@
                     <p>Recognized for developing an AI-powered feature that improved user engagement by 40%</p>
                 </div>
 
-                <div class="achievement-card">
+                <div class="achievement-card hover-lift">
                     <div class="achievement-icon-wrapper">
                         <img src="https://cdn-icons-png.flaticon.com/512/2917/2917995.png" alt="GitHub">
                     </div>
@@ -987,7 +476,7 @@
                     <p>Active contributor with 500+ stars across GitHub repositories</p>
                 </div>
 
-                <div class="achievement-card">
+                <div class="achievement-card hover-lift">
                     <div class="achievement-icon-wrapper">
                         <img src="https://cdn-icons-png.flaticon.com/512/3898/3898087.png" alt="Speaker">
                     </div>
@@ -995,7 +484,7 @@
                     <p>Presented at 5+ developer conferences on modern web development</p>
                 </div>
 
-                <div class="achievement-card">
+                <div class="achievement-card hover-lift">
                     <div class="achievement-icon-wrapper">
                         <img src="https://cdn-icons-png.flaticon.com/512/2232/2232688.png" alt="Writer">
                     </div>
@@ -1005,7 +494,7 @@
             </div>
         </section>
 
-        <section class="section">
+        <section class="section reveal">
             <h2 class="section-title">
                 <i data-lucide="graduation-cap"
                     style="display: inline; width: 28px; height: 28px; vertical-align: middle; margin-right: 8px;"></i>
@@ -1013,7 +502,7 @@
             </h2>
 
             <div class="education-grid">
-                <div class="education-item">
+                <div class="education-item hover-lift">
                     <div class="education-icon">
                         <i data-lucide="school" style="width: 32px; height: 32px;"></i>
                     </div>
@@ -1025,7 +514,7 @@
                     </div>
                 </div>
 
-                <div class="education-item">
+                <div class="education-item hover-lift">
                     <div class="education-icon">
                         <i data-lucide="award" style="width: 32px; height: 32px;"></i>
                     </div>
@@ -1042,7 +531,7 @@
 
     <footer class="container muted" style="margin-top:2rem; position: relative; z-index: 1;">
         <div style="margin-bottom:0.5rem;">
-            Press <strong>B</strong> → Blog · <strong>D</strong> → Diary · <strong>H</strong> → Home
+            Press <strong>H</strong> → Home · <strong>B</strong> → Blog · <strong>D</strong> → Diary
         </div>
     </footer>
 
@@ -1088,9 +577,9 @@
 
         typeEffect();
 
-        // Animated Counter
-        function animateCounter(element) {
-            const target = parseInt(element.getAttribute('data-target'));
+        // Counter animation (unified)
+        const animateCounter = (counter) => {
+            const target = +counter.getAttribute('data-target');
             const duration = 2000;
             const increment = target / (duration / 16);
             let current = 0;
@@ -1098,33 +587,32 @@
             const updateCounter = () => {
                 current += increment;
                 if (current < target) {
-                    element.textContent = Math.floor(current);
+                    counter.textContent = Math.floor(current);
                     requestAnimationFrame(updateCounter);
                 } else {
-                    element.textContent = target + (target >= 100 ? '+' : '');
+                    counter.textContent = target + (target >= 100 ? '+' : '');
                 }
             };
 
             updateCounter();
-        }
+        };
 
-        // Intersection Observer for counters
         const counterObserver = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
                     const counters = entry.target.querySelectorAll('.stat-number');
                     counters.forEach(counter => {
-                        if (!counter.classList.contains('counted')) {
-                            counter.classList.add('counted');
+                        if (!counter.classList.contains('animated')) {
+                            counter.classList.add('animated');
                             animateCounter(counter);
                         }
                     });
+                    counterObserver.unobserve(entry.target);
                 }
             });
         }, { threshold: 0.5 });
 
-        const statsContainer = document.querySelector('.stats-container');
-        if (statsContainer) counterObserver.observe(statsContainer);
+        document.querySelectorAll('.stats-container').forEach(container => counterObserver.observe(container));
 
         // Skill Progress Bars Animation
         const skillObserver = new IntersectionObserver((entries) => {
@@ -1146,23 +634,19 @@
             skillObserver.observe(category);
         });
 
-        // Smooth Section Animations
-        const sections = document.querySelectorAll('.section');
-        const sectionObserver = new IntersectionObserver((entries) => {
+        // Reveal animations (unified system)
+        const reveals = document.querySelectorAll('.reveal');
+
+        const observer = new IntersectionObserver(entries => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
-                    entry.target.style.opacity = '1';
-                    entry.target.style.transform = 'translateY(0)';
+                    entry.target.classList.add('visible');
+                    observer.unobserve(entry.target);
                 }
             });
-        }, { threshold: 0.1, rootMargin: '0px 0px -100px 0px' });
+        }, { threshold: 0.15 });
 
-        sections.forEach(section => {
-            section.style.opacity = '0';
-            section.style.transform = 'translateY(30px)';
-            section.style.transition = 'opacity 0.8s ease, transform 0.8s ease';
-            sectionObserver.observe(section);
-        });
+        reveals.forEach(r => observer.observe(r));
 
         // Keyboard shortcuts
         document.addEventListener('keydown', e => {

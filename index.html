@@ -4,30 +4,24 @@
 <head>
 	<meta charset="UTF-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-	<title>Aman Pandey</title>
+	<title>Intro - Aman Pandey</title>
 
 	<link rel="stylesheet" href="css/base.css" />
 	<link rel="stylesheet" href="css/layout.css" />
 	<link rel="stylesheet" href="css/components.css" />
 	<link rel="stylesheet" href="css/animations.css" />
+
 	<style>
-		.project {
-			transition: transform 0.25s ease, box-shadow 0.25s ease;
+		/* Page-specific hero styles */
+		main>section.reveal:first-of-type {
+			margin-top: 4rem;
+			margin-bottom: 2rem;
 		}
 
-		.project:hover {
-			transform: translateY(-4px);
-		}
-
-		.reveal {
-			opacity: 0;
-			transform: translateY(16px);
-			transition: opacity 0.6s ease, transform 0.6s ease;
-		}
-
-		.reveal.visible {
-			opacity: 1;
-			transform: translateY(0);
+		main>section.reveal:first-of-type h1 {
+			font-size: 2.5rem;
+			line-height: 1.35;
+			margin-bottom: 1.5rem;
 		}
 
 		.hero-divider {
@@ -37,11 +31,82 @@
 			opacity: 0.15;
 			margin-top: 2rem;
 		}
+
+		.animated-icon {
+			display: inline-block;
+			animation: bounce 2s ease-in-out infinite;
+			font-size: 1.2rem;
+		}
+
+		.floating-gif {
+			display: inline-block;
+			width: 40px;
+			height: 40px;
+			vertical-align: middle;
+			animation: float 3s ease-in-out infinite;
+		}
+
+		/* Dual identity divider */
+		.dual-identity::before {
+			content: '';
+			position: absolute;
+			left: 50%;
+			top: 10%;
+			bottom: 10%;
+			width: 2px;
+			background: linear-gradient(to bottom,
+					transparent,
+					var(--accent),
+					transparent);
+			opacity: 0.3;
+			transform: translateX(-50%);
+			animation: pulse 2s ease-in-out infinite;
+		}
+
+		/* Light mode adjustments */
+		[data-theme="light"] .identity-card li,
+		[data-theme="light"] .muted,
+		[data-theme="light"] .stat-label {
+			color: var(--muted);
+		}
+
+		[data-theme="light"] .path-card:hover {
+			box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+		}
+
+		[data-theme="light"] .intersection-card:hover {
+			box-shadow: 0 12px 24px rgba(0, 0, 0, 0.08);
+		}
+
+		/* Mobile responsive */
+		@media (max-width: 768px) {
+			main>section.reveal:first-of-type h1 {
+				font-size: 1.8rem;
+			}
+
+			.dual-identity,
+			.three-paths {
+				grid-template-columns: 1fr;
+			}
+
+			.dual-identity::before {
+				display: none;
+			}
+
+			.stats-grid {
+				grid-template-columns: repeat(2, 1fr);
+			}
+
+			.path-icon {
+				font-size: 3rem;
+			}
+		}
 	</style>
+
 	<script src="https://unpkg.com/lucide@latest"></script>
 </head>
 
-<body data-page="home">
+<body data-page="intro">
 	<div class="scroll-progress" id="scrollProgress"></div>
 	<div class="ambient-bg" aria-hidden="true"></div>
 	<div class="particles" id="particles"></div>
@@ -56,6 +121,7 @@
 			</button>
 
 			<nav id="mobileNav">
+				<a href="index.html">Home</a>
 				<a href="about.html">Journey</a>
 				<a href="blog.html">Blog</a>
 				<a href="diary.html">Diary</a>
@@ -95,141 +161,225 @@
 		</a>
 	</div>
 
-
-
 	<main class="container">
 		<!-- INTRO -->
 		<section class="reveal">
 			<h1>
-				<span id="greeting"></span><br />
-				I’m Aman, <span class="dynamic" id="dynamicText"></span>
+				<span id="greeting"></span>
+				<span class="animated-icon">👋</span><br />
+				I exist at the intersection of <span class="dynamic" id="dynamicText"></span>
+				<img src="https://media.giphy.com/media/WUlplcMpOCEmTGBtBW/giphy.gif" class="floating-gif" alt="coding">
 			</h1>
 
 			<p class="muted" style="max-width: 640px;">
-				Software engineer focused on backend systems, deliberate learning,
-				and writing to clarify thinking.
+				A software engineer <span class="animated-icon" style="font-size: 1.2rem;">💻</span> who finds rhythm in algorithms and metaphors in architecture.
+				A writer <span class="animated-icon" style="font-size: 1.2rem;">✍️</span> who sees art in nature and poetry in technology.
 			</p>
 			<p class="muted" style="margin-top:0.5rem;">
-				Currently exploring system design & long-term growth.
+				Where code meets creativity, logic meets beauty. <span class="animated-icon" style="font-size: 1.2rem;">✨</span>
 			</p>
+
 			<div class="hero-divider"></div>
-
-			<div style="margin-top: 1.5rem;">
-				<span class="button" onclick="location.href='about.html'">
-					My journey →
-				</span>
-			</div>
 		</section>
 
-		<!-- FOCUS -->
+		<!-- STATS -->
 		<section class="reveal">
-			<h2>What I care about</h2>
-
-			<div class="grid grid-2">
-				<div class="card">
-					<h3>Engineering</h3>
-					<p class="muted">I like backend systems, architecture, and understanding why things behave the way
-						they do — not just making them work.</p>
+			<div class="stats-grid">
+				<div class="stat-item hover-lift">
+					<span class="stat-number counter-animated" data-target="500">0</span>
+					<div class="stat-label">Problems Solved</div>
 				</div>
-
-				<div class="card">
-					<h3>Writing & reflection</h3>
-					<p class="muted">Writing helps me notice patterns in my thinking. This site is a quiet place to
-						reflect, not to perform.</p>
+				<div class="stat-item hover-lift">
+					<span class="stat-number counter-animated" data-target="50">0</span>
+					<div class="stat-label">Blog Posts</div>
 				</div>
-
-				<div class="card">
-					<h3>Learning & teaching</h3>
-					<p class="muted">I enjoy breaking down complex ideas like system design, DSA, and Java into
-						bite-sized lessons, and mentoring others along the way.</p>
+				<div class="stat-item hover-lift">
+					<span class="stat-number counter-animated" data-target="100">0</span>
+					<div class="stat-label">Diary Entries</div>
 				</div>
-
-				<div class="card">
-					<h3>Self-growth</h3>
-					<p class="muted">I focus on reducing overthinking, building inner peace, and embracing steady,
-						joyful growth while trusting my own journey.</p>
-				</div>
-
-				<div class="card">
-					<h3>Problem-solving</h3>
-					<p class="muted">I thrive on dissecting problems, debugging tricky issues, and finding elegant
-						solutions that scale.</p>
-				</div>
-
-				<div class="card">
-					<h3>Technology & innovation</h3>
-					<p class="muted">Exploring new tools, frameworks, and approaches that make systems more efficient
-						and secure fascinates me.</p>
-				</div>
-			</div>
-		</section>
-		<section class="reveal">
-			<h2>Selected work</h2>
-
-			<div class="grid grid-2">
-				<div class="card project">
-					<h3>Backend System Design Notes</h3>
-					<p class="muted">
-						Practical breakdowns of scalable systems, trade-offs, and architecture decisions.
-					</p>
-					<a href="#" class="inline-link">View notes →</a>
-				</div>
-
-				<div class="card project">
-					<h3>DSA Learning Tracker</h3>
-					<p class="muted">
-						A structured way I track problem-solving patterns and learning gaps.
-					</p>
-					<a href="#" class="inline-link">Explore →</a>
+				<div class="stat-item hover-lift">
+					<span class="stat-number counter-animated" data-target="10">0</span>
+					<div class="stat-label">Projects Built</div>
 				</div>
 			</div>
 		</section>
 
-		<!-- BLOG / DIARY -->
+		<!-- DUAL IDENTITY -->
 		<section class="reveal">
-			<h2>How I use this space</h2>
+			<h2>Two worlds, one soul <span class="animated-icon" style="font-size: 1.5rem;">🌓</span></h2>
 
-			<div class="grid grid-2">
-				<div class="card">
+			<div class="dual-identity">
+				<div class="identity-card">
+					<h3>
+						<i data-lucide="code-2"></i> The Engineer
+						<img src="https://media.giphy.com/media/SWoSkN6DxTszqIKEqv/giphy.gif" width="25"
+							style="margin-left: auto;" class="floating-element">
+					</h3>
+					<ul>
+						<li>Backend systems & architecture</li>
+						<li>Problem-solving & debugging</li>
+						<li>Data structures & algorithms</li>
+						<li>System design & scalability</li>
+						<li>Code as craftsmanship</li>
+					</ul>
+				</div>
+
+				<div class="identity-card">
+					<h3>
+						<i data-lucide="feather"></i> The Artist
+						<img src="https://media.giphy.com/media/3oKIPnAiaMCws8nOsE/giphy.gif" width="25"
+							style="margin-left: auto;" class="floating-element">
+					</h3>
+					<ul>
+						<li>Poetry & reflective writing</li>
+						<li>Photography & visual stories</li>
+						<li>Nature & quiet observations</li>
+						<li>Art as expression</li>
+						<li>Words as meditation</li>
+					</ul>
+				</div>
+			</div>
+		</section>
+
+		<!-- CODE AS POETRY -->
+		<section class="reveal" style="margin-top: 3rem;">
+			<h2>When code becomes poetry <span class="animated-icon" style="font-size: 1.5rem;">🎨</span></h2>
+
+			<div class="code-poetry">
+				<div class="code-line"><span class="comment">// Sometimes, a function is more than logic</span></div>
+				<div class="code-line">function <strong>life</strong>() {</div>
+				<div class="code-line"> while (learning && growing) {</div>
+				<div class="code-line"> observe(world); <span class="animated-icon"
+						style="font-size: 0.8rem;">👁️</span></div>
+				<div class="code-line"> write(thoughts); <span class="animated-icon"
+						style="font-size: 0.8rem;">✍️</span></div>
+				<div class="code-line"> code(dreams); <span class="animated-icon" style="font-size: 0.8rem;">💻</span>
+				</div>
+				<div class="code-line"> capture(moments); <span class="animated-icon"
+						style="font-size: 0.8rem;">📸</span></div>
+				<div class="code-line"> </div>
+				<div class="code-line"> if (overwhelmed) {</div>
+				<div class="code-line"> breathe();</div>
+				<div class="code-line"> walk(nature); <span class="animated-icon" style="font-size: 0.8rem;">🌿</span>
+				</div>
+				<div class="code-line"> }</div>
+				<div class="code-line"> </div>
+				<div class="code-line"> return peace; <span class="animated-icon" style="font-size: 0.8rem;">☮️</span>
+				</div>
+				<div class="code-line"> }</div>
+				<div class="code-line">}</div>
+				<div class="code-line"></div>
+				<div class="code-line"><span class="comment">// Recursion isn't just a pattern—</span></div>
+				<div class="code-line"><span class="comment">// it's how we grow, iteration by iteration</span> <span
+						class="animated-icon" style="font-size: 0.8rem;">🔄</span></div>
+			</div>
+		</section>
+
+		<!-- THREE PATHS -->
+		<section class="reveal">
+			<h2>Explore my world <span class="animated-icon" style="font-size: 1.5rem;">🚀</span></h2>
+			<p class="muted" style="text-align: center; margin-bottom: 2rem;">Three paths to understanding who I am</p>
+
+			<div class="three-paths">
+				<div class="card-hover" onclick="location.href='blog.html'">
+					<div class="path-icon">📚</div>
 					<h3>Blog</h3>
 					<p class="muted">Structured thoughts on learning, systems, engineering concepts, and ideas worth
 						exploring deeply.</p>
-					<span class="button" onclick="location.href='blog.html'">
-						Read the blog →
-					</span>
+					<button class="glow-button">Read Articles</button>
 				</div>
 
-				<div class="card">
+				<div class="card-hover" onclick="location.href='diary.html'">
+					<div class="path-icon">📔</div>
 					<h3>Diary Entry</h3>
 					<p class="muted">Short, honest notes. No editing. No structure. Just moments captured as they are.
 					</p>
-					<span class="button" onclick="location.href='diary.html'">
-						Open diary →
-					</span>
+					<button class="glow-button">Open Diary</button>
+				</div>
+
+				<div class="card-hover" onclick="location.href='about.html'">
+					<div class="path-icon">🗺️</div>
+					<h3>My Journey</h3>
+					<p class="muted">The story of how I got here. Experiences, learnings, and the path that shaped who I
+						am.</p>
+					<button class="glow-button">View Journey</button>
 				</div>
 			</div>
 		</section>
 
+		<!-- INTERSECTIONS -->
+		<section class="reveal">
+			<h2>Where worlds collide <span class="animated-icon" style="font-size: 1.5rem;">🌌</span></h2>
+
+			<div class="intersection-grid">
+				<div class="intersection-card">
+					<h4><span class="card-icon">📐</span> Systems & Stories</h4>
+					<p class="muted">Every architecture tells a story. Every story has structure. Both need clarity and
+						purpose.</p>
+				</div>
+
+				<div class="intersection-card">
+					<h4><span class="card-icon">📷</span> Code & Capture</h4>
+					<p class="muted">Photography frames moments. Code frames solutions. Both require seeing what others
+						miss.</p>
+				</div>
+
+				<div class="intersection-card">
+					<h4><span class="card-icon">🌳</span> Nature & Logic</h4>
+					<p class="muted">Nature follows algorithms. The most elegant code mirrors nature's simplicity.</p>
+				</div>
+
+				<div class="intersection-card">
+					<h4><span class="card-icon">✏️</span> Writing & Thinking</h4>
+					<p class="muted">Clear writing is clear thinking. Good code is good communication.</p>
+				</div>
+
+				<div class="intersection-card">
+					<h4><span class="card-icon">📖</span> Learning & Reflecting</h4>
+					<p class="muted">Technical growth needs reflection. Artistic growth needs structure.</p>
+				</div>
+
+				<div class="intersection-card">
+					<h4><span class="card-icon">❤️</span> Logic & Emotion</h4>
+					<p class="muted">The best work happens when reason meets feeling—when solving becomes an act of
+						care.</p>
+				</div>
+			</div>
+		</section>
+
+		<!-- CLOSING -->
+		<section class="reveal" style="text-align: center;">
+			<p class="muted" style="font-size: 1.1rem; max-width: 600px; margin: 0 auto 2rem;">
+				This is who I am:<br />
+				A builder with a poet's soul. <span class="animated-icon" style="font-size: 1.2rem;">🏗️</span><br />
+				An observer with an engineer's mind. <span class="animated-icon"
+					style="font-size: 1.2rem;">🧠</span><br />
+				Forever curious, forever learning. <span class="animated-icon" style="font-size: 1.2rem;">🌱</span>
+			</p>
+		</section>
+
 	</main>
+
 	<footer class="container muted" style="margin-top:2rem;">
-		<!-- Keyboard shortcuts -->
 		<div style="margin-bottom:0.5rem;">
-			Press <strong>B</strong> → Blog · <strong>D</strong> → Diary · <strong>J</strong> → My Journey
+			Press <strong>H</strong> → Home · <strong>B</strong> → Blog · <strong>D</strong> → Diary ·
+			<strong>J</strong> → Journey
 		</div>
 	</footer>
 
-
 	<script src="js/base.js" defer></script>
 
-	<!-- --- Dynamic greeting, animated text, and floating quotes --- -->
 	<script>
+		// Initialize Lucide icons
+		lucide.createIcons();
+
 		// Greeting
 		const h = new Date().getHours();
 		document.getElementById('greeting').textContent =
-			h < 12 ? 'Good morning.' : h < 16 ? 'Good afternoon.' : 'Good evening.';
+			h < 12 ? 'Good morning' : h < 16 ? 'Good afternoon' : 'Good evening';
 
 		// Dynamic text
-		const words = ['learning slowly', 'building systems', 'writing to think'];
+		const words = ['logic & beauty', 'code & poetry', 'systems & stories'];
 		let i = 0;
 		const el = document.getElementById('dynamicText');
 		el.textContent = words[0];
@@ -244,12 +394,90 @@
 		}
 		setInterval(animateWord, 2500);
 
+		// Counter animation
+		const animateCounter = (counter) => {
+			const target = +counter.getAttribute('data-target');
+			const duration = 2000;
+			const increment = target / (duration / 16);
+			let current = 0;
+
+			const updateCounter = () => {
+				current += increment;
+				if (current < target) {
+					counter.textContent = Math.floor(current);
+					requestAnimationFrame(updateCounter);
+				} else {
+					counter.textContent = target + '+';
+				}
+			};
+
+			updateCounter();
+		};
+
+		const counterObserver = new IntersectionObserver((entries) => {
+			entries.forEach(entry => {
+				if (entry.isIntersecting) {
+					const counters = entry.target.querySelectorAll('.stat-number');
+					counters.forEach(counter => {
+						if (!counter.classList.contains('animated')) {
+							counter.classList.add('animated');
+							animateCounter(counter);
+						}
+					});
+					counterObserver.unobserve(entry.target);
+				}
+			});
+		}, { threshold: 0.5 });
+
+		document.querySelectorAll('.stats-grid').forEach(grid => counterObserver.observe(grid));
+
+		// Staggered intersection cards
+		const intersectionCards = document.querySelectorAll('.intersection-card');
+		const cardObserver = new IntersectionObserver((entries) => {
+			entries.forEach((entry, index) => {
+				if (entry.isIntersecting) {
+					setTimeout(() => {
+						entry.target.classList.add('visible');
+					}, index * 100);
+					cardObserver.unobserve(entry.target);
+				}
+			});
+		}, { threshold: 0.1 });
+
+		intersectionCards.forEach(card => cardObserver.observe(card));
+
+		// Sparkle effect on path cards
+		document.querySelectorAll('.card-hover').forEach(card => {
+			card.addEventListener('mouseenter', (e) => {
+				for (let i = 0; i < 5; i++) {
+					setTimeout(() => {
+						createSparkle(e.currentTarget);
+					}, i * 100);
+				}
+			});
+		});
+
+		function createSparkle(element) {
+			const sparkle = document.createElement('div');
+			sparkle.className = 'sparkle';
+			sparkle.textContent = '✨';
+			sparkle.style.left = Math.random() * element.offsetWidth + 'px';
+			sparkle.style.top = Math.random() * element.offsetHeight + 'px';
+			sparkle.style.setProperty('--x', (Math.random() - 0.5) * 100 + 'px');
+			sparkle.style.setProperty('--y', (Math.random() - 0.5) * 100 + 'px');
+			element.appendChild(sparkle);
+			setTimeout(() => sparkle.remove(), 1000);
+		}
+
 		// Keyboard shortcuts
 		document.addEventListener('keydown', e => {
+			if (e.key.toLowerCase() === 'h') location.href = 'index.html';
 			if (e.key.toLowerCase() === 'b') location.href = 'blog.html';
 			if (e.key.toLowerCase() === 'd') location.href = 'diary.html';
 			if (e.key.toLowerCase() === 'j') location.href = 'about.html';
 		});
+
+		// Reveal animation
 		const reveals = document.querySelectorAll('.reveal');
 
 		const observer = new IntersectionObserver(entries => {
