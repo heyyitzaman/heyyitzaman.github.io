@@ -10,6 +10,34 @@
 	<link rel="stylesheet" href="css/layout.css" />
 	<link rel="stylesheet" href="css/components.css" />
 	<link rel="stylesheet" href="css/animations.css" />
+	<style>
+		.project {
+			transition: transform 0.25s ease, box-shadow 0.25s ease;
+		}
+
+		.project:hover {
+			transform: translateY(-4px);
+		}
+
+		.reveal {
+			opacity: 0;
+			transform: translateY(16px);
+			transition: opacity 0.6s ease, transform 0.6s ease;
+		}
+
+		.reveal.visible {
+			opacity: 1;
+			transform: translateY(0);
+		}
+
+		.hero-divider {
+			width: 48px;
+			height: 2px;
+			background: currentColor;
+			opacity: 0.15;
+			margin-top: 2rem;
+		}
+	</style>
 	<script src="https://unpkg.com/lucide@latest"></script>
 </head>
 
@@ -21,7 +49,7 @@
 	<header class="nav">
 		<div class="container nav-inner">
 			<h2>Aman Pandey</h2>
-			<button class="hamburger" id="hamburger">
+			<button class="hamburger" id="hamburger" aria-label="Toggle navigation" aria-expanded="false">
 				<span></span>
 				<span></span>
 			</button>
@@ -74,16 +102,20 @@
 
 	<main class="container">
 		<!-- INTRO -->
-		<section>
+		<section class="reveal">
 			<h1>
 				<span id="greeting"></span><br />
 				I’m Aman, <span class="dynamic" id="dynamicText"></span>
 			</h1>
 
 			<p class="muted" style="max-width: 640px;">
-				I’m a software engineer who enjoys slowing things down —
-				understanding systems, learning deliberately, and writing to think clearly.
+				Software engineer focused on backend systems, deliberate learning,
+				and writing to clarify thinking.
 			</p>
+			<p class="muted" style="margin-top:0.5rem;">
+				Currently exploring system design & long-term growth.
+			</p>
+			<div class="hero-divider"></div>
 
 			<div style="margin-top: 1.5rem;">
 				<span class="button" onclick="location.href='about.html'">
@@ -93,7 +125,7 @@
 		</section>
 
 		<!-- FOCUS -->
-		<section>
+		<section class="reveal">
 			<h2>What I care about</h2>
 
 			<div class="grid grid-2">
@@ -134,9 +166,30 @@
 				</div>
 			</div>
 		</section>
+		<section class="reveal">
+			<h2>Selected work</h2>
+
+			<div class="grid grid-2">
+				<div class="card project">
+					<h3>Backend System Design Notes</h3>
+					<p class="muted">
+						Practical breakdowns of scalable systems, trade-offs, and architecture decisions.
+					</p>
+					<a href="#" class="inline-link">View notes →</a>
+				</div>
+
+				<div class="card project">
+					<h3>DSA Learning Tracker</h3>
+					<p class="muted">
+						A structured way I track problem-solving patterns and learning gaps.
+					</p>
+					<a href="#" class="inline-link">Explore →</a>
+				</div>
+			</div>
+		</section>
 
 		<!-- BLOG / DIARY -->
-		<section>
+		<section class="reveal">
 			<h2>How I use this space</h2>
 
 			<div class="grid grid-2">
@@ -200,6 +253,18 @@
 			if (e.key.toLowerCase() === 'd') location.href = 'diary.html';
 			if (e.key.toLowerCase() === 'j') location.href = 'about.html';
 		});
+		const reveals = document.querySelectorAll('.reveal');
+
+		const observer = new IntersectionObserver(entries => {
+			entries.forEach(entry => {
+				if (entry.isIntersecting) {
+					entry.target.classList.add('visible');
+					observer.unobserve(entry.target);
+				}
+			});
+		}, { threshold: 0.15 });
+
+		reveals.forEach(r => observer.observe(r));
 	</script>
 </body>
 

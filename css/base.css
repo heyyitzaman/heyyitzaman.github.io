@@ -66,19 +66,22 @@ h1 {
     font-size: 2.8rem;
     font-weight: 700;
     margin-bottom: 1rem;
+    font-size: clamp(2.2rem, 4vw, 3.2rem);
     line-height: 1.2;
+    letter-spacing: -0.02em;
 }
 
 h2 {
-    font-size: 2.2rem;
     font-weight: 600;
-    margin-bottom: 0.8rem;
+    font-size: 1.4rem;
+    letter-spacing: 0.02em;
+    margin-bottom: 1.2rem;
 }
 
 h3 {
-    font-size: 1.6rem;
     font-weight: 500;
-    margin-bottom: 0.6rem;
+    font-size: 1.05rem;
+    margin-bottom: 0.4rem;
 }
 
 /* Paragraphs */
@@ -86,12 +89,14 @@ p {
     font-size: 1rem;
     color: var(--fg);
     margin-bottom: 1rem;
+    line-height: 1.7;
 }
 
 /* Muted text */
 .muted {
     color: var(--muted);
     font-size: 0.95rem;
+    opacity: 0.75;
 }
 
 /* Links */
@@ -143,16 +148,11 @@ a:hover {
 .ambient-bg {
     position: fixed;
     inset: 0;
-    z-index: 0;
-    pointer-events: none;
     background:
-        radial-gradient(circle at 20% 20%,
-            rgba(56, 189, 248, 0.08),
-            transparent 60%),
-        radial-gradient(circle at 80% 80%,
-            rgba(99, 102, 241, 0.06),
-            transparent 55%);
-    animation: ambientShift 40s ease-in-out infinite alternate;
+        radial-gradient(600px at 20% 10%, rgba(120, 120, 255, 0.08), transparent),
+        radial-gradient(600px at 80% 30%, rgba(255, 120, 180, 0.06), transparent);
+    pointer-events: none;
+    z-index: -1;
 }
 
 /* Light mode: cleaner, paper-like */

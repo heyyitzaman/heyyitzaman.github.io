@@ -42,19 +42,26 @@ document.addEventListener('DOMContentLoaded', () => {
 (() => {
     const hamburger = document.getElementById('hamburger');
     const nav = document.getElementById('mobileNav');
+    const header = document.querySelector('.nav');
 
-    if (!hamburger || !nav) return;
+    if (!hamburger || !nav || !header) return;
 
-    hamburger.addEventListener('click', () => {
-        nav.classList.toggle('open');
-        hamburger.classList.toggle('active');
-    });
+    const toggleMenu = () => {
+        const isOpen = nav.classList.toggle('open');
+        hamburger.classList.toggle('active', isOpen);
 
-    // Close on link click
+        hamburger.setAttribute('aria-expanded', isOpen);
+        header.classList.toggle('menu-open', isOpen);
+    };
+
+    hamburger.addEventListener('click', toggleMenu);
+
     nav.querySelectorAll('a').forEach(link => {
         link.addEventListener('click', () => {
             nav.classList.remove('open');
             hamburger.classList.remove('active');
+            hamburger.setAttribute('aria-expanded', 'false');
+            header.classList.remove('menu-open');
         });
     });
 })();
@@ -83,3 +90,32 @@ document.querySelectorAll("a").forEach(link => {
         });
     }
 });
+
+(() => {
+    const nav = document.querySelector('.nav');
+    if (!nav) return;
+
+    let lastScrollY = window.scrollY;
+    const navHeight = nav.offsetHeight;
+
+    window.addEventListener('scroll', () => {
+        const currentScrollY = window.scrollY;
+
+        // Always show nav near top
+        if (currentScrollY <= navHeight) {
+            nav.classList.remove('nav-hidden');
+            lastScrollY = currentScrollY;
+            return;
+        }
+
+        if (currentScrollY > lastScrollY) {
+            nav.classList.add('nav-hidden');
+            nav.classList.remove('scrolling-up');
+        } else {
+            nav.classList.remove('nav-hidden');
+            nav.classList.add('scrolling-up');
+        }
+
+        lastScrollY = currentScrollY;
+    }, { passive: true });
+})();

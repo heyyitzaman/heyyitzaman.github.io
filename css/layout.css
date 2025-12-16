@@ -13,6 +13,12 @@
   gap: 2rem;
 }
 
+@media (min-width: 900px) {
+  .grid-2 {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
 
 @media (min-width: 768px) {
   .grid-2 {
@@ -22,7 +28,16 @@
 
 
 section {
-  padding: 4rem 0;
+  margin-bottom: 5rem;
+}
+
+section>h2 {
+  margin-bottom: 2rem;
+}
+
+body[data-page="home"] section:first-of-type {
+  padding-top: 6rem;
+  padding-bottom: 5rem;
 }
 
 @media (min-width: 1200px) {

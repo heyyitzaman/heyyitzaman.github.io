@@ -9,10 +9,10 @@
   width: 100%;
   height: var(--nav-height);
   z-index: 100;
-
-  background: color-mix(in srgb, var(--bg) 88%, transparent);
+  background: color-mix(in srgb, var(--bg) 92%, transparent);
   backdrop-filter: blur(10px);
-  border-bottom: 1px solid color-mix(in srgb, var(--fg) 8%, transparent);
+  border-bottom: 1px solid color-mix(in srgb, var(--fg) 6%, transparent);
+  transition: transform 0.35s ease;
 }
 
 /* Inner container */
@@ -23,12 +23,20 @@
   align-items: center;
 }
 
+.nav.nav-hidden {
+  transform: translateY(-100%);
+}
+
+.nav.scrolling-up {
+  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.08);
+}
+
 /* Brand */
 .nav h2 {
-  font-size: 1.25rem;
-  font-weight: 600;
-  margin: 0;
-  white-space: nowrap;
+  font-size: 1.05rem;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  opacity: 0.9;
 }
 
 /* Nav links */
@@ -43,7 +51,13 @@
   color: var(--fg);
   position: relative;
   padding-bottom: 4px;
-  font-size: 0.95rem;
+  font-size: 0.9rem;
+  opacity: 0.75;
+  transition: opacity 0.2s ease;
+}
+
+.nav a:hover {
+  opacity: 1;
 }
 
 /* Underline animation */
@@ -52,14 +66,18 @@
   position: absolute;
   left: 0;
   bottom: 0;
-  height: 2px;
   width: 0;
-  background: var(--accent);
+  height: 1.5px;
+  background: color-mix(in srgb, var(--accent) 80%, transparent);
   transition: width 0.25s ease;
 }
 
 .nav a:hover::after {
   width: 100%;
+}
+.nav a[aria-current="page"] {
+  opacity: 1;
+  font-weight: 500;
 }
 
 /* Active page underline */
@@ -68,6 +86,21 @@ body[data-page="blog"] .nav a[href="blog.html"]::after,
 body[data-page="diary"] .nav a[href="diary.html"]::after,
 body[data-page="journey"] .nav a[href="about.html"]::after {
   width: 100%;
+}
+
+@media (max-width: 640px) {
+  .nav h2 {
+    font-size: 0.95rem;
+  }
+
+  .nav a {
+    font-size: 0.85rem;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .nav {
+    transition: none;
+  }
 }
 
 /* Theme toggle */
@@ -132,6 +165,7 @@ body[data-page="journey"] .nav a[href="about.html"]::after {
     top: var(--nav-height);
     left: 0;
     width: 100%;
+
     background: var(--bg);
     border-bottom: 1px solid color-mix(in srgb, var(--fg) 10%, transparent);
 
@@ -140,12 +174,22 @@ body[data-page="journey"] .nav a[href="about.html"]::after {
     gap: 1rem;
     padding: 1.2rem 1.5rem;
 
-    display: none;
+    opacity: 0;
+    transform: translateY(-8px);
+    pointer-events: none;
+
+    transition: opacity 0.25s ease, transform 0.25s ease;
   }
 
   .nav nav.open {
-    display: flex;
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
   }
+}
+
+.nav.menu-open {
+  transform: translateY(0) !important;
 }
 
 .button {
@@ -158,22 +202,26 @@ body[data-page="journey"] .nav a[href="about.html"]::after {
   transition: all 0.3s ease;
   margin-top: 1rem;
   align-self: flex-start;
+  transition: transform 0.2s ease, opacity 0.2s ease;
 }
 
 .button:hover {
-  transform: scale(1.05);
+  transform: translateY(-1px);
+  opacity: 0.9;
   box-shadow: 0 8px 20px rgba(56, 189, 248, 0.3);
 }
 
 .card {
-  background: var(--card);
-  border-radius: var(--radius);
-  padding: 1.5rem;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
   display: flex;
   flex-direction: column;
   justify-content: center;
   transition: transform 0.2s ease, box-shadow 0.2s ease;
+  background: var(--card-bg);
+  border-radius: 14px;
+  padding: 1.4rem;
+  box-shadow:
+    0 1px 2px rgba(0,0,0,0.04),
+    0 8px 24px rgba(0,0,0,0.06);
 }
 
 .card:hover {
@@ -185,6 +233,17 @@ body[data-page="journey"] .nav a[href="about.html"]::after {
   width: 100%;
   border-radius: var(--radius);
   margin-bottom: 0.5rem;
+}
+
+.inline-link {
+  font-size: 0.9rem;
+  color: inherit;
+  opacity: 0.8;
+}
+
+.inline-link:hover {
+  opacity: 1;
+  text-decoration: underline;
 }
 
 /* =========================
