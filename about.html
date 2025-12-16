@@ -14,238 +14,132 @@
 
 	<style>
 		/* =========================
-       LAYOUT
-    ========================= */
+		   LAYOUT – FOCUSED & RESPONSIVE
+		========================= */
 
 		.journey-container {
 			display: grid;
-			grid-template-columns: 1.3fr 700px;
-			gap: 4rem;
-			margin-top: 4rem;
-			max-width: 2000px;
+			grid-template-columns: minmax(0, 1fr);
+			row-gap: 2.5rem;
+			margin-top: 3.25rem;
+			max-width: 1100px;
 			margin-left: auto;
 			margin-right: auto;
-			padding: 0 3rem;
+			padding: 0 1.5rem 1.75rem;
 		}
 
-		@media (max-width: 1600px) {
+		@media (max-width: 768px) {
 			.journey-container {
-				grid-template-columns: 1fr 600px;
-				gap: 3rem;
-			}
-		}
-
-		@media (max-width: 1300px) {
-			.journey-container {
-				grid-template-columns: 1fr 520px;
-				gap: 2.5rem;
-			}
-		}
-
-		@media (max-width: 1000px) {
-			.journey-container {
-				grid-template-columns: 1fr;
-				padding: 0 2rem;
-			}
-		}
-
-		@media (max-width: 600px) {
-			.journey-container {
-				padding: 0 1rem;
+				margin-top: 2.25rem;
+				padding: 0 1rem 1.5rem;
+				row-gap: 2rem;
 			}
 		}
 
 		/* =========================
-       SVG CONTAINER - BIGGER
-    ========================= */
+		   CURVED ROAD TIMELINE (SVG)
+		========================= */
 
 		.journey-svg-container {
-			min-height: 900px;
+			min-height: 520px;
 			display: flex;
 			align-items: center;
 			justify-content: center;
 			width: 100%;
+			max-width: 900px;
+			margin-inline: auto;
 		}
 
 		.journey-svg-container svg {
 			width: 100%;
-			height: 100%;
+			height: auto;
+			overflow: visible;
 		}
 
-		@media (max-width: 1600px) {
+		@media (max-width: 768px) {
 			.journey-svg-container {
-				min-height: 800px;
+				min-height: 360px;
+				max-width: 100%;
+			}
+
+			.journey-dot-label {
+				font-size: 0.7rem;
 			}
 		}
 
-		@media (max-width: 1300px) {
-			.journey-svg-container {
-				min-height: 700px;
-			}
-		}
-
-		@media (max-width: 1000px) {
-			.journey-svg-container {
-				min-height: 600px;
-			}
-		}
-
-		/* =========================
-       SVG PATH - Enhanced Visual Appeal
-    ========================= */
-
-		.journey-path {
+		.road-base {
 			fill: none;
-			stroke: url(#pathGradient);
-			stroke-width: 32;
+			stroke: color-mix(in srgb, var(--accent) 70%, #fb923c 30%);
+			stroke-width: 26;
 			stroke-linecap: round;
 			stroke-linejoin: round;
-			opacity: 0.95;
-			filter: drop-shadow(0 8px 24px color-mix(in srgb, var(--accent) 60%, transparent));
 		}
 
-		.journey-dashed {
+		.road-center {
 			fill: none;
-			stroke: color-mix(in srgb, var(--fg) 30%, transparent);
-			stroke-width: 6;
-			stroke-dasharray: 20 15;
-			opacity: 0.5;
+			stroke: rgba(255, 255, 255, 0.75);
+			stroke-width: 4;
+			stroke-dasharray: 16 14;
 		}
-
-		/* =========================
-       DOTS + LABELS - MASSIVE SIZE
-    ========================= */
 
 		.journey-dot {
 			cursor: pointer;
-			transition: all 0.4s ease;
+			transition: transform 0.25s ease, opacity 0.25s ease;
+			opacity: 0.8;
 		}
 
-		.journey-dot circle.dot-bg {
+		.journey-dot circle {
 			fill: var(--bg);
 			stroke: var(--accent);
-			stroke-width: 10;
-			opacity: 0.95;
-			transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
-			filter: drop-shadow(0 6px 16px color-mix(in srgb, var(--accent) 60%, transparent));
+			stroke-width: 3;
+			filter: drop-shadow(0 6px 18px rgba(15, 23, 42, 0.85));
 		}
 
-		.journey-dot:hover circle.dot-bg,
-		.journey-dot.selected circle.dot-bg {
-			opacity: 1;
-			transform: scale(1.2);
-			filter: drop-shadow(0 10px 30px var(--accent));
-			stroke-width: 12;
-		}
-
-		.dot-label {
-			font-size: 2.2rem;
-			font-weight: 900;
-			fill: var(--accent);
-			opacity: 1;
-			filter: drop-shadow(0 3px 8px rgba(0, 0, 0, 0.5));
-			letter-spacing: 1px;
-		}
-
-		.dot-sub {
-			font-size: 1.6rem;
+		.journey-dot-label {
+			font-size: 0.8rem;
+			letter-spacing: 0.1em;
+			text-transform: uppercase;
 			fill: var(--fg);
+		}
+
+		.journey-dot.active {
 			opacity: 1;
-			font-weight: 700;
-			filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.4));
+			transform: scale(1.08);
 		}
 
-		.journey-dot:hover .dot-label,
-		.journey-dot.selected .dot-label {
-			filter: drop-shadow(0 5px 16px var(--accent));
-			transform: scale(1.05);
+		.journey-dot.active circle {
+			stroke-width: 4;
 		}
-
-		.journey-dot:hover .dot-sub,
-		.journey-dot.selected .dot-sub {
-			transform: scale(1.05);
-		}
-
-		/* =========================
-       TRAVELER ICON - HUGE & VISIBLE
-    ========================= */
 
 		.traveler {
-			transition: transform 1.2s cubic-bezier(.22, .61, .36, 1);
+			filter: drop-shadow(0 14px 34px rgba(56, 189, 248, 0.9));
 			pointer-events: none;
-			filter: drop-shadow(0 6px 16px rgba(255, 71, 87, 0.7));
+			transform-origin: center;
+			transition: transform 0.5s cubic-bezier(.22, .61, .36, 1);
 		}
 
-		.traveler-body {
-			fill: #ff4757;
-			stroke: #ff4757;
-		}
-
-		@keyframes walk {
-
-			0%,
-			100% {
-				transform: translateY(0) rotate(0deg);
-			}
-
-			25% {
-				transform: translateY(-5px) rotate(-3deg);
-			}
-
-			50% {
-				transform: translateY(-8px) rotate(0deg);
-			}
-
-			75% {
-				transform: translateY(-5px) rotate(3deg);
-			}
-		}
-
-		.traveler.walking .traveler-body {
-			animation: walk 0.4s ease-in-out infinite;
-		}
-
-		/* Person icon at dots - MASSIVE & PROMINENT */
-		.person-icon {
-			opacity: 0.95;
-			transition: all 0.4s ease;
-			filter: drop-shadow(0 4px 12px rgba(78, 205, 196, 0.8));
-		}
-
-		.journey-dot:hover .person-icon,
-		.journey-dot.selected .person-icon {
-			opacity: 1;
-			transform: scale(1.15);
-			filter: drop-shadow(0 6px 18px rgba(78, 205, 196, 1));
-		}
-
-		.person-icon circle {
-			fill: #4ecdc4;
-			stroke: #3ba89e;
-			stroke-width: 3.5;
-		}
-
-		.person-icon line {
-			stroke: #4ecdc4;
-			stroke-width: 6;
-			stroke-linecap: round;
+		.traveler circle {
+			fill: var(--accent);
+			stroke: var(--accent);
 		}
 
 		/* =========================
-       DETAIL PANEL - MUCH WIDER
-    ========================= */
+		   DETAIL PANEL – READING FOCUS
+		========================= */
 
 		.journey-panel {
 			position: sticky;
 			top: 120px;
-			padding: 3.5rem;
-			border-radius: 24px;
-			background: color-mix(in srgb, var(--bg) 98%, transparent);
-			border: 3px solid color-mix(in srgb, var(--accent) 30%, transparent);
-			backdrop-filter: blur(24px);
-			max-height: calc(100vh - 160px);
+			padding: 2.5rem 2.25rem;
+			border-radius: 20px;
+			background: color-mix(in srgb, var(--bg) 96%, transparent);
+			border: 1px solid color-mix(in srgb, var(--accent) 20%, transparent);
+			backdrop-filter: blur(18px);
+			max-height: calc(100vh - 180px);
 			overflow-y: auto;
-			box-shadow: 0 16px 64px rgba(0, 0, 0, 0.2);
+			box-shadow:
+				0 18px 50px rgba(15, 23, 42, 0.55),
+				0 0 0 1px rgba(148, 163, 184, 0.15);
 		}
 
 		@media (max-width: 1000px) {
@@ -253,7 +147,7 @@
 				position: relative;
 				top: 0;
 				max-height: none;
-				padding: 2.5rem;
+				padding: 2rem 1.75rem;
 			}
 		}
 
@@ -400,27 +294,27 @@
 		<a href="https://github.com/heyyitzaman" target="_blank" data-tooltip="GitHub">
 			<i data-lucide="github"></i>
 		</a>
-	
+
 		<a href="https://linkedin.com/in/iamanchandrapandey" target="_blank" data-tooltip="LinkedIn">
 			<i data-lucide="linkedin"></i>
 		</a>
-	
+
 		<a href="https://instagram.com/heyyitzaman" target="_blank" data-tooltip="Instagram">
 			<i data-lucide="instagram"></i>
 		</a>
-	
+
 		<a href="https://twitter.com/heyyitzaman" target="_blank" data-tooltip="Twitter / X">
 			<i data-lucide="twitter"></i>
 		</a>
-	
+
 		<a href="https://iamanpandey.medium.com/about" target="_blank" data-tooltip="Medium">
 			<i data-lucide="pen-tool"></i>
 		</a>
-	
+
 		<a href="https://leetcode.com/iaman_pandey" target="_blank" data-tooltip="LeetCode">
 			<i data-lucide="code"></i>
 		</a>
-	
+
 		<a href="mailto:iamancpandey@gmail.com" data-tooltip="Email">
 			<i data-lucide="mail"></i>
 		</a>
@@ -433,55 +327,50 @@
 
 		<div class="journey-container">
 
-			<!-- SVG -->
-			<div class="journey-svg-container">
-				<svg viewBox="0 0 1000 800" width="100%" height="100%">
-					<!-- Gradient for path -->
-					<defs>
-						<linearGradient id="pathGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-							<stop offset="0%" style="stop-color:var(--accent);stop-opacity:1" />
-							<stop offset="50%" style="stop-color:var(--accent);stop-opacity:0.9" />
-							<stop offset="100%" style="stop-color:var(--accent);stop-opacity:1" />
-						</linearGradient>
-					</defs>
+			<!-- CURVED ROAD TIMELINE COLUMN -->
+			<div class="journey-svg-container" aria-label="Journey timeline">
+				<svg viewBox="0 0 1000 600" preserveAspectRatio="xMidYMid meet">
+					<!-- Road path -->
+					<path id="roadPath" class="road-base" d="M80 520 C 200 460, 260 390, 320 320
+						   C 380 250, 460 230, 540 200
+						   C 620 170, 700 165, 780 175
+						   C 860 185, 910 175, 940 165" />
 
-					<path class="journey-path" d="M50 700 C150 650, 200 600, 250 520
-                                     C300 440, 250 350, 350 280
-                                     C450 210, 550 250, 600 320
-                                     C650 390, 700 350, 750 280
-                                     C800 210, 850 150, 900 80" />
-					<path class="journey-dashed" d="M50 700 C150 650, 200 600, 250 520
-                                       C300 440, 250 350, 350 280
-                                       C450 210, 550 250, 600 320
-                                       C650 390, 700 350, 750 280
-                                       C800 210, 850 150, 900 80" />
+					<path class="road-center" d="M80 520 C 200 460, 260 390, 320 320
+						   C 380 250, 460 230, 540 200
+						   C 620 170, 700 165, 780 175
+						   C 860 185, 910 175, 940 165" />
 
-					<!-- TRAVELER - Walking Person Icon - HUGE -->
+					<!-- Traveler on the road -->
 					<g id="traveler" class="traveler">
-						<!-- Head -->
-						<circle class="traveler-body" r="20" cy="-45" />
-						<!-- Body -->
-						<line class="traveler-body" x1="0" y1="-25" x2="0" y2="20" stroke="#ff4757" stroke-width="9"
+						<circle r="13" />
+						<circle r="5" cy="-7" fill="var(--bg)" />
+						<line x1="0" y1="-2" x2="0" y2="9" stroke="var(--bg)" stroke-width="2.5"
 							stroke-linecap="round" />
-						<!-- Arms -->
-						<line class="traveler-body" x1="-20" y1="-10" x2="20" y2="-10" stroke="#ff4757" stroke-width="9"
+						<line x1="-6" y1="1" x2="6" y2="1" stroke="var(--bg)" stroke-width="2.5"
 							stroke-linecap="round" />
-						<!-- Legs -->
-						<line class="traveler-body" x1="0" y1="20" x2="-18" y2="48" stroke="#ff4757" stroke-width="9"
+						<line x1="0" y1="9" x2="-6" y2="16" stroke="var(--bg)" stroke-width="2.5"
 							stroke-linecap="round" />
-						<line class="traveler-body" x1="0" y1="20" x2="18" y2="48" stroke="#ff4757" stroke-width="9"
+						<line x1="0" y1="9" x2="6" y2="16" stroke="var(--bg)" stroke-width="2.5"
 							stroke-linecap="round" />
 					</g>
 
+					<!-- Dots + labels from JS -->
 					<g id="journeyDots"></g>
 				</svg>
 			</div>
 
-			<!-- PANEL -->
-			<aside class="journey-panel" id="journeyPanel"></aside>
-
 		</div>
 	</main>
+
+	<!-- Journey detail modal (reuses global modal styles) -->
+	<div id="journeyModal" class="modal">
+		<div class="modal-content">
+			<button class="close" id="journeyModalClose" aria-label="Close journey details">&times;</button>
+			<div id="journeyModalBody"></div>
+		</div>
+	</div>
+
 	<footer class="container muted">
 		Press <strong>B</strong> → Blog · <strong>D</strong> → Diary · <strong>H</strong> → Home
 	</footer>
@@ -492,9 +381,9 @@
   ========================= -->
 	<script>
 		document.addEventListener('keydown', e => {
-				if (e.key.toLowerCase() === 'b') location.href = 'blog.html';
-				if (e.key.toLowerCase() === 'd') location.href = 'diary.html';
-				if (e.key.toLowerCase() === 'h') location.href = 'index.html';
+			if (e.key.toLowerCase() === 'b') location.href = 'blog.html';
+			if (e.key.toLowerCase() === 'd') location.href = 'diary.html';
+			if (e.key.toLowerCase() === 'h') location.href = 'index.html';
 		});
 		const journeyData = [
 			{
@@ -520,8 +409,7 @@
 					"Articles": "12+",
 					"Mentees": "5"
 				},
-				tags: ["Reflection", "Systems", "Minimalism", "Writing"],
-				x: 900, y: 80
+				tags: ["Reflection", "Systems", "Minimalism", "Writing"]
 			},
 			{
 				year: "2023 – 2024",
@@ -547,8 +435,7 @@
 					"APIs": "25+",
 					"Uptime": "99.9%"
 				},
-				tags: ["Backend", "Microservices", "Scalability", "Cloud"],
-				x: 750, y: 280
+				tags: ["Backend", "Microservices", "Scalability", "Cloud"]
 			},
 			{
 				year: "2022",
@@ -573,8 +460,7 @@
 					"Contests": "30+",
 					"Rank": "Top 5%"
 				},
-				tags: ["DSA", "Algorithms", "Problem Solving"],
-				x: 600, y: 320
+				tags: ["DSA", "Algorithms", "Problem Solving"]
 			},
 			{
 				year: "2021",
@@ -599,8 +485,7 @@
 					"Users": "500+",
 					"Features": "50+"
 				},
-				tags: ["Full-Stack", "React", "Node.js", "Deployment"],
-				x: 350, y: 280
+				tags: ["Full-Stack", "React", "Node.js", "Deployment"]
 			},
 			{
 				year: "2020",
@@ -625,8 +510,7 @@
 					"Tables": "30+",
 					"Endpoints": "50+"
 				},
-				tags: ["Backend", "Databases", "APIs"],
-				x: 250, y: 520
+				tags: ["Backend", "Databases", "APIs"]
 			},
 			{
 				year: "2019",
@@ -651,8 +535,7 @@
 					"Lines": "5K+",
 					"Commits": "200+"
 				},
-				tags: ["Web", "Frontend", "Fundamentals"],
-				x: 150, y: 650
+				tags: ["Web", "Frontend", "Fundamentals"]
 			},
 			{
 				year: "2018",
@@ -677,31 +560,26 @@
 					"Hours": "100+",
 					"Aha!": "∞"
 				},
-				tags: ["Curiosity", "Basics", "Python"],
-				x: 50, y: 700
+				tags: ["Curiosity", "Basics", "Python"]
 			}
 		];
 
+		const modal = document.getElementById("journeyModal");
+		const modalBody = document.getElementById("journeyModalBody");
+		const modalClose = document.getElementById("journeyModalClose");
+		const roadPath = document.getElementById("roadPath");
 		const dotsGroup = document.getElementById("journeyDots");
-		const panel = document.getElementById("journeyPanel");
 		const traveler = document.getElementById("traveler");
-		let selected = null;
 
-		function selectItem(dot, data) {
-			if (selected) selected.classList.remove("selected");
-			dot.classList.add("selected");
-			selected = dot;
+		const pathLength = roadPath.getTotalLength();
+		let activeIndex = journeyData.length - 1; // latest by default
 
-			// Add walking animation
-			traveler.classList.add("walking");
-			traveler.setAttribute("transform", `translate(${data.x} ${data.y})`);
+		function pointAtFraction(f) {
+			const pt = roadPath.getPointAtLength(f * pathLength);
+			return { x: pt.x, y: pt.y };
+		}
 
-			// Remove walking animation after transition
-			setTimeout(() => {
-				traveler.classList.remove("walking");
-			}, 1000);
-
-			// Build metrics HTML
+		function renderModalContent(data) {
 			const metricsHTML = data.metrics ? `
 				<div class="metrics">
 					${Object.entries(data.metrics).map(([key, value]) => `
@@ -713,7 +591,7 @@
 				</div>
 			` : '';
 
-			panel.innerHTML = `
+			modalBody.innerHTML = `
 				<span class="year">${data.year}</span>
 				<h3>${data.title}</h3>
 				<span class="subtitle">${data.subtitle}</span>
@@ -729,72 +607,73 @@
 			`;
 		}
 
-		journeyData.forEach((item, i) => {
+		function moveTravelerToFraction(f) {
+			const { x, y } = pointAtFraction(f);
+			traveler.setAttribute("transform", `translate(${x} ${y})`);
+		}
+
+		// Build dots along the road, spaced evenly based on data length
+		const dotEls = journeyData.map((item, index) => {
 			const g = document.createElementNS("http://www.w3.org/2000/svg", "g");
 			g.classList.add("journey-dot");
-			g.setAttribute("transform", `translate(${item.x} ${item.y})`);
+			g.dataset.index = String(index);
 
-			const c = document.createElementNS("http://www.w3.org/2000/svg", "circle");
-			c.classList.add("dot-bg");
-			c.setAttribute("r", 35);
+			const fraction = journeyData.length === 1 ? 0.5 : index / (journeyData.length - 1);
+			const { x, y } = pointAtFraction(fraction);
+			g.setAttribute("transform", `translate(${x} ${y})`);
 
-			// Person icon at each dot - MASSIVE and SUPER VISIBLE
-			const personGroup = document.createElementNS("http://www.w3.org/2000/svg", "g");
-			personGroup.classList.add("person-icon");
+			const circle = document.createElementNS("http://www.w3.org/2000/svg", "circle");
+			circle.setAttribute("r", "11");
 
-			const head = document.createElementNS("http://www.w3.org/2000/svg", "circle");
-			head.setAttribute("r", "12");
-			head.setAttribute("cy", "-15");
+			const label = document.createElementNS("http://www.w3.org/2000/svg", "text");
+			label.classList.add("journey-dot-label");
+			label.setAttribute("x", "18");
+			label.setAttribute("y", "-16");
+			label.textContent = item.year;
 
-			const body = document.createElementNS("http://www.w3.org/2000/svg", "line");
-			body.setAttribute("y1", "-3");
-			body.setAttribute("y2", "22");
+			g.append(circle, label);
+			g.addEventListener("click", () => openForIndex(index));
 
-			const armLeft = document.createElementNS("http://www.w3.org/2000/svg", "line");
-			armLeft.setAttribute("x1", "-14");
-			armLeft.setAttribute("y1", "5");
-			armLeft.setAttribute("x2", "0");
-			armLeft.setAttribute("y2", "5");
-
-			const armRight = document.createElementNS("http://www.w3.org/2000/svg", "line");
-			armRight.setAttribute("x1", "0");
-			armRight.setAttribute("y1", "5");
-			armRight.setAttribute("x2", "14");
-			armRight.setAttribute("y2", "5");
-
-			const legLeft = document.createElementNS("http://www.w3.org/2000/svg", "line");
-			legLeft.setAttribute("x1", "0");
-			legLeft.setAttribute("y1", "22");
-			legLeft.setAttribute("x2", "-10");
-			legLeft.setAttribute("y2", "36");
-
-			const legRight = document.createElementNS("http://www.w3.org/2000/svg", "line");
-			legRight.setAttribute("x1", "0");
-			legRight.setAttribute("y1", "22");
-			legRight.setAttribute("x2", "10");
-			legRight.setAttribute("y2", "36");
-
-			personGroup.append(head, body, armLeft, armRight, legLeft, legRight);
-
-			const t1 = document.createElementNS("http://www.w3.org/2000/svg", "text");
-			t1.setAttribute("x", 48);
-			t1.setAttribute("y", -14);
-			t1.classList.add("dot-label");
-			t1.textContent = item.year;
-
-			const t2 = document.createElementNS("http://www.w3.org/2000/svg", "text");
-			t2.setAttribute("x", 48);
-			t2.setAttribute("y", 16);
-			t2.classList.add("dot-sub");
-			t2.textContent = item.subtitle;
-
-			g.append(c, personGroup, t1, t2);
 			dotsGroup.appendChild(g);
-
-			g.addEventListener("click", () => selectItem(g, item));
-
-			if (i === 0) selectItem(g, item);
+			return g;
 		});
+
+		function setActiveIndex(index) {
+			if (index === activeIndex || index < 0 || index >= journeyData.length) return;
+
+			dotEls[activeIndex]?.classList.remove("active");
+			activeIndex = index;
+			const frac = journeyData.length === 1 ? 0.5 : index / (journeyData.length - 1);
+
+			dotEls[activeIndex].classList.add("active");
+			moveTravelerToFraction(frac);
+		}
+
+		function openModal() {
+			modal.classList.add("active");
+		}
+
+		function closeModal() {
+			modal.classList.remove("active");
+		}
+
+		function openForIndex(index) {
+			setActiveIndex(index);
+			renderModalContent(journeyData[index]);
+			openModal();
+		}
+
+		// Close handlers
+		modalClose.addEventListener("click", closeModal);
+		modal.addEventListener("click", (e) => {
+			if (e.target === modal) closeModal();
+		});
+		document.addEventListener("keydown", (e) => {
+			if (e.key === "Escape") closeModal();
+		});
+
+		// Initial: latest (last) dot selected, but modal closed
+		setActiveIndex(journeyData.length - 1);
 	</script>
 
 </body>
