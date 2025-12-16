@@ -2,14 +2,374 @@
 <html lang="en">
 
 <head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 	<title>My Journey</title>
-	<link rel="stylesheet" href="css/base.css">
-	<link rel="stylesheet" href="css/layout.css">
-	<link rel="stylesheet" href="css/components.css">
-	<link rel="stylesheet" href="css/animations.css">
+
+	<link rel="stylesheet" href="css/base.css" />
+	<link rel="stylesheet" href="css/layout.css" />
+	<link rel="stylesheet" href="css/components.css" />
+	<link rel="stylesheet" href="css/animations.css" />
 	<script src="https://unpkg.com/lucide@latest"></script>
+
+	<style>
+		/* =========================
+       LAYOUT
+    ========================= */
+
+		.journey-container {
+			display: grid;
+			grid-template-columns: 1.3fr 700px;
+			gap: 4rem;
+			margin-top: 4rem;
+			max-width: 2000px;
+			margin-left: auto;
+			margin-right: auto;
+			padding: 0 3rem;
+		}
+
+		@media (max-width: 1600px) {
+			.journey-container {
+				grid-template-columns: 1fr 600px;
+				gap: 3rem;
+			}
+		}
+
+		@media (max-width: 1300px) {
+			.journey-container {
+				grid-template-columns: 1fr 520px;
+				gap: 2.5rem;
+			}
+		}
+
+		@media (max-width: 1000px) {
+			.journey-container {
+				grid-template-columns: 1fr;
+				padding: 0 2rem;
+			}
+		}
+
+		@media (max-width: 600px) {
+			.journey-container {
+				padding: 0 1rem;
+			}
+		}
+
+		/* =========================
+       SVG CONTAINER - BIGGER
+    ========================= */
+
+		.journey-svg-container {
+			min-height: 900px;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			width: 100%;
+		}
+
+		.journey-svg-container svg {
+			width: 100%;
+			height: 100%;
+		}
+
+		@media (max-width: 1600px) {
+			.journey-svg-container {
+				min-height: 800px;
+			}
+		}
+
+		@media (max-width: 1300px) {
+			.journey-svg-container {
+				min-height: 700px;
+			}
+		}
+
+		@media (max-width: 1000px) {
+			.journey-svg-container {
+				min-height: 600px;
+			}
+		}
+
+		/* =========================
+       SVG PATH - Enhanced Visual Appeal
+    ========================= */
+
+		.journey-path {
+			fill: none;
+			stroke: url(#pathGradient);
+			stroke-width: 32;
+			stroke-linecap: round;
+			stroke-linejoin: round;
+			opacity: 0.95;
+			filter: drop-shadow(0 8px 24px color-mix(in srgb, var(--accent) 60%, transparent));
+		}
+
+		.journey-dashed {
+			fill: none;
+			stroke: color-mix(in srgb, var(--fg) 30%, transparent);
+			stroke-width: 6;
+			stroke-dasharray: 20 15;
+			opacity: 0.5;
+		}
+
+		/* =========================
+       DOTS + LABELS - MASSIVE SIZE
+    ========================= */
+
+		.journey-dot {
+			cursor: pointer;
+			transition: all 0.4s ease;
+		}
+
+		.journey-dot circle.dot-bg {
+			fill: var(--bg);
+			stroke: var(--accent);
+			stroke-width: 10;
+			opacity: 0.95;
+			transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+			filter: drop-shadow(0 6px 16px color-mix(in srgb, var(--accent) 60%, transparent));
+		}
+
+		.journey-dot:hover circle.dot-bg,
+		.journey-dot.selected circle.dot-bg {
+			opacity: 1;
+			transform: scale(1.2);
+			filter: drop-shadow(0 10px 30px var(--accent));
+			stroke-width: 12;
+		}
+
+		.dot-label {
+			font-size: 2.2rem;
+			font-weight: 900;
+			fill: var(--accent);
+			opacity: 1;
+			filter: drop-shadow(0 3px 8px rgba(0, 0, 0, 0.5));
+			letter-spacing: 1px;
+		}
+
+		.dot-sub {
+			font-size: 1.6rem;
+			fill: var(--fg);
+			opacity: 1;
+			font-weight: 700;
+			filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.4));
+		}
+
+		.journey-dot:hover .dot-label,
+		.journey-dot.selected .dot-label {
+			filter: drop-shadow(0 5px 16px var(--accent));
+			transform: scale(1.05);
+		}
+
+		.journey-dot:hover .dot-sub,
+		.journey-dot.selected .dot-sub {
+			transform: scale(1.05);
+		}
+
+		/* =========================
+       TRAVELER ICON - HUGE & VISIBLE
+    ========================= */
+
+		.traveler {
+			transition: transform 1.2s cubic-bezier(.22, .61, .36, 1);
+			pointer-events: none;
+			filter: drop-shadow(0 6px 16px rgba(255, 71, 87, 0.7));
+		}
+
+		.traveler-body {
+			fill: #ff4757;
+			stroke: #ff4757;
+		}
+
+		@keyframes walk {
+
+			0%,
+			100% {
+				transform: translateY(0) rotate(0deg);
+			}
+
+			25% {
+				transform: translateY(-5px) rotate(-3deg);
+			}
+
+			50% {
+				transform: translateY(-8px) rotate(0deg);
+			}
+
+			75% {
+				transform: translateY(-5px) rotate(3deg);
+			}
+		}
+
+		.traveler.walking .traveler-body {
+			animation: walk 0.4s ease-in-out infinite;
+		}
+
+		/* Person icon at dots - MASSIVE & PROMINENT */
+		.person-icon {
+			opacity: 0.95;
+			transition: all 0.4s ease;
+			filter: drop-shadow(0 4px 12px rgba(78, 205, 196, 0.8));
+		}
+
+		.journey-dot:hover .person-icon,
+		.journey-dot.selected .person-icon {
+			opacity: 1;
+			transform: scale(1.15);
+			filter: drop-shadow(0 6px 18px rgba(78, 205, 196, 1));
+		}
+
+		.person-icon circle {
+			fill: #4ecdc4;
+			stroke: #3ba89e;
+			stroke-width: 3.5;
+		}
+
+		.person-icon line {
+			stroke: #4ecdc4;
+			stroke-width: 6;
+			stroke-linecap: round;
+		}
+
+		/* =========================
+       DETAIL PANEL - MUCH WIDER
+    ========================= */
+
+		.journey-panel {
+			position: sticky;
+			top: 120px;
+			padding: 3.5rem;
+			border-radius: 24px;
+			background: color-mix(in srgb, var(--bg) 98%, transparent);
+			border: 3px solid color-mix(in srgb, var(--accent) 30%, transparent);
+			backdrop-filter: blur(24px);
+			max-height: calc(100vh - 160px);
+			overflow-y: auto;
+			box-shadow: 0 16px 64px rgba(0, 0, 0, 0.2);
+		}
+
+		@media (max-width: 1000px) {
+			.journey-panel {
+				position: relative;
+				top: 0;
+				max-height: none;
+				padding: 2.5rem;
+			}
+		}
+
+		.journey-panel .year {
+			font-size: 1.15rem;
+			opacity: 0.85;
+			margin-bottom: 0.6rem;
+			display: block;
+			font-weight: 800;
+			color: var(--accent);
+			text-transform: uppercase;
+			letter-spacing: 2px;
+		}
+
+		.journey-panel h3 {
+			margin: 0.5rem 0 1.2rem;
+			font-size: 2.5rem;
+			line-height: 1.2;
+			font-weight: 800;
+		}
+
+		.journey-panel .subtitle {
+			display: block;
+			font-size: 1.4rem;
+			opacity: 0.9;
+			margin-bottom: 2rem;
+			font-style: italic;
+			font-weight: 600;
+			line-height: 1.4;
+		}
+
+		.journey-panel .description {
+			margin-bottom: 2rem;
+			line-height: 1.8;
+			font-size: 1.15rem;
+		}
+
+		.journey-panel h4 {
+			margin: 2rem 0 1rem;
+			font-size: 1.35rem;
+			opacity: 1;
+			font-weight: 800;
+			color: var(--accent);
+		}
+
+		.journey-panel ul {
+			padding-left: 1.8rem;
+			margin: 1rem 0 2rem;
+		}
+
+		.journey-panel li {
+			font-size: 1.1rem;
+			opacity: 0.95;
+			margin-bottom: 0.9rem;
+			line-height: 1.7;
+		}
+
+		.tags {
+			margin-top: 2rem;
+			padding-top: 2rem;
+			border-top: 3px solid color-mix(in srgb, var(--fg) 15%, transparent);
+			font-size: 1rem;
+			opacity: 0.8;
+			font-weight: 700;
+		}
+
+		.metrics {
+			display: grid;
+			grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+			gap: 2rem;
+			margin: 2rem 0;
+			padding: 2.5rem;
+			background: color-mix(in srgb, var(--accent) 15%, transparent);
+			border-radius: 16px;
+			border: 3px solid color-mix(in srgb, var(--accent) 25%, transparent);
+		}
+
+		.metric {
+			text-align: center;
+		}
+
+		.metric-value {
+			display: block;
+			font-size: 3rem;
+			font-weight: 900;
+			color: var(--accent);
+			text-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+			line-height: 1;
+		}
+
+		.metric-label {
+			font-size: 1.05rem;
+			opacity: 0.85;
+			margin-top: 0.6rem;
+			font-weight: 700;
+		}
+
+		/* Custom scrollbar for panel */
+		.journey-panel::-webkit-scrollbar {
+			width: 10px;
+		}
+
+		.journey-panel::-webkit-scrollbar-track {
+			background: color-mix(in srgb, var(--fg) 8%, transparent);
+			border-radius: 10px;
+		}
+
+		.journey-panel::-webkit-scrollbar-thumb {
+			background: color-mix(in srgb, var(--accent) 50%, transparent);
+			border-radius: 10px;
+		}
+
+		.journey-panel::-webkit-scrollbar-thumb:hover {
+			background: color-mix(in srgb, var(--accent) 70%, transparent);
+		}
+	</style>
 </head>
 
 <body data-page="journey">
@@ -17,6 +377,7 @@
 
 	<div class="cursor-dot" id="cursorDot"></div>
 
+	<!-- NAV -->
 	<header class="nav">
 		<div class="container nav-inner">
 			<h2>Aman Pandey</h2>
@@ -68,36 +429,371 @@
 
 	<main class="container fade-in">
 		<h1>My Journey</h1>
-		<p class="muted">From my first line of code to building this portfolio.</p>
+		<p class="muted">Learning, drifting, focusing — in phases.</p>
 
-		<div class="grid grid-2">
-			<div class="card">
-				<h3>2018 - First Steps</h3>
-				<p>Started learning programming. Hello world!</p>
+		<div class="journey-container">
+
+			<!-- SVG -->
+			<div class="journey-svg-container">
+				<svg viewBox="0 0 1000 800" width="100%" height="100%">
+					<!-- Gradient for path -->
+					<defs>
+						<linearGradient id="pathGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+							<stop offset="0%" style="stop-color:var(--accent);stop-opacity:1" />
+							<stop offset="50%" style="stop-color:var(--accent);stop-opacity:0.9" />
+							<stop offset="100%" style="stop-color:var(--accent);stop-opacity:1" />
+						</linearGradient>
+					</defs>
+
+					<path class="journey-path" d="M50 700 C150 650, 200 600, 250 520
+                                     C300 440, 250 350, 350 280
+                                     C450 210, 550 250, 600 320
+                                     C650 390, 700 350, 750 280
+                                     C800 210, 850 150, 900 80" />
+					<path class="journey-dashed" d="M50 700 C150 650, 200 600, 250 520
+                                       C300 440, 250 350, 350 280
+                                       C450 210, 550 250, 600 320
+                                       C650 390, 700 350, 750 280
+                                       C800 210, 850 150, 900 80" />
+
+					<!-- TRAVELER - Walking Person Icon - HUGE -->
+					<g id="traveler" class="traveler">
+						<!-- Head -->
+						<circle class="traveler-body" r="20" cy="-45" />
+						<!-- Body -->
+						<line class="traveler-body" x1="0" y1="-25" x2="0" y2="20" stroke="#ff4757" stroke-width="9"
+							stroke-linecap="round" />
+						<!-- Arms -->
+						<line class="traveler-body" x1="-20" y1="-10" x2="20" y2="-10" stroke="#ff4757" stroke-width="9"
+							stroke-linecap="round" />
+						<!-- Legs -->
+						<line class="traveler-body" x1="0" y1="20" x2="-18" y2="48" stroke="#ff4757" stroke-width="9"
+							stroke-linecap="round" />
+						<line class="traveler-body" x1="0" y1="20" x2="18" y2="48" stroke="#ff4757" stroke-width="9"
+							stroke-linecap="round" />
+					</g>
+
+					<g id="journeyDots"></g>
+				</svg>
 			</div>
-			<div class="card">
-				<h3>2019 - First Project</h3>
-				<p>Built my first web application. Learned HTML, CSS basics.</p>
-			</div>
-			<div class="card">
-				<h3>2020 - Deep Dive</h3>
-				<p>Explored algorithms, data structures, and backend development.</p>
-			</div>
-			<div class="card">
-				<h3>2025 - Portfolio Live</h3>
-				<p>Built this website from scratch, responsive, and deployed via GitHub Pages.</p>
-			</div>
+
+			<!-- PANEL -->
+			<aside class="journey-panel" id="journeyPanel"></aside>
+
 		</div>
 	</main>
 	<footer class="container muted">
 		Press <strong>B</strong> → Blog · <strong>D</strong> → Diary · <strong>H</strong> → Home
 	</footer>
 	<script src="js/base.js" defer></script>
+
+	<!-- =========================
+       DATA + LOGIC
+  ========================= -->
 	<script>
 		document.addEventListener('keydown', e => {
-			if (e.key.toLowerCase() === 'b') location.href = 'blog.html';
-			if (e.key.toLowerCase() === 'd') location.href = 'diary.html';
-			if (e.key.toLowerCase() === 'h') location.href = 'index.html';
+				if (e.key.toLowerCase() === 'b') location.href = 'blog.html';
+				if (e.key.toLowerCase() === 'd') location.href = 'diary.html';
+				if (e.key.toLowerCase() === 'h') location.href = 'index.html';
+		});
+		const journeyData = [
+			{
+				year: "2025 · Present",
+				title: "Building in Public",
+				subtitle: "Clarity, systems, and intentional growth",
+				description: "Creating a personal digital space to document learning, build meaningful projects, and cultivate slow, deliberate growth. Focusing on systems thinking and writing as a tool for clarity.",
+				highlights: [
+					"Launched personal website and digital garden",
+					"Writing regularly about engineering and systems thinking",
+					"Building tools for personal knowledge management",
+					"Contributing to open-source projects",
+					"Mentoring junior developers"
+				],
+				learnings: [
+					"Writing clarifies thinking better than any other tool",
+					"Consistency beats intensity in the long run",
+					"Public learning creates accountability and connection"
+				],
+				technologies: ["React", "Node.js", "System Design", "Writing", "Notion API"],
+				metrics: {
+					"Projects": "3",
+					"Articles": "12+",
+					"Mentees": "5"
+				},
+				tags: ["Reflection", "Systems", "Minimalism", "Writing"],
+				x: 900, y: 80
+			},
+			{
+				year: "2023 – 2024",
+				title: "Advanced Backend Engineering",
+				subtitle: "Scalability, architecture, and depth",
+				description: "Deep dive into backend systems, distributed architectures, and high-performance computing. Worked on microservices, event-driven systems, and cloud infrastructure. Led technical initiatives and mentored team members.",
+				highlights: [
+					"Designed and implemented microservices architecture for 50K+ daily users",
+					"Optimized database queries reducing response time by 60%",
+					"Built event-driven systems using Kafka and RabbitMQ",
+					"Implemented caching strategies with Redis",
+					"Led migration from monolith to microservices",
+					"Conducted system design interviews and code reviews"
+				],
+				learnings: [
+					"Scalability is about trade-offs, not perfection",
+					"Documentation is as important as code",
+					"Premature optimization is real, but so is technical debt"
+				],
+				technologies: ["Java", "Spring Boot", "PostgreSQL", "Redis", "Kafka", "Docker", "Kubernetes", "AWS"],
+				metrics: {
+					"Users": "50K+",
+					"APIs": "25+",
+					"Uptime": "99.9%"
+				},
+				tags: ["Backend", "Microservices", "Scalability", "Cloud"],
+				x: 750, y: 280
+			},
+			{
+				year: "2022",
+				title: "DSA & Problem Solving",
+				subtitle: "Mastering fundamentals",
+				description: "Dedicated year to understanding data structures and algorithms at a deep level. Solved 500+ problems across various platforms, participated in contests, and strengthened computer science fundamentals.",
+				highlights: [
+					"Solved 500+ coding problems on LeetCode and CodeForces",
+					"Achieved top 5% ranking in monthly contests",
+					"Mastered dynamic programming and graph algorithms",
+					"Built visualizer for common algorithms",
+					"Mentored peers in DSA study groups"
+				],
+				learnings: [
+					"Patterns matter more than memorizing solutions",
+					"Teaching others deepens your own understanding",
+					"Consistent practice builds intuition over time"
+				],
+				technologies: ["Java", "Python", "C++", "Algorithms", "Data Structures"],
+				metrics: {
+					"Problems": "500+",
+					"Contests": "30+",
+					"Rank": "Top 5%"
+				},
+				tags: ["DSA", "Algorithms", "Problem Solving"],
+				x: 600, y: 320
+			},
+			{
+				year: "2021",
+				title: "Full-Stack Development",
+				subtitle: "End-to-end product thinking",
+				description: "Expanded into full-stack development, understanding how frontend and backend work together. Built multiple full-stack applications, learned about UX, deployment, and the complete software development lifecycle.",
+				highlights: [
+					"Built 5 full-stack applications from scratch",
+					"Learned React and modern frontend frameworks",
+					"Implemented authentication and authorization flows",
+					"Deployed applications to cloud platforms",
+					"Collaborated with designers on UI/UX"
+				],
+				learnings: [
+					"Understanding both sides makes you a better developer",
+					"User experience is as important as code quality",
+					"Deployment is where theory meets reality"
+				],
+				technologies: ["React", "Node.js", "Express", "MongoDB", "Tailwind CSS", "Heroku"],
+				metrics: {
+					"Apps": "5",
+					"Users": "500+",
+					"Features": "50+"
+				},
+				tags: ["Full-Stack", "React", "Node.js", "Deployment"],
+				x: 350, y: 280
+			},
+			{
+				year: "2020",
+				title: "Backend Foundations",
+				subtitle: "Server-side logic and databases",
+				description: "Focused on backend development, learning server-side programming, database design, and API development. Built RESTful APIs and understood how data flows through applications.",
+				highlights: [
+					"Built REST APIs with Node.js and Express",
+					"Learned SQL and database design principles",
+					"Implemented CRUD operations and data validation",
+					"Understood authentication with JWT",
+					"Worked with PostgreSQL and MySQL"
+				],
+				learnings: [
+					"Good database design prevents future headaches",
+					"APIs are contracts that need careful planning",
+					"Security should be built in, not added later"
+				],
+				technologies: ["Node.js", "Express", "PostgreSQL", "MySQL", "JWT"],
+				metrics: {
+					"APIs": "10+",
+					"Tables": "30+",
+					"Endpoints": "50+"
+				},
+				tags: ["Backend", "Databases", "APIs"],
+				x: 250, y: 520
+			},
+			{
+				year: "2019",
+				title: "Web Development Basics",
+				subtitle: "HTML, CSS, JavaScript",
+				description: "Started the web development journey by learning HTML, CSS, and JavaScript. Built static websites, understood DOM manipulation, and learned how the web works at a fundamental level.",
+				highlights: [
+					"Built 10+ static websites",
+					"Learned responsive design principles",
+					"Understood JavaScript fundamentals",
+					"Created interactive web elements",
+					"Learned Git and version control"
+				],
+				learnings: [
+					"Fundamentals never go out of style",
+					"Browser DevTools are your best friend",
+					"Reading documentation is a superpower"
+				],
+				technologies: ["HTML", "CSS", "JavaScript", "Git", "Bootstrap"],
+				metrics: {
+					"Sites": "10+",
+					"Lines": "5K+",
+					"Commits": "200+"
+				},
+				tags: ["Web", "Frontend", "Fundamentals"],
+				x: 150, y: 650
+			},
+			{
+				year: "2018",
+				title: "The Beginning",
+				subtitle: "First line of code",
+				description: "The journey began with curiosity about how software works. Wrote the first 'Hello World' program and discovered the joy of making computers do things through code. This was the spark that started everything.",
+				highlights: [
+					"Wrote first 'Hello World' in Python",
+					"Learned basic programming concepts",
+					"Built simple calculator and games",
+					"Discovered the joy of problem solving",
+					"Joined online coding communities"
+				],
+				learnings: [
+					"Everyone starts somewhere",
+					"Curiosity is the best teacher",
+					"The journey is as important as the destination"
+				],
+				technologies: ["Python", "Scratch"],
+				metrics: {
+					"Programs": "20+",
+					"Hours": "100+",
+					"Aha!": "∞"
+				},
+				tags: ["Curiosity", "Basics", "Python"],
+				x: 50, y: 700
+			}
+		];
+
+		const dotsGroup = document.getElementById("journeyDots");
+		const panel = document.getElementById("journeyPanel");
+		const traveler = document.getElementById("traveler");
+		let selected = null;
+
+		function selectItem(dot, data) {
+			if (selected) selected.classList.remove("selected");
+			dot.classList.add("selected");
+			selected = dot;
+
+			// Add walking animation
+			traveler.classList.add("walking");
+			traveler.setAttribute("transform", `translate(${data.x} ${data.y})`);
+
+			// Remove walking animation after transition
+			setTimeout(() => {
+				traveler.classList.remove("walking");
+			}, 1000);
+
+			// Build metrics HTML
+			const metricsHTML = data.metrics ? `
+				<div class="metrics">
+					${Object.entries(data.metrics).map(([key, value]) => `
+						<div class="metric">
+							<span class="metric-value">${value}</span>
+							<div class="metric-label">${key}</div>
+						</div>
+					`).join('')}
+				</div>
+			` : '';
+
+			panel.innerHTML = `
+				<span class="year">${data.year}</span>
+				<h3>${data.title}</h3>
+				<span class="subtitle">${data.subtitle}</span>
+				<p class="description">${data.description}</p>
+				${metricsHTML}
+				<h4>Key Achievements</h4>
+				<ul>${data.highlights.map(h => `<li>${h}</li>`).join("")}</ul>
+				<h4>Learnings</h4>
+				<ul>${data.learnings.map(l => `<li>${l}</li>`).join("")}</ul>
+				<h4>Technologies</h4>
+				<p class="muted">${data.technologies.join(" · ")}</p>
+				<div class="tags">${data.tags.join(" · ")}</div>
+			`;
+		}
+
+		journeyData.forEach((item, i) => {
+			const g = document.createElementNS("http://www.w3.org/2000/svg", "g");
+			g.classList.add("journey-dot");
+			g.setAttribute("transform", `translate(${item.x} ${item.y})`);
+
+			const c = document.createElementNS("http://www.w3.org/2000/svg", "circle");
+			c.classList.add("dot-bg");
+			c.setAttribute("r", 35);
+
+			// Person icon at each dot - MASSIVE and SUPER VISIBLE
+			const personGroup = document.createElementNS("http://www.w3.org/2000/svg", "g");
+			personGroup.classList.add("person-icon");
+
+			const head = document.createElementNS("http://www.w3.org/2000/svg", "circle");
+			head.setAttribute("r", "12");
+			head.setAttribute("cy", "-15");
+
+			const body = document.createElementNS("http://www.w3.org/2000/svg", "line");
+			body.setAttribute("y1", "-3");
+			body.setAttribute("y2", "22");
+
+			const armLeft = document.createElementNS("http://www.w3.org/2000/svg", "line");
+			armLeft.setAttribute("x1", "-14");
+			armLeft.setAttribute("y1", "5");
+			armLeft.setAttribute("x2", "0");
+			armLeft.setAttribute("y2", "5");
+
+			const armRight = document.createElementNS("http://www.w3.org/2000/svg", "line");
+			armRight.setAttribute("x1", "0");
+			armRight.setAttribute("y1", "5");
+			armRight.setAttribute("x2", "14");
+			armRight.setAttribute("y2", "5");
+
+			const legLeft = document.createElementNS("http://www.w3.org/2000/svg", "line");
+			legLeft.setAttribute("x1", "0");
+			legLeft.setAttribute("y1", "22");
+			legLeft.setAttribute("x2", "-10");
+			legLeft.setAttribute("y2", "36");
+
+			const legRight = document.createElementNS("http://www.w3.org/2000/svg", "line");
+			legRight.setAttribute("x1", "0");
+			legRight.setAttribute("y1", "22");
+			legRight.setAttribute("x2", "10");
+			legRight.setAttribute("y2", "36");
+
+			personGroup.append(head, body, armLeft, armRight, legLeft, legRight);
+
+			const t1 = document.createElementNS("http://www.w3.org/2000/svg", "text");
+			t1.setAttribute("x", 48);
+			t1.setAttribute("y", -14);
+			t1.classList.add("dot-label");
+			t1.textContent = item.year;
+
+			const t2 = document.createElementNS("http://www.w3.org/2000/svg", "text");
+			t2.setAttribute("x", 48);
+			t2.setAttribute("y", 16);
+			t2.classList.add("dot-sub");
+			t2.textContent = item.subtitle;
+
+			g.append(c, personGroup, t1, t2);
+			dotsGroup.appendChild(g);
+
+			g.addEventListener("click", () => selectItem(g, item));
+
+			if (i === 0) selectItem(g, item);
 		});
 	</script>
 
