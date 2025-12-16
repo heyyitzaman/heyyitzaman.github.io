@@ -2,680 +2,1182 @@
 <html lang="en">
 
 <head>
-	<meta charset="UTF-8" />
-	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-	<title>My Journey</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Aman Pandey - Resume</title>
 
-	<link rel="stylesheet" href="css/base.css" />
-	<link rel="stylesheet" href="css/layout.css" />
-	<link rel="stylesheet" href="css/components.css" />
-	<link rel="stylesheet" href="css/animations.css" />
-	<script src="https://unpkg.com/lucide@latest"></script>
+    <link rel="stylesheet" href="css/base.css" />
+    <link rel="stylesheet" href="css/layout.css" />
+    <link rel="stylesheet" href="css/components.css" />
+    <link rel="stylesheet" href="css/animations.css" />
+    <script src="https://unpkg.com/lucide@latest"></script>
 
-	<style>
-		/* =========================
-		   LAYOUT – FOCUSED & RESPONSIVE
-		========================= */
+    <style>
 
-		.journey-container {
-			display: grid;
-			grid-template-columns: minmax(0, 1fr);
-			row-gap: 2.5rem;
-			margin-top: 3.25rem;
-			max-width: 1100px;
-			margin-left: auto;
-			margin-right: auto;
-			padding: 0 1.5rem 1.75rem;
-		}
+        /* Resume-specific styles */
+        .resume-hero {
+            text-align: center;
+            padding: 4rem 0 3rem;
+            position: relative;
+            z-index: 1;
+        }
 
-		@media (max-width: 768px) {
-			.journey-container {
-				margin-top: 2.25rem;
-				padding: 0 1rem 1.5rem;
-				row-gap: 2rem;
-			}
-		}
+        .profile-image-container {
+            position: relative;
+            width: 180px;
+            height: 180px;
+            margin: 0 auto 2rem;
+            animation: floatImage 3s ease-in-out infinite;
+        }
 
-		/* =========================
-		   CURVED ROAD TIMELINE (SVG)
-		========================= */
+        @keyframes floatImage {
 
-		.journey-svg-container {
-			min-height: 520px;
-			display: flex;
-			align-items: center;
-			justify-content: center;
-			width: 100%;
-			max-width: 900px;
-			margin-inline: auto;
-		}
+            0%,
+            100% {
+                transform: translateY(0px);
+            }
 
-		.journey-svg-container svg {
-			width: 100%;
-			height: auto;
-			overflow: visible;
-		}
+            50% {
+                transform: translateY(-20px);
+            }
+        }
 
-		@media (max-width: 768px) {
-			.journey-svg-container {
-				min-height: 360px;
-				max-width: 100%;
-			}
+        .profile-image {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 4px solid transparent;
+            background: linear-gradient(white, white) padding-box,
+                linear-gradient(135deg, #667eea, #764ba2) border-box;
+            animation: rotateBorder 3s linear infinite;
+        }
 
-			.journey-dot-label {
-				font-size: 0.7rem;
-			}
-		}
+        @keyframes rotateBorder {
+            0% {
+                filter: hue-rotate(0deg);
+            }
 
-		.road-base {
-			fill: none;
-			stroke: color-mix(in srgb, var(--accent) 70%, #fb923c 30%);
-			stroke-width: 26;
-			stroke-linecap: round;
-			stroke-linejoin: round;
-		}
+            100% {
+                filter: hue-rotate(360deg);
+            }
+        }
 
-		.road-center {
-			fill: none;
-			stroke: rgba(255, 255, 255, 0.75);
-			stroke-width: 4;
-			stroke-dasharray: 16 14;
-		}
+        .profile-image-container::before {
+            content: '';
+            position: absolute;
+            top: -10px;
+            left: -10px;
+            right: -10px;
+            bottom: -10px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            border-radius: 50%;
+            opacity: 0.3;
+            filter: blur(20px);
+            animation: pulse 2s ease-in-out infinite;
+        }
 
-		.journey-dot {
-			cursor: pointer;
-			transition: transform 0.25s ease, opacity 0.25s ease;
-			opacity: 0.8;
-		}
+        @keyframes pulse {
 
-		.journey-dot circle {
-			fill: var(--bg);
-			stroke: var(--accent);
-			stroke-width: 3;
-			filter: drop-shadow(0 6px 18px rgba(15, 23, 42, 0.85));
-		}
+            0%,
+            100% {
+                transform: scale(1);
+                opacity: 0.3;
+            }
 
-		.journey-dot-label {
-			font-size: 0.8rem;
-			letter-spacing: 0.1em;
-			text-transform: uppercase;
-			fill: var(--fg);
-		}
+            50% {
+                transform: scale(1.1);
+                opacity: 0.5;
+            }
+        }
 
-		.journey-dot.active {
-			opacity: 1;
-			transform: scale(1.08);
-		}
+        .resume-hero h1 {
+            font-size: 3rem;
+            margin-bottom: 0.5rem;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: gradientShift 3s ease infinite;
+        }
 
-		.journey-dot.active circle {
-			stroke-width: 4;
-		}
+        @keyframes gradientShift {
 
-		.traveler {
-			filter: drop-shadow(0 14px 34px rgba(56, 189, 248, 0.9));
-			pointer-events: none;
-			transform-origin: center;
-			transition: transform 0.5s cubic-bezier(.22, .61, .36, 1);
-		}
+            0%,
+            100% {
+                filter: hue-rotate(0deg);
+            }
 
-		.traveler circle {
-			fill: var(--accent);
-			stroke: var(--accent);
-		}
+            50% {
+                filter: hue-rotate(20deg);
+            }
+        }
 
-		/* =========================
-		   DETAIL PANEL – READING FOCUS
-		========================= */
+        .tagline {
+            font-size: 1.25rem;
+            opacity: 0.7;
+            margin-bottom: 1rem;
+        }
 
-		.journey-panel {
-			position: sticky;
-			top: 120px;
-			padding: 2.5rem 2.25rem;
-			border-radius: 20px;
-			background: color-mix(in srgb, var(--bg) 96%, transparent);
-			border: 1px solid color-mix(in srgb, var(--accent) 20%, transparent);
-			backdrop-filter: blur(18px);
-			max-height: calc(100vh - 180px);
-			overflow-y: auto;
-			box-shadow:
-				0 18px 50px rgba(15, 23, 42, 0.55),
-				0 0 0 1px rgba(148, 163, 184, 0.15);
-		}
+        .typing-effect {
+            display: inline-block;
+            border-right: 2px solid #667eea;
+            animation: blink 0.7s infinite;
+            min-height: 1.5rem;
+        }
 
-		@media (max-width: 1000px) {
-			.journey-panel {
-				position: relative;
-				top: 0;
-				max-height: none;
-				padding: 2rem 1.75rem;
-			}
-		}
+        @keyframes blink {
 
-		.journey-panel .year {
-			font-size: 1.15rem;
-			opacity: 0.85;
-			margin-bottom: 0.6rem;
-			display: block;
-			font-weight: 800;
-			color: var(--accent);
-			text-transform: uppercase;
-			letter-spacing: 2px;
-		}
+            0%,
+            50% {
+                border-color: #667eea;
+            }
 
-		.journey-panel h3 {
-			margin: 0.5rem 0 1.2rem;
-			font-size: 2.5rem;
-			line-height: 1.2;
-			font-weight: 800;
-		}
+            51%,
+            100% {
+                border-color: transparent;
+            }
+        }
 
-		.journey-panel .subtitle {
-			display: block;
-			font-size: 1.4rem;
-			opacity: 0.9;
-			margin-bottom: 2rem;
-			font-style: italic;
-			font-weight: 600;
-			line-height: 1.4;
-		}
+        .stats-container {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin: 2rem 0;
+            flex-wrap: wrap;
+        }
 
-		.journey-panel .description {
-			margin-bottom: 2rem;
-			line-height: 1.8;
-			font-size: 1.15rem;
-		}
+        .stat-item {
+            text-align: center;
+            padding: 1rem 2rem;
+            background: rgba(102, 126, 234, 0.1);
+            border-radius: 12px;
+            border: 1px solid rgba(102, 126, 234, 0.2);
+            transition: all 0.3s ease;
+        }
 
-		.journey-panel h4 {
-			margin: 2rem 0 1rem;
-			font-size: 1.35rem;
-			opacity: 1;
-			font-weight: 800;
-			color: var(--accent);
-		}
+        .stat-item:hover {
+            transform: translateY(-5px);
+            background: rgba(102, 126, 234, 0.2);
+            box-shadow: 0 8px 24px rgba(102, 126, 234, 0.3);
+        }
 
-		.journey-panel ul {
-			padding-left: 1.8rem;
-			margin: 1rem 0 2rem;
-		}
+        .stat-number {
+            font-size: 2rem;
+            font-weight: bold;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
 
-		.journey-panel li {
-			font-size: 1.1rem;
-			opacity: 0.95;
-			margin-bottom: 0.9rem;
-			line-height: 1.7;
-		}
+        .stat-label {
+            opacity: 0.7;
+            font-size: 0.9rem;
+            margin-top: 0.25rem;
+        }
 
-		.tags {
-			margin-top: 2rem;
-			padding-top: 2rem;
-			border-top: 3px solid color-mix(in srgb, var(--fg) 15%, transparent);
-			font-size: 1rem;
-			opacity: 0.8;
-			font-weight: 700;
-		}
+        .section {
+            margin-bottom: 4rem;
+            position: relative;
+            z-index: 1;
+        }
 
-		.metrics {
-			display: grid;
-			grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-			gap: 2rem;
-			margin: 2rem 0;
-			padding: 2.5rem;
-			background: color-mix(in srgb, var(--accent) 15%, transparent);
-			border-radius: 16px;
-			border: 3px solid color-mix(in srgb, var(--accent) 25%, transparent);
-		}
+        .section-title {
+            font-size: 2rem;
+            margin-bottom: 2rem;
+            position: relative;
+            display: inline-block;
+            animation: fadeInLeft 0.6s ease-out;
+        }
 
-		.metric {
-			text-align: center;
-		}
+        @keyframes fadeInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-30px);
+            }
 
-		.metric-value {
-			display: block;
-			font-size: 3rem;
-			font-weight: 900;
-			color: var(--accent);
-			text-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
-			line-height: 1;
-		}
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
 
-		.metric-label {
-			font-size: 1.05rem;
-			opacity: 0.85;
-			margin-top: 0.6rem;
-			font-weight: 700;
-		}
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 0;
+            width: 0;
+            height: 3px;
+            background: linear-gradient(90deg, #667eea, #764ba2);
+            border-radius: 2px;
+            animation: expandWidth 0.8s ease-out forwards;
+            animation-delay: 0.3s;
+        }
 
-		/* Custom scrollbar for panel */
-		.journey-panel::-webkit-scrollbar {
-			width: 10px;
-		}
+        @keyframes expandWidth {
+            to {
+                width: 60%;
+            }
+        }
 
-		.journey-panel::-webkit-scrollbar-track {
-			background: color-mix(in srgb, var(--fg) 8%, transparent);
-			border-radius: 10px;
-		}
+        /* Experience Timeline */
+        .timeline {
+            position: relative;
+            padding-left: 2rem;
+        }
 
-		.journey-panel::-webkit-scrollbar-thumb {
-			background: color-mix(in srgb, var(--accent) 50%, transparent);
-			border-radius: 10px;
-		}
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: linear-gradient(180deg, #667eea, #764ba2);
+        }
 
-		.journey-panel::-webkit-scrollbar-thumb:hover {
-			background: color-mix(in srgb, var(--accent) 70%, transparent);
-		}
-	</style>
+        .experience-card {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            position: relative;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+
+        .experience-card::before {
+            content: '';
+            position: absolute;
+            left: -2.5rem;
+            top: 1.5rem;
+            width: 12px;
+            height: 12px;
+            background: #667eea;
+            border-radius: 50%;
+            border: 3px solid rgba(102, 126, 234, 0.3);
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        .experience-card:hover {
+            transform: translateX(12px);
+            border-color: rgba(102, 126, 234, 0.4);
+            box-shadow: 0 12px 32px rgba(102, 126, 234, 0.2);
+        }
+
+        .experience-card:hover::before {
+            background: #764ba2;
+            box-shadow: 0 0 20px rgba(118, 75, 162, 0.6);
+        }
+
+        .experience-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 1rem;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .experience-title h3 {
+            font-size: 1.25rem;
+            margin-bottom: 0.25rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .company {
+            color: #667eea;
+            font-weight: 500;
+        }
+
+        .duration {
+            opacity: 0.6;
+            font-size: 0.9rem;
+            white-space: nowrap;
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+        }
+
+        .tech-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+
+        .tech-tag {
+            background: rgba(102, 126, 234, 0.2);
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            border: 1px solid rgba(102, 126, 234, 0.3);
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .tech-tag:hover {
+            background: rgba(102, 126, 234, 0.4);
+            transform: translateY(-2px) scale(1.05);
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+        }
+
+        /* Skills Grid with Progress */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .skill-category {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            padding: 1.5rem;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+
+        .skill-category:hover {
+            transform: translateY(-8px) scale(1.02);
+            border-color: rgba(102, 126, 234, 0.3);
+            box-shadow: 0 12px 32px rgba(102, 126, 234, 0.2);
+        }
+
+        .skill-category h4 {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 1.5rem;
+            font-size: 1.1rem;
+        }
+
+        .skill-item-wrapper {
+            margin-bottom: 1rem;
+        }
+
+        .skill-item-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 0.5rem;
+            font-size: 0.9rem;
+        }
+
+        .skill-progress-bar {
+            height: 6px;
+            background: rgba(102, 126, 234, 0.2);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .skill-progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #667eea, #764ba2);
+            border-radius: 10px;
+            transition: width 1s ease-out;
+            width: 0;
+        }
+
+        /* Projects with 3D Effect */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2rem;
+        }
+
+        .project-card {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            padding: 0;
+            overflow: hidden;
+            transition: all 0.4s ease;
+            cursor: pointer;
+            position: relative;
+            backdrop-filter: blur(10px);
+        }
+
+        .project-image {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+            transition: transform 0.4s ease;
+        }
+
+        .project-card:hover .project-image {
+            transform: scale(1.1);
+        }
+
+        .project-content {
+            padding: 1.5rem;
+        }
+
+        .project-card:hover {
+            transform: translateY(-12px);
+            border-color: rgba(102, 126, 234, 0.4);
+            box-shadow: 0 20px 40px rgba(102, 126, 234, 0.3);
+        }
+
+        .project-card h4 {
+            font-size: 1.2rem;
+            margin-bottom: 0.75rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .project-badge {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: rgba(102, 126, 234, 0.9);
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: bold;
+            backdrop-filter: blur(10px);
+        }
+
+        .project-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .project-link {
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+            color: #667eea;
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: all 0.2s ease;
+            padding: 0.4rem 0.8rem;
+            border-radius: 6px;
+            background: rgba(102, 126, 234, 0.1);
+        }
+
+        .project-link:hover {
+            background: rgba(102, 126, 234, 0.3);
+            transform: translateX(3px);
+        }
+
+        /* Achievements with Icons */
+        .achievements-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .achievement-card {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            padding: 1.5rem;
+            text-align: center;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+
+        .achievement-card:hover {
+            transform: translateY(-8px) rotate(2deg);
+            border-color: rgba(102, 126, 234, 0.4);
+            box-shadow: 0 12px 32px rgba(102, 126, 234, 0.3);
+        }
+
+        .achievement-icon-wrapper {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 1rem;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            animation: rotate 10s linear infinite;
+        }
+
+        @keyframes rotate {
+            from {
+                transform: rotate(0deg);
+            }
+
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        .achievement-icon-wrapper:hover {
+            animation-play-state: paused;
+        }
+
+        .achievement-icon-wrapper img {
+            width: 50px;
+            height: 50px;
+            filter: brightness(0) invert(1);
+        }
+
+        .achievement-card h4 {
+            margin-bottom: 0.5rem;
+            font-size: 1.1rem;
+        }
+
+        .achievement-card p {
+            opacity: 0.7;
+            font-size: 0.9rem;
+        }
+
+        /* Download Button */
+        .download-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .download-btn::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            transition: width 0.6s, height 0.6s;
+        }
+
+        .download-btn:hover::before {
+            width: 300px;
+            height: 300px;
+        }
+
+        .download-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 32px rgba(102, 126, 234, 0.5);
+        }
+
+        .download-btn span {
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Education with Icons */
+        .education-grid {
+            display: grid;
+            gap: 1.5rem;
+        }
+
+        .education-item {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            padding: 1.5rem;
+            display: flex;
+            gap: 1.5rem;
+            align-items: center;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+
+        .education-item:hover {
+            transform: translateX(8px);
+            border-color: rgba(102, 126, 234, 0.3);
+            box-shadow: 0 8px 24px rgba(102, 126, 234, 0.2);
+        }
+
+        .education-icon {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .resume-hero h1 {
+                font-size: 2rem;
+            }
+
+            .section-title {
+                font-size: 1.5rem;
+            }
+
+            .timeline {
+                padding-left: 1.5rem;
+            }
+
+            .experience-card::before {
+                left: -2rem;
+            }
+
+            .stats-container {
+                gap: 1rem;
+            }
+
+            .stat-item {
+                padding: 0.75rem 1rem;
+            }
+
+            .stat-number {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
 </head>
 
-<body data-page="journey">
-	<div class="ambient-bg" aria-hidden="true"></div>
+<body data-page="resume">
+    <div class="scroll-progress" id="scrollProgress"></div>
+    <div class="ambient-bg" aria-hidden="true"></div>
+    <div class="particles" id="particles"></div>
+    <div class="cursor-dot" id="cursorDot"></div>
 
-	<div class="cursor-dot" id="cursorDot"></div>
+    <header class="nav">
+        <div class="container nav-inner">
+            <h2>Aman Pandey</h2>
+            <button class="hamburger" id="hamburger" aria-label="Toggle navigation" aria-expanded="false">
+                <span></span>
+                <span></span>
+            </button>
 
-	<!-- NAV -->
-	<header class="nav">
-		<div class="container nav-inner">
-			<h2>Aman Pandey</h2>
-			<button class="hamburger" id="hamburger" aria-label="Toggle navigation" aria-expanded="false">
-				<span></span>
-				<span></span>
-			</button>
+            <nav id="mobileNav">
+                <a href="index.html">Home</a>
+                <a href="blog.html">Blog</a>
+                <a href="diary.html">Diary</a>
+                <span class="theme-toggle" id="themeToggle">☀ / 🌙</span>
+            </nav>
+        </div>
+    </header>
 
-			<nav id="mobileNav">
-				<a href="index.html">Home</a>
-				<a href="about.html">Journey</a>
-				<a href="blog.html">Blog</a>
-				<a href="diary.html">Diary</a>
-				<span class="theme-toggle" id="themeToggle">☀ / 🌙</span>
-			</nav>
+    <div class="social-rail">
+        <a href="https://github.com/heyyitzaman" target="_blank" data-tooltip="GitHub">
+            <i data-lucide="github"></i>
+        </a>
+        <a href="https://linkedin.com/in/iamanchandrapandey" target="_blank" data-tooltip="LinkedIn">
+            <i data-lucide="linkedin"></i>
+        </a>
+        <a href="https://instagram.com/heyyitzaman" target="_blank" data-tooltip="Instagram">
+            <i data-lucide="instagram"></i>
+        </a>
+        <a href="https://twitter.com/heyyitzaman" target="_blank" data-tooltip="Twitter / X">
+            <i data-lucide="twitter"></i>
+        </a>
+        <a href="https://iamanpandey.medium.com/about" target="_blank" data-tooltip="Medium">
+            <i data-lucide="pen-tool"></i>
+        </a>
+        <a href="https://leetcode.com/iaman_pandey" target="_blank" data-tooltip="LeetCode">
+            <i data-lucide="code"></i>
+        </a>
+        <a href="mailto:iamancpandey@gmail.com" data-tooltip="Email">
+            <i data-lucide="mail"></i>
+        </a>
+    </div>
 
-		</div>
-	</header>
-	<div class="social-rail">
-		<a href="https://github.com/heyyitzaman" target="_blank" data-tooltip="GitHub">
-			<i data-lucide="github"></i>
-		</a>
+    <main class="container">
+        <div class="resume-hero">
+            <div class="profile-image-container">
+                <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=Aman" alt="Aman Pandey" class="profile-image">
+            </div>
+            <h1>Software Developer</h1>
+            <p class="tagline">Building elegant solutions with modern technologies</p>
+            <div class="typing-effect" id="typingText"></div>
 
-		<a href="https://linkedin.com/in/iamanchandrapandey" target="_blank" data-tooltip="LinkedIn">
-			<i data-lucide="linkedin"></i>
-		</a>
+            <div class="stats-container">
+                <div class="stat-item">
+                    <div class="stat-number" data-target="5">0</div>
+                    <div class="stat-label">Years Experience</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number" data-target="50">0</div>
+                    <div class="stat-label">Projects Completed</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number" data-target="20">0</div>
+                    <div class="stat-label">Tech Articles</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number" data-target="500">0</div>
+                    <div class="stat-label">GitHub Stars</div>
+                </div>
+            </div>
 
-		<a href="https://instagram.com/heyyitzaman" target="_blank" data-tooltip="Instagram">
-			<i data-lucide="instagram"></i>
-		</a>
+            <a href="https://drive.google.com/file/d/1L0g-sQzcmg9HBibbiKZ7Adzu91hb_usw/view?usp=sharing" class="download-btn" target="_blank">
+                <i data-lucide="download"></i>
+                <span>View Resume</span>
+            </a>
+        </div>
 
-		<a href="https://twitter.com/heyyitzaman" target="_blank" data-tooltip="Twitter / X">
-			<i data-lucide="twitter"></i>
-		</a>
+        <section class="section">
+            <h2 class="section-title">
+                <i data-lucide="briefcase"
+                    style="display: inline; width: 28px; height: 28px; vertical-align: middle; margin-right: 8px;"></i>
+                Experience
+            </h2>
 
-		<a href="https://iamanpandey.medium.com/about" target="_blank" data-tooltip="Medium">
-			<i data-lucide="pen-tool"></i>
-		</a>
+            <div class="timeline">
+                <div class="experience-card">
+                    <div class="experience-header">
+                        <div class="experience-title">
+                            <h3><i data-lucide="star"></i> Senior Software Developer</h3>
+                            <p class="company">Tech Company Inc.</p>
+                        </div>
+                        <span class="duration"><i data-lucide="calendar"></i> Jan 2023 - Present</span>
+                    </div>
+                    <p class="experience-description">
+                        Led development of scalable web applications serving 100K+ users. Architected microservices
+                        infrastructure and mentored junior developers.
+                    </p>
+                    <div class="tech-tags">
+                        <span class="tech-tag">React</span>
+                        <span class="tech-tag">Node.js</span>
+                        <span class="tech-tag">MongoDB</span>
+                        <span class="tech-tag">AWS</span>
+                        <span class="tech-tag">Docker</span>
+                    </div>
+                </div>
 
-		<a href="https://leetcode.com/iaman_pandey" target="_blank" data-tooltip="LeetCode">
-			<i data-lucide="code"></i>
-		</a>
+                <div class="experience-card">
+                    <div class="experience-header">
+                        <div class="experience-title">
+                            <h3><i data-lucide="code-2"></i> Software Developer</h3>
+                            <p class="company">Startup Solutions</p>
+                        </div>
+                        <span class="duration"><i data-lucide="calendar"></i> Jun 2021 - Dec 2022</span>
+                    </div>
+                    <p class="experience-description">
+                        Developed full-stack applications using modern JavaScript frameworks. Collaborated with
+                        cross-functional teams to deliver features on schedule.
+                    </p>
+                    <div class="tech-tags">
+                        <span class="tech-tag">Vue.js</span>
+                        <span class="tech-tag">Express</span>
+                        <span class="tech-tag">PostgreSQL</span>
+                        <span class="tech-tag">Redis</span>
+                    </div>
+                </div>
 
-		<a href="mailto:iamancpandey@gmail.com" data-tooltip="Email">
-			<i data-lucide="mail"></i>
-		</a>
-	</div>
+                <div class="experience-card">
+                    <div class="experience-header">
+                        <div class="experience-title">
+                            <h3><i data-lucide="coffee"></i> Junior Developer</h3>
+                            <p class="company">Digital Agency</p>
+                        </div>
+                        <span class="duration"><i data-lucide="calendar"></i> Jan 2020 - May 2021</span>
+                    </div>
+                    <p class="experience-description">
+                        Built responsive websites and maintained client projects. Gained expertise in modern web
+                        development practices and agile methodologies.
+                    </p>
+                    <div class="tech-tags">
+                        <span class="tech-tag">HTML/CSS</span>
+                        <span class="tech-tag">JavaScript</span>
+                        <span class="tech-tag">PHP</span>
+                        <span class="tech-tag">MySQL</span>
+                    </div>
+                </div>
+            </div>
+        </section>
 
+        <section class="section">
+            <h2 class="section-title">
+                <i data-lucide="code-2"
+                    style="display: inline; width: 28px; height: 28px; vertical-align: middle; margin-right: 8px;"></i>
+                Skills & Technologies
+            </h2>
 
-	<main class="container fade-in">
-		<h1>My Journey</h1>
-		<p class="muted">Learning, drifting, focusing — in phases.</p>
+            <div class="skills-grid">
+                <div class="skill-category">
+                    <h4><i data-lucide="layout"></i> Frontend Development</h4>
+                    <div class="skill-item-wrapper">
+                        <div class="skill-item-header">
+                            <span>React & Next.js</span>
+                            <span>95%</span>
+                        </div>
+                        <div class="skill-progress-bar">
+                            <div class="skill-progress-fill" data-progress="95"></div>
+                        </div>
+                    </div>
+                    <div class="skill-item-wrapper">
+                        <div class="skill-item-header">
+                            <span>TypeScript</span>
+                            <span>90%</span>
+                        </div>
+                        <div class="skill-progress-bar">
+                            <div class="skill-progress-fill" data-progress="90"></div>
+                        </div>
+                    </div>
+                    <div class="skill-item-wrapper">
+                        <div class="skill-item-header">
+                            <span>Tailwind CSS</span>
+                            <span>88%</span>
+                        </div>
+                        <div class="skill-progress-bar">
+                            <div class="skill-progress-fill" data-progress="88"></div>
+                        </div>
+                    </div>
+                    <div class="skill-item-wrapper">
+                        <div class="skill-item-header">
+                            <span>PostgreSQL & MySQL</span>
+                            <span>85%</span>
+                        </div>
+                        <div class="skill-progress-bar">
+                            <div class="skill-progress-fill" data-progress="85"></div>
+                        </div>
+                    </div>
+                    <div class="skill-item-wrapper">
+                        <div class="skill-item-header">
+                            <span>Redis & Firebase</span>
+                            <span>80%</span>
+                        </div>
+                        <div class="skill-progress-bar">
+                            <div class="skill-progress-fill" data-progress="80"></div>
+                        </div>
+                    </div>
+                </div>
 
-		<div class="journey-container">
+                <div class="skill-category">
+                    <h4><i data-lucide="cloud"></i> DevOps & Tools</h4>
+                    <div class="skill-item-wrapper">
+                        <div class="skill-item-header">
+                            <span>AWS & Cloud Services</span>
+                            <span>87%</span>
+                        </div>
+                        <div class="skill-progress-bar">
+                            <div class="skill-progress-fill" data-progress="87"></div>
+                        </div>
+                    </div>
+                    <div class="skill-item-wrapper">
+                        <div class="skill-item-header">
+                            <span>Docker & Kubernetes</span>
+                            <span>83%</span>
+                        </div>
+                        <div class="skill-progress-bar">
+                            <div class="skill-progress-fill" data-progress="83"></div>
+                        </div>
+                    </div>
+                    <div class="skill-item-wrapper">
+                        <div class="skill-item-header">
+                            <span>CI/CD & Git</span>
+                            <span>90%</span>
+                        </div>
+                        <div class="skill-progress-bar">
+                            <div class="skill-progress-fill" data-progress="90"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
 
-			<!-- CURVED ROAD TIMELINE COLUMN -->
-			<div class="journey-svg-container" aria-label="Journey timeline">
-				<svg viewBox="0 0 1000 600" preserveAspectRatio="xMidYMid meet">
-					<!-- Road path -->
-					<path id="roadPath" class="road-base" d="M80 520 C 200 460, 260 390, 320 320
-						   C 380 250, 460 230, 540 200
-						   C 620 170, 700 165, 780 175
-						   C 860 185, 910 175, 940 165" />
+        <section class="section">
+            <h2 class="section-title">
+                <i data-lucide="rocket"
+                    style="display: inline; width: 28px; height: 28px; vertical-align: middle; margin-right: 8px;"></i>
+                Featured Projects
+            </h2>
 
-					<path class="road-center" d="M80 520 C 200 460, 260 390, 320 320
-						   C 380 250, 460 230, 540 200
-						   C 620 170, 700 165, 780 175
-						   C 860 185, 910 175, 940 165" />
+            <div class="projects-grid">
+                <div class="project-card">
+                    <img src="https://images.unsplash.com/photo-1557821552-17105176677c?w=600&h=400&fit=crop"
+                        alt="E-Commerce Platform" class="project-image">
+                    <span class="project-badge">⭐ Featured</span>
+                    <div class="project-content">
+                        <h4><i data-lucide="shopping-cart"></i> E-Commerce Platform</h4>
+                        <p class="project-description">
+                            Full-stack e-commerce solution with payment integration, inventory management, and analytics
+                            dashboard.
+                        </p>
+                        <div class="tech-tags">
+                            <span class="tech-tag">React</span>
+                            <span class="tech-tag">Node.js</span>
+                            <span class="tech-tag">Stripe</span>
+                        </div>
+                        <div class="project-links">
+                            <a href="#" class="project-link"><i data-lucide="github"></i> Code</a>
+                            <a href="#" class="project-link"><i data-lucide="external-link"></i> Live</a>
+                        </div>
+                    </div>
+                </div>
 
-					<!-- Traveler on the road -->
-					<g id="traveler" class="traveler">
-						<circle r="13" />
-						<circle r="5" cy="-7" fill="var(--bg)" />
-						<line x1="0" y1="-2" x2="0" y2="9" stroke="var(--bg)" stroke-width="2.5"
-							stroke-linecap="round" />
-						<line x1="-6" y1="1" x2="6" y2="1" stroke="var(--bg)" stroke-width="2.5"
-							stroke-linecap="round" />
-						<line x1="0" y1="9" x2="-6" y2="16" stroke="var(--bg)" stroke-width="2.5"
-							stroke-linecap="round" />
-						<line x1="0" y1="9" x2="6" y2="16" stroke="var(--bg)" stroke-width="2.5"
-							stroke-linecap="round" />
-					</g>
+                <div class="project-card">
+                    <img src="https://images.unsplash.com/photo-1611746872915-64382b5c76da?w=600&h=400&fit=crop"
+                        alt="Chat Application" class="project-image">
+                    <span class="project-badge">🔥 Popular</span>
+                    <div class="project-content">
+                        <h4><i data-lucide="message-circle"></i> Real-time Chat App</h4>
+                        <p class="project-description">
+                            WebSocket-based chat with file sharing, typing indicators, and end-to-end encryption.
+                        </p>
+                        <div class="tech-tags">
+                            <span class="tech-tag">Vue.js</span>
+                            <span class="tech-tag">Socket.io</span>
+                            <span class="tech-tag">MongoDB</span>
+                        </div>
+                        <div class="project-links">
+                            <a href="#" class="project-link"><i data-lucide="github"></i> Code</a>
+                            <a href="#" class="project-link"><i data-lucide="external-link"></i> Live</a>
+                        </div>
+                    </div>
+                </div>
 
-					<!-- Dots + labels from JS -->
-					<g id="journeyDots"></g>
-				</svg>
-			</div>
+                <div class="project-card">
+                    <img src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=600&h=400&fit=crop"
+                        alt="Task Management" class="project-image">
+                    <span class="project-badge">✨ New</span>
+                    <div class="project-content">
+                        <h4><i data-lucide="calendar"></i> Task Management System</h4>
+                        <p class="project-description">
+                            Collaborative project management with Kanban boards, team collaboration, and progress
+                            tracking.
+                        </p>
+                        <div class="tech-tags">
+                            <span class="tech-tag">Next.js</span>
+                            <span class="tech-tag">PostgreSQL</span>
+                            <span class="tech-tag">Prisma</span>
+                        </div>
+                        <div class="project-links">
+                            <a href="#" class="project-link"><i data-lucide="github"></i> Code</a>
+                            <a href="#" class="project-link"><i data-lucide="external-link"></i> Live</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
 
-		</div>
-	</main>
+        <section class="section">
+            <h2 class="section-title">
+                <i data-lucide="trophy"
+                    style="display: inline; width: 28px; height: 28px; vertical-align: middle; margin-right: 8px;"></i>
+                Achievements & Awards
+            </h2>
 
-	<!-- Journey detail modal (reuses global modal styles) -->
-	<div id="journeyModal" class="modal">
-		<div class="modal-content">
-			<button class="close" id="journeyModalClose" aria-label="Close journey details">&times;</button>
-			<div id="journeyModalBody"></div>
-		</div>
-	</div>
+            <div class="achievements-grid">
+                <div class="achievement-card">
+                    <div class="achievement-icon-wrapper">
+                        <img src="https://cdn-icons-png.flaticon.com/512/1534/1534938.png" alt="Award">
+                    </div>
+                    <h4>Best Innovation Award</h4>
+                    <p>Recognized for developing an AI-powered feature that improved user engagement by 40%</p>
+                </div>
 
-	<footer class="container muted">
-		Press <strong>B</strong> → Blog · <strong>D</strong> → Diary · <strong>H</strong> → Home
-	</footer>
-	<script src="js/base.js" defer></script>
+                <div class="achievement-card">
+                    <div class="achievement-icon-wrapper">
+                        <img src="https://cdn-icons-png.flaticon.com/512/2917/2917995.png" alt="GitHub">
+                    </div>
+                    <h4>Open Source Star</h4>
+                    <p>Active contributor with 500+ stars across GitHub repositories</p>
+                </div>
 
-	<!-- =========================
-       DATA + LOGIC
-  ========================= -->
-	<script>
-		document.addEventListener('keydown', e => {
-			if (e.key.toLowerCase() === 'b') location.href = 'blog.html';
-			if (e.key.toLowerCase() === 'd') location.href = 'diary.html';
-			if (e.key.toLowerCase() === 'h') location.href = 'index.html';
-		});
-		const journeyData = [
-			{
-				year: "2025 · Present",
-				title: "Building in Public",
-				subtitle: "Clarity, systems, and intentional growth",
-				description: "Creating a personal digital space to document learning, build meaningful projects, and cultivate slow, deliberate growth. Focusing on systems thinking and writing as a tool for clarity.",
-				highlights: [
-					"Launched personal website and digital garden",
-					"Writing regularly about engineering and systems thinking",
-					"Building tools for personal knowledge management",
-					"Contributing to open-source projects",
-					"Mentoring junior developers"
-				],
-				learnings: [
-					"Writing clarifies thinking better than any other tool",
-					"Consistency beats intensity in the long run",
-					"Public learning creates accountability and connection"
-				],
-				technologies: ["React", "Node.js", "System Design", "Writing", "Notion API"],
-				metrics: {
-					"Projects": "3",
-					"Articles": "12+",
-					"Mentees": "5"
-				},
-				tags: ["Reflection", "Systems", "Minimalism", "Writing"]
-			},
-			{
-				year: "2023 – 2024",
-				title: "Advanced Backend Engineering",
-				subtitle: "Scalability, architecture, and depth",
-				description: "Deep dive into backend systems, distributed architectures, and high-performance computing. Worked on microservices, event-driven systems, and cloud infrastructure. Led technical initiatives and mentored team members.",
-				highlights: [
-					"Designed and implemented microservices architecture for 50K+ daily users",
-					"Optimized database queries reducing response time by 60%",
-					"Built event-driven systems using Kafka and RabbitMQ",
-					"Implemented caching strategies with Redis",
-					"Led migration from monolith to microservices",
-					"Conducted system design interviews and code reviews"
-				],
-				learnings: [
-					"Scalability is about trade-offs, not perfection",
-					"Documentation is as important as code",
-					"Premature optimization is real, but so is technical debt"
-				],
-				technologies: ["Java", "Spring Boot", "PostgreSQL", "Redis", "Kafka", "Docker", "Kubernetes", "AWS"],
-				metrics: {
-					"Users": "50K+",
-					"APIs": "25+",
-					"Uptime": "99.9%"
-				},
-				tags: ["Backend", "Microservices", "Scalability", "Cloud"]
-			},
-			{
-				year: "2022",
-				title: "DSA & Problem Solving",
-				subtitle: "Mastering fundamentals",
-				description: "Dedicated year to understanding data structures and algorithms at a deep level. Solved 500+ problems across various platforms, participated in contests, and strengthened computer science fundamentals.",
-				highlights: [
-					"Solved 500+ coding problems on LeetCode and CodeForces",
-					"Achieved top 5% ranking in monthly contests",
-					"Mastered dynamic programming and graph algorithms",
-					"Built visualizer for common algorithms",
-					"Mentored peers in DSA study groups"
-				],
-				learnings: [
-					"Patterns matter more than memorizing solutions",
-					"Teaching others deepens your own understanding",
-					"Consistent practice builds intuition over time"
-				],
-				technologies: ["Java", "Python", "C++", "Algorithms", "Data Structures"],
-				metrics: {
-					"Problems": "500+",
-					"Contests": "30+",
-					"Rank": "Top 5%"
-				},
-				tags: ["DSA", "Algorithms", "Problem Solving"]
-			},
-			{
-				year: "2021",
-				title: "Full-Stack Development",
-				subtitle: "End-to-end product thinking",
-				description: "Expanded into full-stack development, understanding how frontend and backend work together. Built multiple full-stack applications, learned about UX, deployment, and the complete software development lifecycle.",
-				highlights: [
-					"Built 5 full-stack applications from scratch",
-					"Learned React and modern frontend frameworks",
-					"Implemented authentication and authorization flows",
-					"Deployed applications to cloud platforms",
-					"Collaborated with designers on UI/UX"
-				],
-				learnings: [
-					"Understanding both sides makes you a better developer",
-					"User experience is as important as code quality",
-					"Deployment is where theory meets reality"
-				],
-				technologies: ["React", "Node.js", "Express", "MongoDB", "Tailwind CSS", "Heroku"],
-				metrics: {
-					"Apps": "5",
-					"Users": "500+",
-					"Features": "50+"
-				},
-				tags: ["Full-Stack", "React", "Node.js", "Deployment"]
-			},
-			{
-				year: "2020",
-				title: "Backend Foundations",
-				subtitle: "Server-side logic and databases",
-				description: "Focused on backend development, learning server-side programming, database design, and API development. Built RESTful APIs and understood how data flows through applications.",
-				highlights: [
-					"Built REST APIs with Node.js and Express",
-					"Learned SQL and database design principles",
-					"Implemented CRUD operations and data validation",
-					"Understood authentication with JWT",
-					"Worked with PostgreSQL and MySQL"
-				],
-				learnings: [
-					"Good database design prevents future headaches",
-					"APIs are contracts that need careful planning",
-					"Security should be built in, not added later"
-				],
-				technologies: ["Node.js", "Express", "PostgreSQL", "MySQL", "JWT"],
-				metrics: {
-					"APIs": "10+",
-					"Tables": "30+",
-					"Endpoints": "50+"
-				},
-				tags: ["Backend", "Databases", "APIs"]
-			},
-			{
-				year: "2019",
-				title: "Web Development Basics",
-				subtitle: "HTML, CSS, JavaScript",
-				description: "Started the web development journey by learning HTML, CSS, and JavaScript. Built static websites, understood DOM manipulation, and learned how the web works at a fundamental level.",
-				highlights: [
-					"Built 10+ static websites",
-					"Learned responsive design principles",
-					"Understood JavaScript fundamentals",
-					"Created interactive web elements",
-					"Learned Git and version control"
-				],
-				learnings: [
-					"Fundamentals never go out of style",
-					"Browser DevTools are your best friend",
-					"Reading documentation is a superpower"
-				],
-				technologies: ["HTML", "CSS", "JavaScript", "Git", "Bootstrap"],
-				metrics: {
-					"Sites": "10+",
-					"Lines": "5K+",
-					"Commits": "200+"
-				},
-				tags: ["Web", "Frontend", "Fundamentals"]
-			},
-			{
-				year: "2018",
-				title: "The Beginning",
-				subtitle: "First line of code",
-				description: "The journey began with curiosity about how software works. Wrote the first 'Hello World' program and discovered the joy of making computers do things through code. This was the spark that started everything.",
-				highlights: [
-					"Wrote first 'Hello World' in Python",
-					"Learned basic programming concepts",
-					"Built simple calculator and games",
-					"Discovered the joy of problem solving",
-					"Joined online coding communities"
-				],
-				learnings: [
-					"Everyone starts somewhere",
-					"Curiosity is the best teacher",
-					"The journey is as important as the destination"
-				],
-				technologies: ["Python", "Scratch"],
-				metrics: {
-					"Programs": "20+",
-					"Hours": "100+",
-					"Aha!": "∞"
-				},
-				tags: ["Curiosity", "Basics", "Python"]
-			}
-		];
+                <div class="achievement-card">
+                    <div class="achievement-icon-wrapper">
+                        <img src="https://cdn-icons-png.flaticon.com/512/3898/3898087.png" alt="Speaker">
+                    </div>
+                    <h4>Tech Speaker</h4>
+                    <p>Presented at 5+ developer conferences on modern web development</p>
+                </div>
 
-		const modal = document.getElementById("journeyModal");
-		const modalBody = document.getElementById("journeyModalBody");
-		const modalClose = document.getElementById("journeyModalClose");
-		const roadPath = document.getElementById("roadPath");
-		const dotsGroup = document.getElementById("journeyDots");
-		const traveler = document.getElementById("traveler");
+                <div class="achievement-card">
+                    <div class="achievement-icon-wrapper">
+                        <img src="https://cdn-icons-png.flaticon.com/512/2232/2232688.png" alt="Writer">
+                    </div>
+                    <h4>Technical Writer</h4>
+                    <p>Published 20+ articles with 10K+ views on Medium</p>
+                </div>
+            </div>
+        </section>
 
-		const pathLength = roadPath.getTotalLength();
-		let activeIndex = journeyData.length - 1; // latest by default
+        <section class="section">
+            <h2 class="section-title">
+                <i data-lucide="graduation-cap"
+                    style="display: inline; width: 28px; height: 28px; vertical-align: middle; margin-right: 8px;"></i>
+                Education & Certifications
+            </h2>
 
-		function pointAtFraction(f) {
-			const pt = roadPath.getPointAtLength(f * pathLength);
-			return { x: pt.x, y: pt.y };
-		}
+            <div class="education-grid">
+                <div class="education-item">
+                    <div class="education-icon">
+                        <i data-lucide="school" style="width: 32px; height: 32px;"></i>
+                    </div>
+                    <div>
+                        <h4>Bachelor of Technology in Computer Science</h4>
+                        <p class="education-details">
+                            <strong>University Name</strong> • 2016 - 2020 • CGPA: 8.5/10
+                        </p>
+                    </div>
+                </div>
 
-		function renderModalContent(data) {
-			const metricsHTML = data.metrics ? `
-				<div class="metrics">
-					${Object.entries(data.metrics).map(([key, value]) => `
-						<div class="metric">
-							<span class="metric-value">${value}</span>
-							<div class="metric-label">${key}</div>
-						</div>
-					`).join('')}
-				</div>
-			` : '';
+                <div class="education-item">
+                    <div class="education-icon">
+                        <i data-lucide="award" style="width: 32px; height: 32px;"></i>
+                    </div>
+                    <div>
+                        <h4>Professional Certifications</h4>
+                        <p class="education-details">
+                            AWS Certified Developer • MongoDB Certified • Meta Frontend Professional
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
 
-			modalBody.innerHTML = `
-				<span class="year">${data.year}</span>
-				<h3>${data.title}</h3>
-				<span class="subtitle">${data.subtitle}</span>
-				<p class="description">${data.description}</p>
-				${metricsHTML}
-				<h4>Key Achievements</h4>
-				<ul>${data.highlights.map(h => `<li>${h}</li>`).join("")}</ul>
-				<h4>Learnings</h4>
-				<ul>${data.learnings.map(l => `<li>${l}</li>`).join("")}</ul>
-				<h4>Technologies</h4>
-				<p class="muted">${data.technologies.join(" · ")}</p>
-				<div class="tags">${data.tags.join(" · ")}</div>
-			`;
-		}
+    <footer class="container muted" style="margin-top:2rem; position: relative; z-index: 1;">
+        <div style="margin-bottom:0.5rem;">
+            Press <strong>B</strong> → Blog · <strong>D</strong> → Diary · <strong>H</strong> → Home
+        </div>
+    </footer>
 
-		function moveTravelerToFraction(f) {
-			const { x, y } = pointAtFraction(f);
-			traveler.setAttribute("transform", `translate(${x} ${y})`);
-		}
+    <script src="js/base.js" defer></script>
+    <script>
+        // Initialize Lucide icons
+        lucide.createIcons();
 
-		// Build dots along the road, spaced evenly based on data length
-		const dotEls = journeyData.map((item, index) => {
-			const g = document.createElementNS("http://www.w3.org/2000/svg", "g");
-			g.classList.add("journey-dot");
-			g.dataset.index = String(index);
+        // Typing Effect
+        const phrases = [
+            'Full-Stack Developer 💻',
+            'Problem Solver 🧩',
+            'Tech Enthusiast 🚀',
+            'Open Source Contributor 🌟'
+        ];
+        let phraseIndex = 0;
+        let charIndex = 0;
+        let isDeleting = false;
+        const typingElement = document.getElementById('typingText');
 
-			const fraction = journeyData.length === 1 ? 0.5 : index / (journeyData.length - 1);
-			const { x, y } = pointAtFraction(fraction);
-			g.setAttribute("transform", `translate(${x} ${y})`);
+        function typeEffect() {
+            const currentPhrase = phrases[phraseIndex];
 
-			const circle = document.createElementNS("http://www.w3.org/2000/svg", "circle");
-			circle.setAttribute("r", "11");
+            if (isDeleting) {
+                typingElement.textContent = currentPhrase.substring(0, charIndex - 1);
+                charIndex--;
+            } else {
+                typingElement.textContent = currentPhrase.substring(0, charIndex + 1);
+                charIndex++;
+            }
 
-			const label = document.createElementNS("http://www.w3.org/2000/svg", "text");
-			label.classList.add("journey-dot-label");
-			label.setAttribute("x", "18");
-			label.setAttribute("y", "-16");
-			label.textContent = item.year;
+            if (!isDeleting && charIndex === currentPhrase.length) {
+                isDeleting = true;
+                setTimeout(typeEffect, 2000);
+            } else if (isDeleting && charIndex === 0) {
+                isDeleting = false;
+                phraseIndex = (phraseIndex + 1) % phrases.length;
+                setTimeout(typeEffect, 500);
+            } else {
+                setTimeout(typeEffect, isDeleting ? 50 : 100);
+            }
+        }
 
-			g.append(circle, label);
-			g.addEventListener("click", () => openForIndex(index));
+        typeEffect();
 
-			dotsGroup.appendChild(g);
-			return g;
-		});
+        // Animated Counter
+        function animateCounter(element) {
+            const target = parseInt(element.getAttribute('data-target'));
+            const duration = 2000;
+            const increment = target / (duration / 16);
+            let current = 0;
 
-		function setActiveIndex(index) {
-			if (index === activeIndex || index < 0 || index >= journeyData.length) return;
+            const updateCounter = () => {
+                current += increment;
+                if (current < target) {
+                    element.textContent = Math.floor(current);
+                    requestAnimationFrame(updateCounter);
+                } else {
+                    element.textContent = target + (target >= 100 ? '+' : '');
+                }
+            };
 
-			dotEls[activeIndex]?.classList.remove("active");
-			activeIndex = index;
-			const frac = journeyData.length === 1 ? 0.5 : index / (journeyData.length - 1);
+            updateCounter();
+        }
 
-			dotEls[activeIndex].classList.add("active");
-			moveTravelerToFraction(frac);
-		}
+        // Intersection Observer for counters
+        const counterObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const counters = entry.target.querySelectorAll('.stat-number');
+                    counters.forEach(counter => {
+                        if (!counter.classList.contains('counted')) {
+                            counter.classList.add('counted');
+                            animateCounter(counter);
+                        }
+                    });
+                }
+            });
+        }, { threshold: 0.5 });
 
-		function openModal() {
-			modal.classList.add("active");
-		}
+        const statsContainer = document.querySelector('.stats-container');
+        if (statsContainer) counterObserver.observe(statsContainer);
 
-		function closeModal() {
-			modal.classList.remove("active");
-		}
+        // Skill Progress Bars Animation
+        const skillObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const progressBars = entry.target.querySelectorAll('.skill-progress-fill');
+                    progressBars.forEach(bar => {
+                        const progress = bar.getAttribute('data-progress');
+                        setTimeout(() => {
+                            bar.style.width = progress + '%';
+                        }, 200);
+                    });
+                    skillObserver.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.3 });
 
-		function openForIndex(index) {
-			setActiveIndex(index);
-			renderModalContent(journeyData[index]);
-			openModal();
-		}
+        document.querySelectorAll('.skill-category').forEach(category => {
+            skillObserver.observe(category);
+        });
 
-		// Close handlers
-		modalClose.addEventListener("click", closeModal);
-		modal.addEventListener("click", (e) => {
-			if (e.target === modal) closeModal();
-		});
-		document.addEventListener("keydown", (e) => {
-			if (e.key === "Escape") closeModal();
-		});
+        // Smooth Section Animations
+        const sections = document.querySelectorAll('.section');
+        const sectionObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, { threshold: 0.1, rootMargin: '0px 0px -100px 0px' });
 
-		// Initial: latest (last) dot selected, but modal closed
-		setActiveIndex(journeyData.length - 1);
-	</script>
+        sections.forEach(section => {
+            section.style.opacity = '0';
+            section.style.transform = 'translateY(30px)';
+            section.style.transition = 'opacity 0.8s ease, transform 0.8s ease';
+            sectionObserver.observe(section);
+        });
 
+        // Keyboard shortcuts
+        document.addEventListener('keydown', e => {
+            if (e.key.toLowerCase() === 'b') location.href = 'blog.html';
+            if (e.key.toLowerCase() === 'd') location.href = 'diary.html';
+            if (e.key.toLowerCase() === 'h') location.href = 'index.html';
+        });
+
+        // Add hover sound effect (optional - requires audio file)
+        document.querySelectorAll('.project-card, .achievement-card, .skill-category').forEach(card => {
+            card.addEventListener('mouseenter', () => {
+                card.style.transition = 'all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275)';
+            });
+        });
+    </script>
 </body>
 
 </html>

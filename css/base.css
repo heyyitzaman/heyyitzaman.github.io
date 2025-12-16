@@ -5,6 +5,7 @@
     --accent: #38bdf8;
     --card: #020617;
     --radius: 12px;
+    --nav-height: 72px;
 }
 
 [data-theme="light"] {

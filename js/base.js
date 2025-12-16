@@ -4,6 +4,31 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 });
 
+// Floating Particles
+(() => {
+    const particlesContainer = document.getElementById('particles');
+    for (let i = 0; i < 30; i++) {
+        const particle = document.createElement('div');
+        particle.className = 'particle';
+        particle.style.left = Math.random() * 100 + '%';
+        particle.style.top = Math.random() * 100 + '%';
+        particle.style.animationDelay = Math.random() * 20 + 's';
+        particle.style.animationDuration = (15 + Math.random() * 10) + 's';
+        particlesContainer.appendChild(particle);
+    }
+})();
+
+// Scroll Progress Bar
+(() => {
+        window.addEventListener('scroll', () => {
+            const scrollProgress = document.getElementById('scrollProgress');
+            const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+            const scrolled = (window.scrollY / docHeight) * 100;
+            scrollProgress.style.width = scrolled + '%';
+        });
+    }
+)();
+
 /* =========================
    Cursor Dot
 ========================= */
