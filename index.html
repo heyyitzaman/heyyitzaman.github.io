@@ -106,7 +106,7 @@
 	<script src="https://unpkg.com/lucide@latest"></script>
 </head>
 
-<body data-page="intro">
+<body data-page="home">
 	<div class="scroll-progress" id="scrollProgress"></div>
 	<div class="ambient-bg" aria-hidden="true"></div>
 	<div class="particles" id="particles"></div>
@@ -121,10 +121,10 @@
 			</button>
 
 			<nav id="mobileNav">
-				<a href="index.html">Home</a>
 				<a href="about.html">Journey</a>
 				<a href="blog.html">Blog</a>
 				<a href="diary.html">Diary</a>
+				<span class="live-clock" id="liveClock" style="font-variant-numeric: tabular-nums; opacity: 0.8; font-size: 0.9rem; margin-right: 0.5rem;"></span>
 				<span class="theme-toggle" id="themeToggle">☀ / 🌙</span>
 			</nav>
 		</div>
@@ -245,33 +245,105 @@
 		<section class="reveal" style="margin-top: 3rem;">
 			<h2>When code becomes poetry <span class="animated-icon" style="font-size: 1.5rem;">🎨</span></h2>
 
-			<div class="code-poetry">
-				<div class="code-line"><span class="comment">// Sometimes, a function is more than logic</span></div>
-				<div class="code-line">function <strong>life</strong>() {</div>
-				<div class="code-line"> while (learning && growing) {</div>
-				<div class="code-line"> observe(world); <span class="animated-icon"
-						style="font-size: 0.8rem;">👁️</span></div>
-				<div class="code-line"> write(thoughts); <span class="animated-icon"
-						style="font-size: 0.8rem;">✍️</span></div>
-				<div class="code-line"> code(dreams); <span class="animated-icon" style="font-size: 0.8rem;">💻</span>
+			<div class="code-window">
+				<div class="window-header">
+					<div class="window-controls">
+						<div class="control close"></div>
+						<div class="control minimize"></div>
+						<div class="control maximize"></div>
+					</div>
+					<div class="tab-bar">
+						<div class="tab active" data-tab="py">
+							<span class="tab-icon">🐍</span> life.py
+						</div>
+						<div class="tab" data-tab="java">
+							<span class="tab-icon">☕</span> Life.java
+						</div>
+						<div class="tab" data-tab="cpp">
+							<span class="tab-icon">⚙️</span> life.cpp
+						</div>
+						<div class="tab" data-tab="js">
+							<span class="tab-icon">📜</span> life.js
+						</div>
+					</div>
 				</div>
-				<div class="code-line"> capture(moments); <span class="animated-icon"
-						style="font-size: 0.8rem;">📸</span></div>
-				<div class="code-line"> </div>
-				<div class="code-line"> if (overwhelmed) {</div>
-				<div class="code-line"> breathe();</div>
-				<div class="code-line"> walk(nature); <span class="animated-icon" style="font-size: 0.8rem;">🌿</span>
+
+				<!-- Python Content -->
+				<div class="code-content active" id="code-py">
+<pre><code><span class="kwd">def</span> <span class="func">life</span>():
+    <span class="kwd">while</span> learning <span class="op">and</span> growing:
+        <span class="func">observe</span>(world) <span class="animated-icon">👁️</span>
+        <span class="func">write</span>(thoughts) <span class="animated-icon">✍️</span>
+        <span class="func">code</span>(dreams) <span class="animated-icon">💻</span>
+
+        <span class="kwd">if</span> overwhelmed:
+            <span class="func">breathe</span>()
+            <span class="func">walk</span>(nature) <span class="animated-icon">🌿</span>
+            <span class="kwd">continue</span>
+
+        <span class="func">capture</span>(moments) <span class="animated-icon">📸</span>
+    
+    <span class="kwd">return</span> peace <span class="animated-icon">☮️</span>
+</code></pre>
 				</div>
-				<div class="code-line"> }</div>
-				<div class="code-line"> </div>
-				<div class="code-line"> return peace; <span class="animated-icon" style="font-size: 0.8rem;">☮️</span>
+
+				<!-- Java Content -->
+				<div class="code-content" id="code-java">
+<pre><code><span class="kwd">public class</span> <span class="type">Life</span> {
+    <span class="kwd">public void</span> <span class="func">live</span>() {
+        <span class="kwd">while</span> (learning && growing) {
+            <span class="func">observe</span>(world); <span class="animated-icon">👁️</span>
+            <span class="func">code</span>(dreams); <span class="animated-icon">💻</span>
+            
+            <span class="kwd">try</span> {
+                <span class="func">innovate</span>();
+            } <span class="kwd">catch</span> (<span class="type">Failure</span> e) {
+                <span class="func">learn</span>(e); <span class="animated-icon">📚</span>
+            }
+        }
+    }
+}
+</code></pre>
 				</div>
-				<div class="code-line"> }</div>
-				<div class="code-line">}</div>
-				<div class="code-line"></div>
-				<div class="code-line"><span class="comment">// Recursion isn't just a pattern—</span></div>
-				<div class="code-line"><span class="comment">// it's how we grow, iteration by iteration</span> <span
-						class="animated-icon" style="font-size: 0.8rem;">🔄</span></div>
+
+				<!-- C++ Content -->
+				<div class="code-content" id="code-cpp">
+<pre><code><span class="type">void</span> <span class="func">Life</span>::loop() {
+    <span class="kwd">while</span> (alive) {
+        std::<span class="func">cout</span> << <span class="str">"Hello World"</span>;
+        <span class="func">build</span>(systems); <span class="animated-icon">⚙️</span>
+        <span class="func">optimize</span>(performance);
+        
+        <span class="kwd">if</span> (memory_leak) {
+            <span class="func">cleanup</span>(); <span class="animated-icon">🧹</span>
+        }
+        
+        <span class="func">sleep</span>(8000); 
+    }
+}
+</code></pre>
+				</div>
+
+				<!-- JS Content -->
+				<div class="code-content" id="code-js">
+<pre><code><span class="com">// Sometimes, a function is more than logic</span>
+<span class="kwd">function</span> <span class="func">life</span>() {
+  <span class="kwd">while</span> (<span class="kwd">this</span>.learning && <span class="kwd">this</span>.growing) {
+    <span class="func">observe</span>(world); <span class="animated-icon">👁️</span>
+    <span class="func">write</span>(thoughts); <span class="animated-icon">✍️</span>
+    <span class="func">code</span>(dreams); <span class="animated-icon">💻</span>
+    <span class="func">capture</span>(moments); <span class="animated-icon">📸</span>
+
+    <span class="kwd">if</span> (overwhelmed) {
+      <span class="func">breathe</span>();
+      <span class="func">walk</span>(nature); <span class="animated-icon">🌿</span>
+    }
+
+    <span class="kwd">return</span> peace; <span class="animated-icon">☮️</span>
+  }
+}
+</code></pre>
+				</div>
 			</div>
 		</section>
 
@@ -281,27 +353,24 @@
 			<p class="muted" style="text-align: center; margin-bottom: 2rem;">Three paths to understanding who I am</p>
 
 			<div class="three-paths">
-				<div class="card-hover" onclick="location.href='blog.html'">
+				<div class="card-hover fade-up" onclick="location.href='blog.html'">
 					<div class="path-icon">📚</div>
 					<h3>Blog</h3>
-					<p class="muted">Structured thoughts on learning, systems, engineering concepts, and ideas worth
-						exploring deeply.</p>
+					<p class="muted">Structured thoughts on learning, systems, and engineering concepts.</p>
 					<button class="glow-button">Read Articles</button>
 				</div>
 
-				<div class="card-hover" onclick="location.href='diary.html'">
+				<div class="card-hover fade-up" onclick="location.href='diary.html'">
 					<div class="path-icon">📔</div>
 					<h3>Diary Entry</h3>
-					<p class="muted">Short, honest notes. No editing. No structure. Just moments captured as they are.
-					</p>
+					<p class="muted">Short, honest notes. No editing. Just moments captured as they are.</p>
 					<button class="glow-button">Open Diary</button>
 				</div>
 
-				<div class="card-hover" onclick="location.href='about.html'">
+				<div class="card-hover fade-up" onclick="location.href='about.html'">
 					<div class="path-icon">🗺️</div>
 					<h3>My Journey</h3>
-					<p class="muted">The story of how I got here. Experiences, learnings, and the path that shaped who I
-						am.</p>
+					<p class="muted">The story of how I got here. Experiences, learnings, and the path forward.</p>
 					<button class="glow-button">View Journey</button>
 				</div>
 			</div>
@@ -490,6 +559,35 @@
 		}, { threshold: 0.15 });
 
 		reveals.forEach(r => observer.observe(r));
+
+		// Live Clock
+		function updateClock() {
+			const now = new Date();
+			const timeString = now.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', second: '2-digit' });
+			const dateString = now.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+			const clockEl = document.getElementById('liveClock');
+			if(clockEl) {
+				clockEl.textContent = `${dateString} • ${timeString}`;
+			}
+		}
+		setInterval(updateClock, 1000);
+		updateClock(); // Initial call
+
+		// Code Window Tabs
+		document.querySelectorAll('.tab').forEach(tab => {
+			tab.addEventListener('click', () => {
+				// Remove active class from all tabs and content
+				document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+				document.querySelectorAll('.code-content').forEach(c => c.classList.remove('active'));
+
+				// Add active class to clicked tab
+				tab.classList.add('active');
+
+				// Show corresponding content
+				const lang = tab.getAttribute('data-tab');
+				document.getElementById(`code-${lang}`).classList.add('active');
+			});
+		});
 	</script>
 </body>
 

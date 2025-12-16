@@ -144,3 +144,48 @@ document.querySelectorAll("a").forEach(link => {
         lastScrollY = currentScrollY;
     }, { passive: true });
 })();
+
+/* =========================
+   Scroll Animations (Mobile & Desktop)
+   ========================= */
+(() => {
+    const observerOptions = {
+        threshold: 0.1,
+        rootMargin: '0px 0px -50px 0px'
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+                observer.unobserve(entry.target); // Only animate once
+            }
+        });
+    }, observerOptions);
+
+    // Observe elements
+    const elementsToAnimate = document.querySelectorAll('.card, .project-card, .blog-card, .diary-entry-card, .tech-card, .code-window, .card-hover');
+    elementsToAnimate.forEach(el => {
+        el.classList.add('fade-up');
+        observer.observe(el);
+    });
+})();
+
+/* =========================
+   Live Clock (Global)
+   ========================= */
+(() => {
+    function updateClock() {
+        const now = new Date();
+        const timeString = now.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', second: '2-digit' });
+        const dateString = now.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+        const clockEl = document.getElementById('liveClock');
+        if(clockEl) {
+            clockEl.textContent = `${dateString} • ${timeString}`;
+        }
+    }
+    // Update every second
+    setInterval(updateClock, 1000);
+    // Initial call
+    updateClock();
+})();

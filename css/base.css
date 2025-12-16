@@ -9,11 +9,12 @@
 }
 
 [data-theme="light"] {
-    --bg: #f8fafc;
-    --fg: #020617;
-    --muted: #475569;
+    --bg: #f3f4f6; /* Soft gray (Zinc 100) instead of bright white */
+    --fg: #1e293b; /* Darker slate for better text contrast */
+    --muted: #64748b;
     --accent: #2563eb;
     --card: #ffffff;
+    --card-border: #e2e8f0;
 }
 
 * {
@@ -87,7 +88,7 @@ h3 {
 
 /* Paragraphs */
 p {
-    font-size: 1rem;
+    font-size: 0.95rem;
     color: var(--fg);
     margin-bottom: 1rem;
     line-height: 1.7;

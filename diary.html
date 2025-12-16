@@ -31,6 +31,7 @@
                 <a href="about.html">Journey</a>
                 <a href="blog.html">Blog</a>
                 <a href="diary.html">Diary</a>
+                <span class="live-clock" id="liveClock" style="font-variant-numeric: tabular-nums; opacity: 0.8; font-size: 0.9rem; margin-right: 0.5rem;"></span>
                 <span class="theme-toggle" id="themeToggle">☀ / 🌙</span>
             </nav>
 
@@ -71,7 +72,7 @@
         <h1>Diary</h1>
         <p class="muted">Click "Read more" to view the full diary entry.</p>
 
-        <div class="diary" id="diary-grid"></div>
+        <div class="diary-container" id="diary-grid"></div>
         <div id="modals-container"></div>
     </main>
 
@@ -85,47 +86,66 @@
         const modalsContainer = document.getElementById('modals-container');
 
         diaryEntries.forEach(entry => {
-            // Card with optional image
+            // Diary Card
             const card = document.createElement('div');
-            card.className = 'diary-entry';
+            card.className = 'diary-entry-card';
             card.innerHTML = `
-            <p class="muted">${entry.date}</p>
-            <h3>${entry.title}</h3>
-            <p>${entry.snippet}</p>
-            <button class="button" data-modal="${entry.id}">
-                Read more →
+            <div class="diary-date">
+                <i data-lucide="calendar" style="width: 14px;"></i> ${entry.date}
+            </div>
+            <h3 class="diary-title">${entry.title}</h3>
+            <p style="font-family: 'Georgia', serif; font-size: 1.05rem; line-height: 1.8;">${entry.snippet}</p>
+            <button class="glow-button" style="margin-top: 1.5rem; background: transparent; color: var(--accent); border: 1px solid var(--accent);" data-modal="${entry.id}">
+                Open Entry <i data-lucide="book-open" style="width: 16px; margin-left: 6px;"></i>
             </button>
             `;
             grid.appendChild(card);
 
-            // Modal with rich content
+            // Modal
             const modal = document.createElement('div');
             modal.classList.add('modal');
             modal.id = entry.id;
             modal.innerHTML = `
-                <span class="close">&times;</span>
-                <div class="modal-content">
-                ${entry.image ? `<img src="${entry.image}" alt="${entry.title}">` : ""}
-                <h2>${entry.title}</h2>
-                <p class="muted">${entry.date}</p>
-                ${entry.full}
+                <button class="close">&times;</button>
+                <div class="modal-content" style="font-family: 'Georgia', serif;">
+                    ${entry.image ? `<img src="${entry.image}" alt="${entry.title}" style="width: 100%; max-height: 300px; object-fit: cover; border-radius: 12px 12px 0 0;">` : ""}
+                    <div style="padding: 2.5rem;">
+                        <p class="diary-date" style="text-align: center;">${entry.date}</p>
+                        <h2 class="diary-title" style="text-align: center; margin-bottom: 2rem; border-bottom: 1px solid var(--muted); padding-bottom: 1rem;">${entry.title}</h2>
+                        <div style="font-size: 1.15rem; line-height: 1.9;">
+                            ${entry.full}
+                        </div>
+                    </div>
                 </div>
             `;
             modalsContainer.appendChild(modal);
         });
-        document.addEventListener("scroll", () => {
-            document.querySelectorAll(".diary-entry").forEach(entry => {
-                const rect = entry.getBoundingClientRect();
-                entry.style.opacity = rect.top < window.innerHeight * 0.85 ? 1 : 0.4;
+
+        // Simple scroll reveal
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = 1;
+                    entry.target.style.transform = 'translateY(0)';
+                }
             });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll(".diary-entry-card").forEach(entry => {
+            entry.style.opacity = 0;
+            entry.style.transform = 'translateY(20px)';
+            entry.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            observer.observe(entry);
         });
 
-        // Open modal
-        document.querySelectorAll('.button').forEach(btn => {
-            btn.addEventListener('click', () => {
+        // Open modal (Event Delegation)
+        grid.addEventListener('click', (e) => {
+            const btn = e.target.closest('.glow-button');
+            if (btn) {
                 const modalId = btn.dataset.modal;
-                document.getElementById(modalId).classList.add('active');
-            });
+                const modal = document.getElementById(modalId);
+                if (modal) modal.classList.add('active');
+            }
         });
 
         // Close modal

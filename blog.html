@@ -33,6 +33,7 @@
 				<a href="about.html">Journey</a>
 				<a href="blog.html">Blog</a>
 				<a href="diary.html">Diary</a>
+				<span class="live-clock" id="liveClock" style="font-variant-numeric: tabular-nums; opacity: 0.8; font-size: 0.9rem; margin-right: 0.5rem;"></span>
 				<span class="theme-toggle" id="themeToggle">☀ / 🌙</span>
 			</nav>
 
@@ -73,7 +74,7 @@
 		<h1>Blog</h1>
 		<p class="muted">Click "Read more" to see the full blog post.</p>
 
-		<div class="grid grid-2" id="blog-grid"></div>
+		<div class="blog-grid" id="blog-grid"></div>
 		<div id="modals-container"></div>
 	</main>
 	<footer class="container muted">
@@ -92,13 +93,23 @@
 
 			blogs.forEach(entry => {
 				const card = document.createElement("div");
-				card.className = "card";
+				card.className = "blog-card";
 				card.innerHTML = `
-					${entry.overviewImage ? `<img src="${entry.overviewImage}" alt="${entry.title}">` : ""}
-					<h3>${entry.title}</h3>
-					<p class="muted">by ${entry.author} • ${entry.date} • ${entry.readTime}</p>
-					<p>${entry.snippet}</p>
-					<button class="button" data-modal="${entry.id}">Read more →</button>
+					<div class="blog-image-wrapper">
+						${entry.overviewImage ? `<img src="${entry.overviewImage}" alt="${entry.title}">` : ""}
+					</div>
+					<div class="blog-content">
+						<div class="blog-meta">
+							<i data-lucide="user" style="width: 14px; height: 14px;"></i> ${entry.author}
+							&nbsp;•&nbsp;
+							<i data-lucide="calendar" style="width: 14px; height: 14px;"></i> ${entry.date}
+						</div>
+						<h3 class="blog-title">${entry.title}</h3>
+						<p class="blog-snippet">${entry.snippet}</p>
+						<button class="glow-button" style="width: 100%; text-align: center; justify-content: center;" data-modal="${entry.id}">
+							Read Article <i data-lucide="arrow-right" style="width: 16px; margin-left: 6px;"></i>
+						</button>
+					</div>
 				`;
 				grid.appendChild(card);
 
@@ -107,21 +118,31 @@
 				modal.id = entry.id;
 				modal.setAttribute("role", "dialog");
 				modal.innerHTML = `
+					<button class="close" aria-label="Close modal">&times;</button>
 					<div class="modal-content">
-						<button class="close" aria-label="Close modal">&times;</button>
-						${entry.mainImage ? `<img src="${entry.mainImage}" alt="${entry.title}">` : ""}
-						<h2>${entry.title}</h2>
-						<p class="muted">by ${entry.author} • ${entry.date} • ${entry.readTime}</p>
-						${entry.full}
+						${entry.mainImage ? `<img src="${entry.mainImage}" alt="${entry.title}" style="width: 100%; height: 250px; object-fit: cover; border-radius: 12px 12px 0 0;">` : ""}
+						<div style="padding: 2rem;">
+							<h2 style="font-size: 2rem; margin-bottom: 0.5rem;">${entry.title}</h2>
+							<p class="muted" style="margin-bottom: 1.5rem;">
+								<i data-lucide="user" style="width: 14px;"></i> ${entry.author} • ${entry.date} • ${entry.readTime}
+							</p>
+							<div style="line-height: 1.8; font-size: 1.05rem;">
+								${entry.full}
+							</div>
+						</div>
 					</div>
 				`;
 				modalsContainer.appendChild(modal);
 			});
 
-			grid.querySelectorAll(".button").forEach(btn => {
-				btn.addEventListener("click", () => {
-					document.getElementById(btn.dataset.modal).classList.add("active");
-				});
+			// Event Delegation for dynamically created buttons
+			grid.addEventListener("click", (e) => {
+				const btn = e.target.closest(".glow-button");
+				if (btn) {
+					const modalId = btn.dataset.modal;
+					const modal = document.getElementById(modalId);
+					if (modal) modal.classList.add("active");
+				}
 			});
 
 			function closeModal(modal) {

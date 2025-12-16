@@ -135,7 +135,7 @@
     </style>
 </head>
 
-<body data-page="resume">
+<body data-page="about">
     <div class="scroll-progress" id="scrollProgress"></div>
     <div class="ambient-bg" aria-hidden="true"></div>
     <div class="particles" id="particles"></div>
@@ -150,9 +150,10 @@
             </button>
 
             <nav id="mobileNav">
-                <a href="index.html">Home</a>
+                <a href="about.html">Journey</a>
                 <a href="blog.html">Blog</a>
                 <a href="diary.html">Diary</a>
+                <span class="live-clock" id="liveClock" style="font-variant-numeric: tabular-nums; opacity: 0.8; font-size: 0.9rem; margin-right: 0.5rem;"></span>
                 <span class="theme-toggle" id="themeToggle">☀ / 🌙</span>
             </nav>
         </div>
@@ -291,86 +292,80 @@
             <h2 class="section-title">
                 <i data-lucide="code-2"
                     style="display: inline; width: 28px; height: 28px; vertical-align: middle; margin-right: 8px;"></i>
-                Skills & Technologies
+                Technical Arsenal
             </h2>
 
-            <div class="skills-grid">
+            <div class="skills-grid" style="grid-template-columns: 1fr; gap: 2rem;">
+                <!-- Backend Arsenal -->
                 <div class="skill-category hover-lift">
-                    <h4><i data-lucide="layout"></i> Frontend Development</h4>
-                    <div class="skill-item-wrapper">
-                        <div class="skill-item-header">
-                            <span>React & Next.js</span>
-                            <span>95%</span>
+                    <h4><i data-lucide="server"></i> Backend Engineering</h4>
+                    <div class="tech-grid">
+                        <div class="tech-card">
+                            <span class="tech-icon">🐍</span>
+                            <span class="tech-name">Python</span>
+                            <span class="tech-level">Advanced</span>
                         </div>
-                        <div class="skill-progress-bar">
-                            <div class="skill-progress-fill" data-progress="95"></div>
+                        <div class="tech-card">
+                            <span class="tech-icon">☕</span>
+                            <span class="tech-name">Java</span>
+                            <span class="tech-level">Experienced</span>
                         </div>
-                    </div>
-                    <div class="skill-item-wrapper">
-                        <div class="skill-item-header">
-                            <span>TypeScript</span>
-                            <span>90%</span>
+                        <div class="tech-card">
+                            <span class="tech-icon">🥜</span>
+                            <span class="tech-name">Go</span>
+                            <span class="tech-level">Intermediate</span>
                         </div>
-                        <div class="skill-progress-bar">
-                            <div class="skill-progress-fill" data-progress="90"></div>
+                        <div class="tech-card">
+                            <span class="tech-icon">🦀</span>
+                            <span class="tech-name">Rust</span>
+                            <span class="tech-level">Learning</span>
                         </div>
-                    </div>
-                    <div class="skill-item-wrapper">
-                        <div class="skill-item-header">
-                            <span>Tailwind CSS</span>
-                            <span>88%</span>
+                        <div class="tech-card">
+                            <span class="tech-icon">🐘</span>
+                            <span class="tech-name">PostgreSQL</span>
+                            <span class="tech-level">Advanced</span>
                         </div>
-                        <div class="skill-progress-bar">
-                            <div class="skill-progress-fill" data-progress="88"></div>
-                        </div>
-                    </div>
-                    <div class="skill-item-wrapper">
-                        <div class="skill-item-header">
-                            <span>PostgreSQL & MySQL</span>
-                            <span>85%</span>
-                        </div>
-                        <div class="skill-progress-bar">
-                            <div class="skill-progress-fill" data-progress="85"></div>
-                        </div>
-                    </div>
-                    <div class="skill-item-wrapper">
-                        <div class="skill-item-header">
-                            <span>Redis & Firebase</span>
-                            <span>80%</span>
-                        </div>
-                        <div class="skill-progress-bar">
-                            <div class="skill-progress-fill" data-progress="80"></div>
+                         <div class="tech-card">
+                            <span class="tech-icon">🍃</span>
+                            <span class="tech-name">MongoDB</span>
+                            <span class="tech-level">Proficient</span>
                         </div>
                     </div>
                 </div>
 
+                <!-- DevOps & Cloud -->
                 <div class="skill-category hover-lift">
-                    <h4><i data-lucide="cloud"></i> DevOps & Tools</h4>
-                    <div class="skill-item-wrapper">
-                        <div class="skill-item-header">
-                            <span>AWS & Cloud Services</span>
-                            <span>87%</span>
+                    <h4><i data-lucide="cloud"></i> DevOps & Infrastructure</h4>
+                    <div class="tech-grid">
+                        <div class="tech-card">
+                            <span class="tech-icon">☁️</span>
+                            <span class="tech-name">AWS</span>
+                            <span class="tech-level">Certified</span>
                         </div>
-                        <div class="skill-progress-bar">
-                            <div class="skill-progress-fill" data-progress="87"></div>
+                        <div class="tech-card">
+                            <span class="tech-icon">🐳</span>
+                            <span class="tech-name">Docker</span>
+                            <span class="tech-level">Advanced</span>
                         </div>
-                    </div>
-                    <div class="skill-item-wrapper">
-                        <div class="skill-item-header">
-                            <span>Docker & Kubernetes</span>
-                            <span>83%</span>
+                        <div class="tech-card">
+                            <span class="tech-icon">☸️</span>
+                            <span class="tech-name">Kubernetes</span>
+                            <span class="tech-level">Intermediate</span>
                         </div>
-                        <div class="skill-progress-bar">
-                            <div class="skill-progress-fill" data-progress="83"></div>
+                        <div class="tech-card">
+                            <span class="tech-icon">🐙</span>
+                            <span class="tech-name">GitHub Actions</span>
+                            <span class="tech-level">Proficient</span>
                         </div>
-                    </div>
-                    <div class="skill-item-wrapper">
-                        <div class="skill-item-header">
-                            <span>CI/CD & Git</span>
-                            <span>90%</span>
+                        <div class="tech-card">
+                            <span class="tech-icon">🐧</span>
+                            <span class="tech-name">Linux</span>
+                            <span class="tech-level">Daily Driver</span>
                         </div>
-                        <div class="skill-progress-bar">
-                            <div class="skill-progress-fill" data-progress="90"></div>
+                         <div class="tech-card">
+                            <span class="tech-icon">🔥</span>
+                            <span class="tech-name">Firebase</span>
+                            <span class="tech-level">Experienced</span>
                         </div>
                     </div>
                 </div>
@@ -385,15 +380,17 @@
             </h2>
 
             <div class="projects-grid">
-                <div class="project-card hover-lift">
-                    <img src="https://images.unsplash.com/photo-1557821552-17105176677c?w=600&h=400&fit=crop"
-                        alt="E-Commerce Platform" class="project-image">
-                    <span class="project-badge">⭐ Featured</span>
+                <div class="project-card">
+                    <div class="project-image-container">
+                        <img src="https://images.unsplash.com/photo-1557821552-17105176677c?w=600&h=400&fit=crop"
+                            alt="E-Commerce Platform" class="project-image">
+                        <span class="project-badge">⭐ Featured</span>
+                    </div>
                     <div class="project-content">
                         <h4><i data-lucide="shopping-cart"></i> E-Commerce Platform</h4>
                         <p class="project-description">
                             Full-stack e-commerce solution with payment integration, inventory management, and analytics
-                            dashboard.
+                            dashboard. Built for scale and performance.
                         </p>
                         <div class="tech-tags">
                             <span class="tech-tag">React</span>
@@ -407,14 +404,17 @@
                     </div>
                 </div>
 
-                <div class="project-card hover-lift">
-                    <img src="https://images.unsplash.com/photo-1611746872915-64382b5c76da?w=600&h=400&fit=crop"
-                        alt="Chat Application" class="project-image">
-                    <span class="project-badge">🔥 Popular</span>
+                <div class="project-card">
+                    <div class="project-image-container">
+                        <img src="https://images.unsplash.com/photo-1611746872915-64382b5c76da?w=600&h=400&fit=crop"
+                            alt="Chat Application" class="project-image">
+                        <span class="project-badge">🔥 Popular</span>
+                    </div>
                     <div class="project-content">
                         <h4><i data-lucide="message-circle"></i> Real-time Chat App</h4>
                         <p class="project-description">
                             WebSocket-based chat with file sharing, typing indicators, and end-to-end encryption.
+                            Seamless communication for teams.
                         </p>
                         <div class="tech-tags">
                             <span class="tech-tag">Vue.js</span>
@@ -428,15 +428,17 @@
                     </div>
                 </div>
 
-                <div class="project-card hover-lift">
-                    <img src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=600&h=400&fit=crop"
-                        alt="Task Management" class="project-image">
-                    <span class="project-badge">✨ New</span>
+                <div class="project-card">
+                    <div class="project-image-container">
+                        <img src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=600&h=400&fit=crop"
+                            alt="Task Management" class="project-image">
+                        <span class="project-badge">✨ New</span>
+                    </div>
                     <div class="project-content">
                         <h4><i data-lucide="calendar"></i> Task Management System</h4>
                         <p class="project-description">
                             Collaborative project management with Kanban boards, team collaboration, and progress
-                            tracking.
+                            tracking. Organized workflow made easy.
                         </p>
                         <div class="tech-tags">
                             <span class="tech-tag">Next.js</span>
@@ -614,25 +616,7 @@
 
         document.querySelectorAll('.stats-container').forEach(container => counterObserver.observe(container));
 
-        // Skill Progress Bars Animation
-        const skillObserver = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    const progressBars = entry.target.querySelectorAll('.skill-progress-fill');
-                    progressBars.forEach(bar => {
-                        const progress = bar.getAttribute('data-progress');
-                        setTimeout(() => {
-                            bar.style.width = progress + '%';
-                        }, 200);
-                    });
-                    skillObserver.unobserve(entry.target);
-                }
-            });
-        }, { threshold: 0.3 });
 
-        document.querySelectorAll('.skill-category').forEach(category => {
-            skillObserver.observe(category);
-        });
 
         // Reveal animations (unified system)
         const reveals = document.querySelectorAll('.reveal');
@@ -654,6 +638,19 @@
             if (e.key.toLowerCase() === 'd') location.href = 'diary.html';
             if (e.key.toLowerCase() === 'h') location.href = 'index.html';
         });
+
+        // Live Clock
+        function updateClock() {
+            const now = new Date();
+            const timeString = now.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', second: '2-digit' });
+            const dateString = now.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+            const clockEl = document.getElementById('liveClock');
+            if(clockEl) {
+                clockEl.textContent = `${dateString} • ${timeString}`;
+            }
+        }
+        setInterval(updateClock, 1000);
+        updateClock(); // Initial call
 
         // Add hover sound effect (optional - requires audio file)
         document.querySelectorAll('.project-card, .achievement-card, .skill-category').forEach(card => {
