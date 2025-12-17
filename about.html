@@ -4,13 +4,13 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Aman Pandey - Resume</title>
+    <title>About - Aman Pandey</title>
 
     <link rel="stylesheet" href="css/base.css" />
-    <link rel="stylesheet" href="css/layout.css" />
     <link rel="stylesheet" href="css/components.css" />
     <link rel="stylesheet" href="css/animations.css" />
     <script src="https://unpkg.com/lucide@latest"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
     <style>
         /* Resume page specific styles */
@@ -64,6 +64,10 @@
             font-size: 1.25rem;
             opacity: 0.7;
             margin-bottom: 1rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            line-height: 1.6;
         }
 
         .section {
@@ -85,6 +89,7 @@
                 opacity: 0;
                 transform: translateX(-30px);
             }
+
             to {
                 opacity: 1;
                 transform: translateX(0);
@@ -143,80 +148,114 @@
 
     <header class="nav">
         <div class="container nav-inner">
-            <h2>Aman Pandey</h2>
+            <h2>
+				<img src="images/logo.png" alt="AP Logo" class="nav-logo">
+				Aman Pandey
+			</h2>
             <button class="hamburger" id="hamburger" aria-label="Toggle navigation" aria-expanded="false">
                 <span></span>
                 <span></span>
             </button>
 
             <nav id="mobileNav">
-                <a href="about.html">Journey</a>
+                <a href="index.html">Home</a>
                 <a href="blog.html">Blog</a>
                 <a href="diary.html">Diary</a>
-                <span class="live-clock" id="liveClock" style="font-variant-numeric: tabular-nums; opacity: 0.8; font-size: 0.9rem; margin-right: 0.5rem;"></span>
+                <span class="live-clock" id="liveClock"
+                    style="font-variant-numeric: tabular-nums; opacity: 0.8; font-size: 0.9rem; margin-right: 0.5rem;"></span>
                 <span class="theme-toggle" id="themeToggle">☀ / 🌙</span>
             </nav>
         </div>
     </header>
 
     <div class="social-rail">
-        <a href="https://github.com/heyyitzaman" target="_blank" data-tooltip="GitHub">
-            <i data-lucide="github"></i>
-        </a>
-        <a href="https://linkedin.com/in/iamanchandrapandey" target="_blank" data-tooltip="LinkedIn">
-            <i data-lucide="linkedin"></i>
-        </a>
-        <a href="https://instagram.com/heyyitzaman" target="_blank" data-tooltip="Instagram">
-            <i data-lucide="instagram"></i>
-        </a>
-        <a href="https://twitter.com/heyyitzaman" target="_blank" data-tooltip="Twitter / X">
-            <i data-lucide="twitter"></i>
-        </a>
-        <a href="https://iamanpandey.medium.com/about" target="_blank" data-tooltip="Medium">
-            <i data-lucide="pen-tool"></i>
-        </a>
-        <a href="https://leetcode.com/iaman_pandey" target="_blank" data-tooltip="LeetCode">
-            <i data-lucide="code"></i>
-        </a>
-        <a href="mailto:iamancpandey@gmail.com" data-tooltip="Email">
-            <i data-lucide="mail"></i>
-        </a>
+        <a href="https://github.com/heyyitzaman" target="_blank" data-tooltip="GitHub"><i data-lucide="github"></i></a>
+        <a href="https://linkedin.com/in/iamanchandrapandey" target="_blank" data-tooltip="LinkedIn"><i data-lucide="linkedin"></i></a>
+        <a href="https://instagram.com/heyyitzaman" target="_blank" data-tooltip="Instagram"><i data-lucide="instagram"></i></a>
+        <a href="https://twitter.com/heyyitzaman" target="_blank" data-tooltip="Twitter / X"><i data-lucide="twitter"></i></a>
+        <a href="https://iamanpandey.medium.com/about" target="_blank" data-tooltip="Medium"><i data-lucide="pen-tool"></i></a>
+        <a href="https://leetcode.com/iaman_pandey" target="_blank" data-tooltip="LeetCode"><i data-lucide="code"></i></a>
+        <a href="mailto:iamancpandey@gmail.com" data-tooltip="Email"><i data-lucide="mail"></i></a>
     </div>
 
     <main class="container">
         <div class="resume-hero">
             <div class="profile-image-container">
-                <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=Aman" alt="Aman Pandey" class="profile-image">
+                <img src="https://avataaars.io/?avatarStyle=Circle&topType=ShortHairShortFlat&accessoriesType=Prescription02&hairColor=Black&facialHairType=BeardLight&facialHairColor=Black&clotheType=Hoodie&clotheColor=Black&eyeType=Happy&eyebrowType=Default&mouthType=Smile&skinColor=Light"
+                    alt="Aman Pandey" class="profile-image">
             </div>
-            <h1 class="gradient-text">Software Developer</h1>
-            <p class="tagline">Building elegant solutions with modern technologies</p>
+            <h1 class="gradient-text">Aman Chandra Pandey</h1>
+            <p class="tagline">
+                Software Engineer specializing in Backend & DevOps. <br>
+                Building reliable, scalable systems at the intersection of logic and creativity.
+            </p>
             <div class="typing-effect" id="typingText"></div>
 
             <div class="stats-container">
                 <div class="stat-item hover-lift">
-                    <div class="stat-number counter-animated" data-target="5">0</div>
+                    <div class="stat-number" id="stat-experience" data-target="2">0</div>
                     <div class="stat-label">Years Experience</div>
                 </div>
                 <div class="stat-item hover-lift">
-                    <div class="stat-number counter-animated" data-target="50">0</div>
-                    <div class="stat-label">Projects Completed</div>
+                    <div class="stat-number" id="stat-projects">0</div>
+                    <div class="stat-label">Projects Built</div>
                 </div>
                 <div class="stat-item hover-lift">
-                    <div class="stat-number counter-animated" data-target="20">0</div>
-                    <div class="stat-label">Tech Articles</div>
+                    <div class="stat-number" id="stat-problems">0</div>
+                    <div class="stat-label">Problems Solved</div>
                 </div>
                 <div class="stat-item hover-lift">
-                    <div class="stat-number counter-animated" data-target="500">0</div>
-                    <div class="stat-label">GitHub Stars</div>
+                    <div class="stat-number" id="stat-stars">0</div>
+                    <div class="stat-label">Stargazers</div>
                 </div>
             </div>
 
-            <a href="https://drive.google.com/file/d/1L0g-sQzcmg9HBibbiKZ7Adzu91hb_usw/view?usp=sharing" class="download-btn" target="_blank">
+            <a href="https://drive.google.com/file/d/1L0g-sQzcmg9HBibbiKZ7Adzu91hb_usw/view?usp=sharing"
+                class="download-btn" target="_blank">
                 <i data-lucide="download"></i>
                 <span>View Resume</span>
             </a>
         </div>
 
+        <!-- CODING ACTIVITY -->
+        <section class="section reveal">
+            <h2 class="section-title">
+                <i data-lucide="activity"
+                    style="display: inline; width: 28px; height: 28px; vertical-align: middle; margin-right: 8px;"></i>
+                Engineering Activity
+            </h2>
+
+            <!-- Custom Activity Graph -->
+            <div class="activity-graph-container hover-lift" style="min-height: 200px;">
+                <h4 style="margin-bottom: 1rem; text-align: left;">Contributions & Consistency</h4>
+                <div class="calendar">
+                    <!-- Loading placeholder -->
+                    <div style="text-align:center; padding:2rem; color:var(--text-muted)">Loading combined stats...</div>
+                </div>
+            </div>
+
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; margin-top: 2rem;">
+                <!-- Problem Solving -->
+                <div class="hover-lift" style="background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 1.5rem;">
+                    <h3 style="text-align:center; margin-bottom: 1rem;">Problem Solving</h3>
+                    <div style="height: 250px;">
+                        <canvas id="problemSolvingChart"></canvas>
+                    </div>
+                </div>
+                
+                <!-- Most Used Languages -->
+                 <div class="hover-lift" style="background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 1.5rem;">
+                    <h3 style="text-align:center; margin-bottom: 1rem;">Most Used Languages</h3>
+                    <div style="height: 250px;">
+                        <canvas id="languageChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Old Engineering Path Removed -->
+
+        <!-- EXPERIENCE (Moved down slightly in order, but keeping flow) -->
         <section class="section reveal">
             <h2 class="section-title">
                 <i data-lucide="briefcase"
@@ -228,150 +267,89 @@
                 <div class="experience-card timeline-item hover-lift">
                     <div class="experience-header">
                         <div class="experience-title">
-                            <h3><i data-lucide="star"></i> Senior Software Developer</h3>
-                            <p class="company">Tech Company Inc.</p>
+                            <h3><i data-lucide="code-2"></i> Software Engineer</h3>
+                            <p class="company">Quantrium Tech Pvt Ltd</p>
                         </div>
-                        <span class="duration"><i data-lucide="calendar"></i> Jan 2023 - Present</span>
+                        <span class="duration"><i data-lucide="calendar"></i> July 2023 - Present</span>
                     </div>
-                    <p class="experience-description">
-                        Led development of scalable web applications serving 100K+ users. Architected microservices
-                        infrastructure and mentored junior developers.
-                    </p>
+                    <!-- 4 Point Description -->
+                    <ul class="detail-list">
+                        <li>Developed authenticated APIs for financial/healthcare apps using FastAPI and OAuth2.</li>
+                        <li>Optimized PostgreSQL queries & Celery workers, reducing execution time by 5x.</li>
+                        <li>Streamlined CI/CD pipelines with Docker, Systemd, Cronjobs, and Shell scripts.</li>
+                        <li>Managed Kafka services for efficient data flow and service integration.</li>
+                    </ul>
                     <div class="tech-tags">
-                        <span class="tech-tag">React</span>
-                        <span class="tech-tag">Node.js</span>
-                        <span class="tech-tag">MongoDB</span>
-                        <span class="tech-tag">AWS</span>
+                        <span class="tech-tag">FastAPI</span>
+                        <span class="tech-tag">Kafka</span>
                         <span class="tech-tag">Docker</span>
-                    </div>
-                </div>
-
-                <div class="experience-card timeline-item hover-lift">
-                    <div class="experience-header">
-                        <div class="experience-title">
-                            <h3><i data-lucide="code-2"></i> Software Developer</h3>
-                            <p class="company">Startup Solutions</p>
-                        </div>
-                        <span class="duration"><i data-lucide="calendar"></i> Jun 2021 - Dec 2022</span>
-                    </div>
-                    <p class="experience-description">
-                        Developed full-stack applications using modern JavaScript frameworks. Collaborated with
-                        cross-functional teams to deliver features on schedule.
-                    </p>
-                    <div class="tech-tags">
-                        <span class="tech-tag">Vue.js</span>
-                        <span class="tech-tag">Express</span>
                         <span class="tech-tag">PostgreSQL</span>
-                        <span class="tech-tag">Redis</span>
                     </div>
                 </div>
 
                 <div class="experience-card timeline-item hover-lift">
                     <div class="experience-header">
                         <div class="experience-title">
-                            <h3><i data-lucide="coffee"></i> Junior Developer</h3>
-                            <p class="company">Digital Agency</p>
+                            <h3><i data-lucide="coffee"></i> Software Engineer Intern</h3>
+                            <p class="company">Quantrium Tech Pvt Ltd</p>
                         </div>
-                        <span class="duration"><i data-lucide="calendar"></i> Jan 2020 - May 2021</span>
+                        <span class="duration"><i data-lucide="calendar"></i> May 2022 - June 2023</span>
                     </div>
-                    <p class="experience-description">
-                        Built responsive websites and maintained client projects. Gained expertise in modern web
-                        development practices and agile methodologies.
-                    </p>
+                    <ul class="detail-list">
+                        <li>Developed web APIs for financial statement analysis using FastAPI.</li>
+                        <li>Implemented JWT-based authentication and authorization with OAuth2 protocol.</li>
+                        <li>Configured Kafka clients for concurrent data processing and microservice streaming.</li>
+                        <li>Deployed fintech services on GCP VM instances using Docker containerization.</li>
+                    </ul>
                     <div class="tech-tags">
-                        <span class="tech-tag">HTML/CSS</span>
-                        <span class="tech-tag">JavaScript</span>
-                        <span class="tech-tag">PHP</span>
-                        <span class="tech-tag">MySQL</span>
+                        <span class="tech-tag">Python</span>
+                        <span class="tech-tag">GCP</span>
+                        <span class="tech-tag">MongoDB</span>
+                        <span class="tech-tag">OAuth2</span>
                     </div>
                 </div>
             </div>
         </section>
 
+        <!-- SKILLS VISUALIZATION -->
         <section class="section reveal">
             <h2 class="section-title">
-                <i data-lucide="code-2"
+                <i data-lucide="cpu"
                     style="display: inline; width: 28px; height: 28px; vertical-align: middle; margin-right: 8px;"></i>
                 Technical Arsenal
             </h2>
 
-            <div class="skills-grid" style="grid-template-columns: 1fr; gap: 2rem;">
-                <!-- Backend Arsenal -->
-                <div class="skill-category hover-lift">
-                    <h4><i data-lucide="server"></i> Backend Engineering</h4>
-                    <div class="tech-grid">
-                        <div class="tech-card">
-                            <span class="tech-icon">🐍</span>
-                            <span class="tech-name">Python</span>
-                            <span class="tech-level">Advanced</span>
-                        </div>
-                        <div class="tech-card">
-                            <span class="tech-icon">☕</span>
-                            <span class="tech-name">Java</span>
-                            <span class="tech-level">Experienced</span>
-                        </div>
-                        <div class="tech-card">
-                            <span class="tech-icon">🥜</span>
-                            <span class="tech-name">Go</span>
-                            <span class="tech-level">Intermediate</span>
-                        </div>
-                        <div class="tech-card">
-                            <span class="tech-icon">🦀</span>
-                            <span class="tech-name">Rust</span>
-                            <span class="tech-level">Learning</span>
-                        </div>
-                        <div class="tech-card">
-                            <span class="tech-icon">🐘</span>
-                            <span class="tech-name">PostgreSQL</span>
-                            <span class="tech-level">Advanced</span>
-                        </div>
-                         <div class="tech-card">
-                            <span class="tech-icon">🍃</span>
-                            <span class="tech-name">MongoDB</span>
-                            <span class="tech-level">Proficient</span>
-                        </div>
-                    </div>
+             <div style="display: flex; flex-wrap: wrap; gap: 2rem; align-items: center;">
+                 <div class="chart-container" style="flex: 1.5;">
+                    <canvas id="skillsChart"></canvas>
                 </div>
-
-                <!-- DevOps & Cloud -->
-                <div class="skill-category hover-lift">
-                    <h4><i data-lucide="cloud"></i> DevOps & Infrastructure</h4>
-                    <div class="tech-grid">
-                        <div class="tech-card">
-                            <span class="tech-icon">☁️</span>
-                            <span class="tech-name">AWS</span>
-                            <span class="tech-level">Certified</span>
+                
+                <div style="flex: 1; min-width: 300px;">
+                    <div class="skills-grid" style="grid-template-columns: 1fr;">
+                        <div class="skill-category hover-lift">
+                            <h4><i data-lucide="server"></i> Backend Engineering</h4>
+                            <div class="tech-grid">
+                                <div class="tech-card small-icon"><span class="tech-icon">🐍</span> Python (FastAPI/Django)</div>
+                                <div class="tech-card small-icon"><span class="tech-icon">☕</span> Java (Data Structures)</div>
+                                <div class="tech-card small-icon"><span class="tech-icon">🐚</span> Shell Scripting</div>
+                                <div class="tech-card small-icon"><span class="tech-icon">🛠️</span> C++ (Basics)</div>
+                            </div>
                         </div>
-                        <div class="tech-card">
-                            <span class="tech-icon">🐳</span>
-                            <span class="tech-name">Docker</span>
-                            <span class="tech-level">Advanced</span>
-                        </div>
-                        <div class="tech-card">
-                            <span class="tech-icon">☸️</span>
-                            <span class="tech-name">Kubernetes</span>
-                            <span class="tech-level">Intermediate</span>
-                        </div>
-                        <div class="tech-card">
-                            <span class="tech-icon">🐙</span>
-                            <span class="tech-name">GitHub Actions</span>
-                            <span class="tech-level">Proficient</span>
-                        </div>
-                        <div class="tech-card">
-                            <span class="tech-icon">🐧</span>
-                            <span class="tech-name">Linux</span>
-                            <span class="tech-level">Daily Driver</span>
-                        </div>
-                         <div class="tech-card">
-                            <span class="tech-icon">🔥</span>
-                            <span class="tech-name">Firebase</span>
-                            <span class="tech-level">Experienced</span>
+                        <div class="skill-category hover-lift" style="margin-top: 1rem;">
+                            <h4><i data-lucide="database"></i> Infrastructure & Tools</h4>
+                            <div class="tech-grid">
+                                <div class="tech-card small-icon"><span class="tech-icon">🐘</span> PostgreSQL / MongoDB</div>
+                                <div class="tech-card small-icon"><span class="tech-icon">📨</span> Kafka / RabbitMQ</div>
+                                <div class="tech-card small-icon"><span class="tech-icon">☁️</span> AWS / GCP / CI/CD</div>
+                                <div class="tech-card small-icon"><span class="tech-icon">🐳</span> Docker / Systemd</div>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
 
+        <!-- PROJECTS (Flip Cards) -->
         <section class="section reveal">
             <h2 class="section-title">
                 <i data-lucide="rocket"
@@ -380,122 +358,199 @@
             </h2>
 
             <div class="projects-grid">
-                <div class="project-card">
-                    <div class="project-image-container">
-                        <img src="https://images.unsplash.com/photo-1557821552-17105176677c?w=600&h=400&fit=crop"
-                            alt="E-Commerce Platform" class="project-image">
-                        <span class="project-badge">⭐ Featured</span>
-                    </div>
-                    <div class="project-content">
-                        <h4><i data-lucide="shopping-cart"></i> E-Commerce Platform</h4>
-                        <p class="project-description">
-                            Full-stack e-commerce solution with payment integration, inventory management, and analytics
-                            dashboard. Built for scale and performance.
-                        </p>
-                        <div class="tech-tags">
-                            <span class="tech-tag">React</span>
-                            <span class="tech-tag">Node.js</span>
-                            <span class="tech-tag">Stripe</span>
+                 <!-- Buddy-Time -->
+                 <div class="project-card">
+                    <div class="project-inner">
+                        <div class="project-front">
+                            <div class="project-image-container">
+                                <img src="https://images.unsplash.com/photo-1543269865-cbf427effbad?w=600&h=400&fit=crop"
+                                    alt="Buddy Time" class="project-image">
+                                <!-- Removed Featured Badge -->
+                                <div class="flip-icon"><i data-lucide="rotate-cw"></i></div>
+                            </div>
+                            <div class="project-content">
+                                <h4><i data-lucide="clock"></i> Buddy-Time</h4>
+                                <p style="margin-top:0.5rem; color: var(--text-muted); font-size: 0.9rem;">
+                                    Collaborative tool for remote team time-management.
+                                </p>
+                                <div style="display: flex; gap: 0.5rem; margin-top: auto;">
+                                    <a href="https://github.com/heyyitzaman/Buddy-Time" class="project-link" target="_blank" onclick="event.stopPropagation();" title="View Code">
+                                        <i data-lucide="github"></i>
+                                    </a>
+                                </div>
+                            </div>
                         </div>
-                        <div class="project-links">
-                            <a href="#" class="project-link"><i data-lucide="github"></i> Code</a>
-                            <a href="#" class="project-link"><i data-lucide="external-link"></i> Live</a>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="project-card">
-                    <div class="project-image-container">
-                        <img src="https://images.unsplash.com/photo-1611746872915-64382b5c76da?w=600&h=400&fit=crop"
-                            alt="Chat Application" class="project-image">
-                        <span class="project-badge">🔥 Popular</span>
-                    </div>
-                    <div class="project-content">
-                        <h4><i data-lucide="message-circle"></i> Real-time Chat App</h4>
-                        <p class="project-description">
-                            WebSocket-based chat with file sharing, typing indicators, and end-to-end encryption.
-                            Seamless communication for teams.
-                        </p>
-                        <div class="tech-tags">
-                            <span class="tech-tag">Vue.js</span>
-                            <span class="tech-tag">Socket.io</span>
-                            <span class="tech-tag">MongoDB</span>
-                        </div>
-                        <div class="project-links">
-                            <a href="#" class="project-link"><i data-lucide="github"></i> Code</a>
-                            <a href="#" class="project-link"><i data-lucide="external-link"></i> Live</a>
+                        <div class="project-back">
+                            <div class="flip-icon"><i data-lucide="x"></i></div>
+                            <h4>Buddy-Time Details</h4>
+                            <ul class="detail-list">
+                                <li>Real-time synchronization for remote teams.</li>
+                                <li>Built with Django for robust backend logic.</li>
+                                <li>Features include scheduling and task tracking.</li>
+                                <li>User-friendly interface for seamless collaboration.</li>
+                            </ul>
+                            <div class="tech-tags">
+                                <span class="tech-tag">🐍 Python</span>
+                                <span class="tech-tag">⚡ Django</span>
+                            </div>
                         </div>
                     </div>
                 </div>
 
-                <div class="project-card">
-                    <div class="project-image-container">
-                        <img src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=600&h=400&fit=crop"
-                            alt="Task Management" class="project-image">
-                        <span class="project-badge">✨ New</span>
-                    </div>
-                    <div class="project-content">
-                        <h4><i data-lucide="calendar"></i> Task Management System</h4>
-                        <p class="project-description">
-                            Collaborative project management with Kanban boards, team collaboration, and progress
-                            tracking. Organized workflow made easy.
-                        </p>
-                        <div class="tech-tags">
-                            <span class="tech-tag">Next.js</span>
-                            <span class="tech-tag">PostgreSQL</span>
-                            <span class="tech-tag">Prisma</span>
+                 <!-- Kafka Docker -->
+                 <div class="project-card">
+                    <div class="project-inner">
+                        <div class="project-front">
+                            <div class="project-image-container">
+                                <img src="https://images.unsplash.com/photo-1555949963-ff9fe0c870eb?w=600&h=400&fit=crop"
+                                    alt="Confluent Kafka" class="project-image">
+                                <div class="flip-icon"><i data-lucide="rotate-cw"></i></div>
+                            </div>
+                            <div class="project-content">
+                                <h4><i data-lucide="server"></i> Kafka Docker Service</h4>
+                                <p style="margin-top:0.5rem; color: var(--text-muted); font-size: 0.9rem;">
+                                    Scalable event streaming infrastructure containerized.
+                                </p>
+                                <div style="display: flex; gap: 0.5rem; margin-top: auto;">
+                                    <a href="https://github.com/heyyitzaman/Confluent-kafka_Docker" class="project-link" target="_blank" onclick="event.stopPropagation();" title="View Code">
+                                        <i data-lucide="github"></i>
+                                    </a>
+                                </div>
+                            </div>
                         </div>
-                        <div class="project-links">
-                            <a href="#" class="project-link"><i data-lucide="github"></i> Code</a>
-                            <a href="#" class="project-link"><i data-lucide="external-link"></i> Live</a>
+                        <div class="project-back">
+                            <div class="flip-icon"><i data-lucide="x"></i></div>
+                            <h4>Kafka Details</h4>
+                            <ul class="detail-list">
+                                <li>Dockerized Confluent Kafka setup.</li>
+                                <li>Implemented simple services using kafka-python.</li>
+                                <li>Scalable architecture for event-driven systems.</li>
+                            </ul>
+                            <div class="tech-tags">
+                                <span class="tech-tag">🐍 Python</span>
+                                <span class="tech-tag">📨 Kafka</span>
+                                <span class="tech-tag">🐳 Docker</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Employee Management -->
+                <div class="project-card">
+                    <div class="project-inner">
+                        <div class="project-front">
+                            <div class="project-image-container">
+                                <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=600&h=400&fit=crop"
+                                    alt="Employee Management" class="project-image">
+                                <div class="flip-icon"><i data-lucide="rotate-cw"></i></div>
+                            </div>
+                            <div class="project-content">
+                                <h4><i data-lucide="users"></i> Employee Management</h4>
+                                <p style="margin-top:0.5rem; color: var(--text-muted); font-size: 0.9rem;">
+                                    Robust backend system for record management.
+                                </p>
+                                <div style="display: flex; gap: 0.5rem; margin-top: auto;">
+                                    <a href="https://github.com/heyyitzaman/Employee-Management" class="project-link" target="_blank" onclick="event.stopPropagation();" title="View Code">
+                                        <i data-lucide="github"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="project-back">
+                            <div class="flip-icon"><i data-lucide="x"></i></div>
+                            <h4>Project Details</h4>
+                            <ul class="detail-list">
+                                <li>FastAPI backend for high performance.</li>
+                                <li>React frontend for responsive UI.</li>
+                                <li>Secure CRUD operations.</li>
+                                <li>PostgreSQL database integration.</li>
+                            </ul>
+                            <div class="tech-tags">
+                                <span class="tech-tag">⚡ FastAPI</span>
+                                <span class="tech-tag">🐘 PostgreSQL</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                 <!-- File Gateway -->
+                 <div class="project-card">
+                    <div class="project-inner">
+                        <div class="project-front">
+                            <div class="project-image-container">
+                                <img src="https://images.unsplash.com/photo-1518773553398-650c184e0bb3?w=600&h=400&fit=crop"
+                                    alt="File Gateway" class="project-image">
+                                <div class="flip-icon"><i data-lucide="rotate-cw"></i></div>
+                            </div>
+                            <div class="project-content">
+                                <h4><i data-lucide="folder-cog"></i> File Gateway</h4>
+                                 <p style="margin-top:0.5rem; color: var(--text-muted); font-size: 0.9rem;">
+                                    Automation tool for file system processing.
+                                </p>
+                                <div style="display: flex; gap: 0.5rem; margin-top: auto;">
+                                    <a href="https://github.com/heyyitzaman/file_gateway" class="project-link" target="_blank" onclick="event.stopPropagation();" title="View Code">
+                                        <i data-lucide="github"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="project-back">
+                            <div class="flip-icon"><i data-lucide="x"></i></div>
+                            <h4>Gateway Details</h4>
+                            <ul class="detail-list">
+                                <li>Watches directories for new files.</li>
+                                <li>Automatically moves files based on rules.</li>
+                                <li>Python automation for task efficiency.</li>
+                            </ul>
+                            <div class="tech-tags">
+                                <span class="tech-tag">🐍 Python</span>
+                                <span class="tech-tag">⚙️ Automation</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- LostFound -->
+                <div class="project-card">
+                    <div class="project-inner">
+                        <div class="project-front">
+                            <div class="project-image-container">
+                                <img src="https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?w=600&h=400&fit=crop"
+                                    alt="LostFound" class="project-image">
+                                <div class="flip-icon"><i data-lucide="rotate-cw"></i></div>
+                            </div>
+                            <div class="project-content">
+                                <h4><i data-lucide="search"></i> LostFound</h4>
+                                 <p style="margin-top:0.5rem; color: var(--text-muted); font-size: 0.9rem;">
+                                    Community platform for retrieving lost items.
+                                </p>
+                                <div style="display: flex; gap: 0.5rem; margin-top: auto;">
+                                    <a href="https://github.com/heyyitzaman/LostFound" class="project-link" target="_blank" onclick="event.stopPropagation();" title="View Code">
+                                        <i data-lucide="github"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="project-back">
+                            <div class="flip-icon"><i data-lucide="x"></i></div>
+                            <h4>Platform Details</h4>
+                            <ul class="detail-list">
+                                <li>Users can report lost or found items.</li>
+                                <li>Simple and effective search functionality.</li>
+                                <li>Community-driven data population.</li>
+                            </ul>
+                            <div class="tech-tags">
+                                <span class="tech-tag">⚡ Django</span>
+                                <span class="tech-tag">🐍 Python</span>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
 
-        <section class="section reveal">
-            <h2 class="section-title">
-                <i data-lucide="trophy"
-                    style="display: inline; width: 28px; height: 28px; vertical-align: middle; margin-right: 8px;"></i>
-                Achievements & Awards
-            </h2>
 
-            <div class="achievements-grid">
-                <div class="achievement-card hover-lift">
-                    <div class="achievement-icon-wrapper">
-                        <img src="https://cdn-icons-png.flaticon.com/512/1534/1534938.png" alt="Award">
-                    </div>
-                    <h4>Best Innovation Award</h4>
-                    <p>Recognized for developing an AI-powered feature that improved user engagement by 40%</p>
-                </div>
-
-                <div class="achievement-card hover-lift">
-                    <div class="achievement-icon-wrapper">
-                        <img src="https://cdn-icons-png.flaticon.com/512/2917/2917995.png" alt="GitHub">
-                    </div>
-                    <h4>Open Source Star</h4>
-                    <p>Active contributor with 500+ stars across GitHub repositories</p>
-                </div>
-
-                <div class="achievement-card hover-lift">
-                    <div class="achievement-icon-wrapper">
-                        <img src="https://cdn-icons-png.flaticon.com/512/3898/3898087.png" alt="Speaker">
-                    </div>
-                    <h4>Tech Speaker</h4>
-                    <p>Presented at 5+ developer conferences on modern web development</p>
-                </div>
-
-                <div class="achievement-card hover-lift">
-                    <div class="achievement-icon-wrapper">
-                        <img src="https://cdn-icons-png.flaticon.com/512/2232/2232688.png" alt="Writer">
-                    </div>
-                    <h4>Technical Writer</h4>
-                    <p>Published 20+ articles with 10K+ views on Medium</p>
-                </div>
-            </div>
-        </section>
-
+        <!-- EDUCATION & CERTIFICATIONS -->
         <section class="section reveal">
             <h2 class="section-title">
                 <i data-lucide="graduation-cap"
@@ -509,34 +564,154 @@
                         <i data-lucide="school" style="width: 32px; height: 32px;"></i>
                     </div>
                     <div>
-                        <h4>Bachelor of Technology in Computer Science</h4>
+                        <h4>Indian Institute of Information Technology, Design and Manufacturing, Kancheepuram</h4>
                         <p class="education-details">
-                            <strong>University Name</strong> • 2016 - 2020 • CGPA: 8.5/10
-                        </p>
-                    </div>
-                </div>
-
-                <div class="education-item hover-lift">
-                    <div class="education-icon">
-                        <i data-lucide="award" style="width: 32px; height: 32px;"></i>
-                    </div>
-                    <div>
-                        <h4>Professional Certifications</h4>
-                        <p class="education-details">
-                            AWS Certified Developer • MongoDB Certified • Meta Frontend Professional
+                            <strong>B.Tech in Computer Science & Engineering</strong> • 2019 - 2023 • CGPA: 8.73
                         </p>
                     </div>
                 </div>
             </div>
+
+            <div class="cert-grid">
+                 <!-- HackerRank -->
+                <div class="cert-card">
+                    <h4><i data-lucide="award"></i> Problem Solving (Basic)</h4>
+                    <p style="color:var(--text-muted); font-size:0.9rem;">HackerRank</p>
+                </div>
+                <div class="cert-card">
+                    <h4><i data-lucide="award"></i> Python (Basic)</h4>
+                    <p style="color:var(--text-muted); font-size:0.9rem;">HackerRank</p>
+                </div>
+                <div class="cert-card">
+                    <h4><i data-lucide="database"></i> SQL (Basic)</h4>
+                    <p style="color:var(--text-muted); font-size:0.9rem;">HackerRank</p>
+                </div>
+
+                <!-- Course Certifications (From Image) -->
+                <div class="cert-card">
+                    <h4>Introduction to Algorithms</h4>
+                    <p style="color:var(--text-muted); font-size:0.9rem;">NPTEL, 2021</p>
+                </div>
+                <div class="cert-card">
+                    <h4>Joy of Computing using Python</h4>
+                    <p style="color:var(--text-muted); font-size:0.9rem;">NPTEL, 2020</p>
+                </div>
+                <div class="cert-card">
+                    <h4>Python Data Structures</h4>
+                    <p style="color:var(--text-muted); font-size:0.9rem;">University of Michigan (Coursera), 2020</p>
+                </div>
+                <div class="cert-card">
+                    <h4>Web App Tech & Django</h4>
+                    <p style="color:var(--text-muted); font-size:0.9rem;">University of Michigan (Coursera), 2020</p>
+                </div>
+            </div>
         </section>
+        
+        <!-- ENGINEERING PROGRESSION (Interactive) -->
+        <section class="section reveal">
+             <h2 class="section-title">
+                <i data-lucide="map"
+                    style="display: inline; width: 28px; height: 28px; vertical-align: middle; margin-right: 8px;"></i>
+                Engineering Progression
+            </h2>
+            
+            <div class="progression-path">
+                <div class="progression-line"></div>
+                
+                <div class="progression-dot active" onclick="showPathStep(1, this)">
+                    <span class="progression-label">Junior</span>
+                </div>
+                <div class="progression-dot" onclick="showPathStep(2, this)">
+                    <span class="progression-label">Mid-Level</span>
+                </div>
+                <div class="progression-dot" onclick="showPathStep(3, this)">
+                    <span class="progression-label">Senior</span>
+                </div>
+                <div class="progression-dot" onclick="showPathStep(4, this)">
+                    <span class="progression-label">Lead</span>
+                </div>
+            </div>
+
+            <div class="progression-details">
+                <!-- Level 1 -->
+                <div class="progression-info active" id="step-1">
+                    <h3>Junior Engineer</h3>
+                    <p>
+                        Starting with the basics: Implementing straightforward APIs, writing clean modular code, and squashing bugs. 
+                        Learning the ecosystem and understanding the importance of testing and documentation.
+                    </p>
+                    <div class="progression-tags">
+                        <span class="tech-tag">🐛 Bug Fixes</span>
+                        <span class="tech-tag">🔌 Basic APIs</span>
+                        <span class="tech-tag">📝 Documentation</span>
+                    </div>
+                </div>
+
+                <!-- Level 2 -->
+                <div class="progression-info" id="step-2">
+                    <h3>Mid-Level Engineer</h3>
+                    <p>
+                        owning features from design to deployment. Designing schemas, optimizing queries, and handling larger components of the system.
+                        Beginning to think about scalability and maintainability of the codebase.
+                    </p>
+                    <div class="progression-tags">
+                        <span class="tech-tag">🏗️ Feature Design</span>
+                        <span class="tech-tag">⚡ Query Optimization</span>
+                        <span class="tech-tag">🤝 Code Reviews</span>
+                    </div>
+                </div>
+
+                <!-- Level 3 -->
+                <div class="progression-info" id="step-3">
+                    <h3>Senior Engineer</h3>
+                    <p>
+                        System-wide architecture and design patterns. Breaking down complex monoliths into microservices, ensuring high availability,
+                        and mentoring junior developers. Making critical tech stack decisions.
+                    </p>
+                    <div class="progression-tags">
+                        <span class="tech-tag">📐 System Architecture</span>
+                        <span class="tech-tag">☁️ High Availability</span>
+                        <span class="tech-tag">🧠 Mentorship</span>
+                    </div>
+                </div>
+                
+                <!-- Level 4 -->
+                <div class="progression-info" id="step-4">
+                    <h3>Lead / Staff Engineer</h3>
+                    <p>
+                        Driving technical strategy and cross-team collaboration. Solving organizational technical challenges and setting engineering standards.
+                        Focusing on the long-term health and evolution of the platform.
+                    </p>
+                    <div class="progression-tags">
+                        <span class="tech-tag">🚀 Tech Strategy</span>
+                        <span class="tech-tag">🌐 Distributed Systems</span>
+                        <span class="tech-tag">🛡️ Security & Compliance</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
     </main>
 
-    <footer class="container muted" style="margin-top:2rem; position: relative; z-index: 1;">
-        <div style="margin-bottom:0.5rem;">
+    <footer class="container muted">
+        <div style="margin-bottom: 1rem; font-size: 0.9rem; line-height: 1.6;">
+            <span style="opacity: 0.6;">Building systems, solving problems, </span>
+            <span style="color: var(--accent);">growing every day</span>
+            <span style="opacity: 0.6;"> 🌱</span>
+        </div>
+        <div style="margin-bottom: 0.75rem; font-size: 0.85rem; opacity: 0.5; font-style: italic;">
+            "The best code is written with empathy"
+        </div>
+        <div style="margin-bottom:0.5rem; font-size: 0.85rem;">
             Press <strong>H</strong> → Home · <strong>B</strong> → Blog · <strong>D</strong> → Diary
         </div>
     </footer>
 
+    <!-- External Scripts -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- stats_fetcher included but charts updated manually below -->
+    <script src="js/stats_fetcher.js"></script>
     <script src="js/base.js" defer></script>
     <script>
         // Initialize Lucide icons
@@ -545,9 +720,9 @@
         // Typing Effect
         const phrases = [
             'Full-Stack Developer 💻',
-            'Problem Solver 🧩',
-            'Tech Enthusiast 🚀',
-            'Open Source Contributor 🌟'
+            'Backend Specialist ⚙️',
+            'DevOps Enthusiast ☁️',
+            'Problem Solver 🧩'
         ];
         let phraseIndex = 0;
         let charIndex = 0;
@@ -579,48 +754,8 @@
 
         typeEffect();
 
-        // Counter animation (unified)
-        const animateCounter = (counter) => {
-            const target = +counter.getAttribute('data-target');
-            const duration = 2000;
-            const increment = target / (duration / 16);
-            let current = 0;
-
-            const updateCounter = () => {
-                current += increment;
-                if (current < target) {
-                    counter.textContent = Math.floor(current);
-                    requestAnimationFrame(updateCounter);
-                } else {
-                    counter.textContent = target + (target >= 100 ? '+' : '');
-                }
-            };
-
-            updateCounter();
-        };
-
-        const counterObserver = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    const counters = entry.target.querySelectorAll('.stat-number');
-                    counters.forEach(counter => {
-                        if (!counter.classList.contains('animated')) {
-                            counter.classList.add('animated');
-                            animateCounter(counter);
-                        }
-                    });
-                    counterObserver.unobserve(entry.target);
-                }
-            });
-        }, { threshold: 0.5 });
-
-        document.querySelectorAll('.stats-container').forEach(container => counterObserver.observe(container));
-
-
-
-        // Reveal animations (unified system)
+        // Reveal animations
         const reveals = document.querySelectorAll('.reveal');
-
         const observer = new IntersectionObserver(entries => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
@@ -629,7 +764,6 @@
                 }
             });
         }, { threshold: 0.15 });
-
         reveals.forEach(r => observer.observe(r));
 
         // Keyboard shortcuts
@@ -650,15 +784,86 @@
             }
         }
         setInterval(updateClock, 1000);
-        updateClock(); // Initial call
+        updateClock();
 
-        // Add hover sound effect (optional - requires audio file)
-        document.querySelectorAll('.project-card, .achievement-card, .skill-category').forEach(card => {
-            card.addEventListener('mouseenter', () => {
-                card.style.transition = 'all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275)';
+        // Chart.js Radar Chart (Skills)
+        const ctx = document.getElementById('skillsChart');
+        // Get CSS variables
+        const style = getComputedStyle(document.body);
+        const accentColor = style.getPropertyValue('--accent') || '#8b5cf6';
+        
+        // Data for backend-focused radar
+        new Chart(ctx, {
+            type: 'radar',
+            data: {
+                labels: ['Backend', 'System Design', 'DevOps', 'Databases', 'Cloud', 'Optimization'],
+                datasets: [{
+                    label: 'Proficiency',
+                    data: [95, 85, 90, 92, 85, 88],
+                    fill: true,
+                    backgroundColor: 'rgba(139, 92, 246, 0.2)',
+                    borderColor: '#8b5cf6',
+                    pointBackgroundColor: '#8b5cf6',
+                    pointBorderColor: '#fff',
+                    pointHoverBackgroundColor: '#fff',
+                    pointHoverBorderColor: '#8b5cf6'
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                elements: {
+                    line: { tension: 0.3 }
+                },
+                scales: {
+                    r: {
+                        angleLines: { color: 'rgba(255, 255, 255, 0.1)' },
+                        grid: { color: 'rgba(255, 255, 255, 0.1)' },
+                        pointLabels: {
+                             color: '#a1a1aa',
+                             font: { size: 12 }
+                        },
+                        ticks: { display: false, max: 100 }
+                    }
+                },
+                plugins: {
+                    legend: { display: false }
+                }
+            }
+        });
+
+        // Flip Card Logic
+        document.addEventListener('DOMContentLoaded', () => {
+    <!-- Custom Activity Graph Script injected later -->
+
+            // Custom Tooltips are handled inside stats_fetcher.js now
+
+
+            document.querySelectorAll('.flip-icon').forEach(icon => {
+                icon.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    const cardInner = icon.closest('.project-inner');
+                    if (cardInner) {
+                        cardInner.classList.toggle('is-flipped');
+                    }
+                });
             });
         });
+
+        // Path Interaction Logic
+        function showPathStep(step, element) {
+            // Update dots
+            document.querySelectorAll('.progression-dot').forEach(el => el.classList.remove('active'));
+            element.classList.add('active');
+
+            // Update content
+            document.querySelectorAll('.progression-info').forEach(info => {
+                info.classList.remove('active');
+            });
+            document.getElementById(`step-${step}`).classList.add('active');
+        }
+        
     </script>
 </body>
-
 </html>

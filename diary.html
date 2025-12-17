@@ -4,9 +4,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Diary - YourName</title>
+    <title>Diary - Aman Pandey</title>
     <link rel="stylesheet" href="css/base.css">
-    <link rel="stylesheet" href="css/layout.css">
     <link rel="stylesheet" href="css/components.css">
     <link rel="stylesheet" href="css/animations.css">
     <script src="https://unpkg.com/lucide@latest"></script>
@@ -20,7 +19,10 @@
 
     <header class="nav">
         <div class="container nav-inner">
-            <h2>Aman Pandey</h2>
+            <h2>
+				<img src="images/logo.png" alt="AP Logo" class="nav-logo">
+				Aman Pandey
+			</h2>
             <button class="hamburger" id="hamburger" aria-label="Toggle navigation" aria-expanded="false">
                 <span></span>
                 <span></span>
@@ -28,7 +30,7 @@
 
             <nav id="mobileNav">
                 <a href="index.html">Home</a>
-                <a href="about.html">Journey</a>
+                <a href="about.html">Profile</a>
                 <a href="blog.html">Blog</a>
                 <a href="diary.html">Diary</a>
                 <span class="live-clock" id="liveClock" style="font-variant-numeric: tabular-nums; opacity: 0.8; font-size: 0.9rem; margin-right: 0.5rem;"></span>
@@ -77,7 +79,17 @@
     </main>
 
     <footer class="container muted">
-        Press <strong>B</strong> → Blog · <strong>H</strong> → Home · <strong>J</strong> → My Journey
+        <div style="margin-bottom: 1rem; font-size: 0.9rem; line-height: 1.6;">
+            <span style="opacity: 0.6;">Capturing moments, </span>
+            <span style="color: var(--accent);">observing life</span>
+            <span style="opacity: 0.6;"> ✨</span>
+        </div>
+        <div style="margin-bottom: 0.75rem; font-size: 0.85rem; opacity: 0.5; font-style: italic;">
+            "In stillness, we find clarity"
+        </div>
+        <div style="margin-bottom:0.5rem; font-size: 0.85rem;">
+            Press <strong>B</strong> → Blog · <strong>H</strong> → Home · <strong>J</strong> → My Journey
+        </div>
     </footer>
     <script src="js/diary_entries.js"></script>
     <script src="js/base.js" defer></script>
@@ -106,8 +118,8 @@
             modal.classList.add('modal');
             modal.id = entry.id;
             modal.innerHTML = `
-                <button class="close">&times;</button>
                 <div class="modal-content" style="font-family: 'Georgia', serif;">
+                    <button class="close">&times;</button>
                     ${entry.image ? `<img src="${entry.image}" alt="${entry.title}" style="width: 100%; max-height: 300px; object-fit: cover; border-radius: 12px 12px 0 0;">` : ""}
                     <div style="padding: 2.5rem;">
                         <p class="diary-date" style="text-align: center;">${entry.date}</p>
@@ -144,7 +156,20 @@
             if (btn) {
                 const modalId = btn.dataset.modal;
                 const modal = document.getElementById(modalId);
-                if (modal) modal.classList.add('active');
+                if (modal) {
+                    modal.classList.add('active');
+                    // Scroll to center the modal in viewport
+                    setTimeout(() => {
+                        const modalContent = modal.querySelector('.modal-content');
+                        if (modalContent) {
+                            const modalRect = modalContent.getBoundingClientRect();
+                            const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+                            const targetScroll = scrollTop + modalRect.top - (window.innerHeight / 2) + (modalRect.height / 2);
+                            window.scrollTo({ top: Math.max(0, targetScroll), behavior: 'smooth' });
+                            modalContent.scrollTop = 0;
+                        }
+                    }, 50);
+                }
             }
         });
 

@@ -4,17 +4,16 @@
 <head>
 	<meta charset="UTF-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-	<title>Intro - Aman Pandey</title>
+	<title>Home - Aman Pandey</title>
 
 	<link rel="stylesheet" href="css/base.css" />
-	<link rel="stylesheet" href="css/layout.css" />
 	<link rel="stylesheet" href="css/components.css" />
 	<link rel="stylesheet" href="css/animations.css" />
 
 	<style>
 		/* Page-specific hero styles */
 		main>section.reveal:first-of-type {
-			margin-top: 4rem;
+			margin-top: 1.5rem;
 			margin-bottom: 2rem;
 		}
 
@@ -114,14 +113,17 @@
 
 	<header class="nav">
 		<div class="container nav-inner">
-			<h2>Aman Pandey</h2>
+			<h2>
+				<img src="images/logo.png" alt="AP Logo" class="nav-logo">
+				Aman Pandey
+			</h2>
 			<button class="hamburger" id="hamburger" aria-label="Toggle navigation" aria-expanded="false">
 				<span></span>
 				<span></span>
 			</button>
 
 			<nav id="mobileNav">
-				<a href="about.html">Journey</a>
+				<a href="about.html">Profile</a>
 				<a href="blog.html">Blog</a>
 				<a href="diary.html">Diary</a>
 				<span class="live-clock" id="liveClock" style="font-variant-numeric: tabular-nums; opacity: 0.8; font-size: 0.9rem; margin-right: 0.5rem;"></span>
@@ -180,28 +182,6 @@
 			</p>
 
 			<div class="hero-divider"></div>
-		</section>
-
-		<!-- STATS -->
-		<section class="reveal">
-			<div class="stats-grid">
-				<div class="stat-item hover-lift">
-					<span class="stat-number counter-animated" data-target="500">0</span>
-					<div class="stat-label">Problems Solved</div>
-				</div>
-				<div class="stat-item hover-lift">
-					<span class="stat-number counter-animated" data-target="50">0</span>
-					<div class="stat-label">Blog Posts</div>
-				</div>
-				<div class="stat-item hover-lift">
-					<span class="stat-number counter-animated" data-target="100">0</span>
-					<div class="stat-label">Diary Entries</div>
-				</div>
-				<div class="stat-item hover-lift">
-					<span class="stat-number counter-animated" data-target="10">0</span>
-					<div class="stat-label">Projects Built</div>
-				</div>
-			</div>
 		</section>
 
 		<!-- DUAL IDENTITY -->
@@ -429,10 +409,19 @@
 
 	</main>
 
-	<footer class="container muted" style="margin-top:2rem;">
-		<div style="margin-bottom:0.5rem;">
-			Press <strong>H</strong> → Home · <strong>B</strong> → Blog · <strong>D</strong> → Diary ·
-			<strong>J</strong> → Journey
+	<footer class="container muted">
+		<div style="margin-bottom: 1rem; font-size: 0.9rem; line-height: 1.6;">
+			<span style="opacity: 0.6;">Built with </span>
+			<span style="color: var(--accent);">❤️</span>
+			<span style="opacity: 0.6;"> and </span>
+			<span style="color: var(--accent);">☕</span>
+			<span style="opacity: 0.6;"> by someone who sees poetry in algorithms</span>
+		</div>
+		<div style="margin-bottom: 0.75rem; font-size: 0.85rem; opacity: 0.5; font-style: italic;">
+			"Where code meets creativity, logic meets beauty"
+		</div>
+		<div style="margin-bottom:0.5rem; font-size: 0.85rem;">
+			Press <strong>B</strong> → Blog · <strong>D</strong> → Diary · <strong>P</strong> → Profile
 		</div>
 	</footer>
 
@@ -540,10 +529,9 @@
 
 		// Keyboard shortcuts
 		document.addEventListener('keydown', e => {
-			if (e.key.toLowerCase() === 'h') location.href = 'index.html';
 			if (e.key.toLowerCase() === 'b') location.href = 'blog.html';
 			if (e.key.toLowerCase() === 'd') location.href = 'diary.html';
-			if (e.key.toLowerCase() === 'j') location.href = 'about.html';
+			if (e.key.toLowerCase() === 'p') location.href = 'about.html';
 		});
 
 		// Reveal animation
