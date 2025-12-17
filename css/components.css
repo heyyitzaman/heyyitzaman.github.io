@@ -376,8 +376,8 @@ body[data-page="about"] .nav a[href="about.html"]::after {
   .filament,
   .glow,
   .rays {
-    transition: none !important;
-    animation: none !important;
+    transition: none;
+    animation: none;
   }
 }
 
@@ -448,7 +448,7 @@ body[data-page="about"] .nav a[href="about.html"]::after {
 }
 
 .nav.menu-open {
-  transform: translateY(0) !important;
+  transform: translateY(0);
 }
 
 .button {
@@ -1359,11 +1359,11 @@ body[data-page="blog"] .modal-content strong {
 
 /* Flip Card Styles for Projects */
 .project-card {
-    background-color: transparent !important; /* Override default card bg */
+    background-color: transparent; /* Override default card bg */
     perspective: 1000px;
     height: 480px; /* Fixed height increased to prevent scroll */
-    border: none !important;
-    padding: 0 !important;
+    border: none;
+    padding: 0;
 }
 
 .project-inner {
@@ -1546,7 +1546,7 @@ body[data-page="blog"] .modal-content strong {
     }
     
     .project-inner {
-        transform: none !important; /* Ensure no accidental flips */
+        transform: none; /* Ensure no accidental flips */
     }
     
     .project-back {
@@ -1565,9 +1565,9 @@ body[data-page="blog"] .modal-content strong {
 @media (hover: none) {
     .project-links,
     .card-hover .glow-button {
-      opacity: 1 !important;
-      visibility: visible !important;
-      transform: none !important;
+      opacity: 1;
+      visibility: visible;
+      transform: none;
     }
 }
 
@@ -2058,8 +2058,8 @@ body[data-page="diary"] .modal-content h2 {
 html[data-theme="dark"] .diary-entry-card,
 body[data-theme="dark"] .diary-entry-card,
 [data-theme="dark"] .diary-entry-card {
-    background: #18181b !important; /* Zinc 900 */
-    color: #e4e4e7 !important;
+    background: #18181b; /* Zinc 900 */
+    color: #e4e4e7;
     border: 1px solid rgba(255, 255, 255, 0.08);
 }
 
@@ -2133,7 +2133,7 @@ body[data-page="diary"] .modal .close:hover {
     padding: 1.5rem;
     margin: 0;
     overflow-x: auto;
-    background: #1e1e1e !important;
+    background: #1e1e1e;
 }
 
 .code-content.active {
@@ -2201,50 +2201,50 @@ body[data-page="home"] section:first-of-type {
 
 /* GitHub Calendar Customization */
 .calendar {
-    border: 1px solid var(--border) !important;
+    border: 1px solid var(--border);
     border-radius: 12px;
     padding: 1rem;
     background: var(--surface);
-    overflow: visible !important; 
+    overflow: visible; 
     min-height: auto;
     position: relative;
     z-index: 5; /* Ensure calendar is above background */
 }
 .contrib-footer, .contrib-legend {
-    display: none !important;
+    display: none;
 }
 .calendar a, .calendar h2 {
-    display: none !important;
+    display: none;
 }
 .js-calendar-graph, .js-calendar-graph-svg {
-    display: block !important;
-    overflow: visible !important;
-    width: 100% !important;
+    display: block;
+    overflow: visible;
+    width: 100%;
 }
 /* Force interactivity on the rects */
 .js-calendar-graph-svg rect.ContributionCalendar-day {
-    pointer-events: all !important; 
+    pointer-events: all; 
     cursor: pointer;
 }
 /* Tooltip styling fixes - Github Calendar uses .svg-tip or aria-label */
 .svg-tip {
-    z-index: 10000 !important;
-    position: fixed !important; /* Fixed to viewport to avoid overflow clipping */
-    background: rgba(0,0,0,0.9) !important;
-    color: white !important;
-    padding: 8px 12px !important;
-    border-radius: 6px !important;
-    font-size: 12px !important;
-    line-height: 1.4 !important;
-    pointer-events: none !important;
-    transform: translate(-50%, -100%) !important; /* Position above cursor */
-    margin-top: -10px !important;
-    white-space: nowrap !important;
-    box-shadow: 0 4px 6px rgba(0,0,0,0.3) !important;
+    z-index: 10000;
+    position: fixed; /* Fixed to viewport to avoid overflow clipping */
+    background: rgba(0,0,0,0.9);
+    color: white;
+    padding: 8px 12px;
+    border-radius: 6px;
+    font-size: 12px;
+    line-height: 1.4;
+    pointer-events: none;
+    transform: translate(-50%, -100%); /* Position above cursor */
+    margin-top: -10px;
+    white-space: nowrap;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.3);
 }
 .calendar-graph text.month {
     font-size: 10px;
-    fill: var(--text-muted) !important;
+    fill: var(--text-muted);
 }
 
 /* Interactive Engineering Path (Dot Style) */
@@ -2351,7 +2351,7 @@ body[data-page="home"] section:first-of-type {
     display: inline-flex;
     justify-content: center;
     align-items: center;
-    color: var(--text-muted) !important; 
+    color: var(--text-muted); 
     font-size: 1.2rem;
     text-decoration: none;
     padding: 8px;
@@ -2369,7 +2369,7 @@ body[data-page="home"] section:first-of-type {
     margin-right: 0; /* Remove margin since no text */
 }
 .project-link:hover {
-    color: var(--accent) !important;
+    color: var(--accent);
     background: color-mix(in srgb, var(--accent) 10%, transparent);
     transform: scale(1.1);
 }
