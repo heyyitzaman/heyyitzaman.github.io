@@ -1,0 +1,39 @@
+<svg width="512" height="512" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg" fill="none">
+
+  <!-- Gradient -->
+  <defs>
+    <linearGradient id="apGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#22d3ee"></stop>
+      <stop offset="50%" stop-color="#6366f1"></stop>
+      <stop offset="100%" stop-color="#ec4899"></stop>
+    </linearGradient>
+  </defs>
+
+  <!-- Letter A -->
+  <path d="M120 420 L200 80 H260 L340 420 H290 L270 350 H190 L170 420 Z
+       M205 300 H255 L230 200 Z" fill="url(#apGradient)"></path>
+
+  <!-- Letter P -->
+  <path d="M330 80 H410 C460 80 480 120 480 160
+       C480 200 460 240 410 240 H370 V420 H330 Z
+       M370 120 V200 H405 C425 200 435 185 435 160
+       C435 135 425 120 405 120 Z" fill="url(#apGradient)"></path>
+
+  <!-- Circuit lines -->
+  <g stroke="white" stroke-width="10" stroke-linecap="round">
+    <line x1="240" y1="220" x2="320" y2="180"></line>
+    <line x1="240" y1="250" x2="320" y2="250"></line>
+    <line x1="240" y1="280" x2="320" y2="320"></line>
+  </g>
+
+  <!-- Circuit nodes -->
+  <g fill="white">
+    <circle cx="240" cy="220" r="8"></circle>
+    <circle cx="240" cy="250" r="8"></circle>
+    <circle cx="240" cy="280" r="8"></circle>
+    <circle cx="320" cy="180" r="8"></circle>
+    <circle cx="320" cy="250" r="8"></circle>
+    <circle cx="320" cy="320" r="8"></circle>
+  </g>
+
+</svg>

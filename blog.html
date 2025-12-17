@@ -4,7 +4,9 @@
 <head>
 	<meta charset="UTF-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-	<title>Blog - Aman Pandey</title>
+	<link rel="icon" type="image/svg+xml" href="images/favicon.svg">
+	<link rel="icon" type="image/png" href="images/favicon.png">
+	<title>About - Aman Pandey</title>
 
 	<link rel="stylesheet" href="css/base.css" />
 	<link rel="stylesheet" href="css/components.css" />
@@ -32,11 +34,32 @@
 
 			<nav id="mobileNav">
 				<a href="index.html">Home</a>
-				<a href="about.html">Journey</a>
+				<a href="about.html">Profile</a>
 				<a href="blog.html">Blog</a>
 				<a href="diary.html">Diary</a>
 				<span class="live-clock" id="liveClock" style="font-variant-numeric: tabular-nums; opacity: 0.8; font-size: 0.9rem; margin-right: 0.5rem;"></span>
-				<span class="theme-toggle" id="themeToggle">☀ / 🌙</span>
+				<span class="theme-toggle" id="themeToggle">
+					<div class="glow"></div>
+					<div class="rays">
+						<div class="ray"></div>
+						<div class="ray"></div>
+						<div class="ray"></div>
+						<div class="ray"></div>
+						<div class="ray"></div>
+						<div class="ray"></div>
+						<div class="ray"></div>
+						<div class="ray"></div>
+					</div>
+					<div class="bulb">
+						<div class="filament"></div>
+					</div>
+					<div class="bulb-base"></div>
+					<div class="bulb-threads">
+						<div class="thread"></div>
+						<div class="thread"></div>
+						<div class="thread"></div>
+					</div>
+				</span>
 			</nav>
 
 		</div>
@@ -89,7 +112,7 @@
 			"Learning in public, growing together"
 		</div>
 		<div style="margin-bottom:0.5rem; font-size: 0.85rem;">
-			Press <strong>H</strong> → Home · <strong>D</strong> → Diary · <strong>J</strong> → My Journey
+			Press <strong>H</strong> → Home · <strong>D</strong> → Diary · <strong>P</strong> → My Profile
 		</div>
 	</footer>
 
@@ -190,6 +213,11 @@
 				}
 			});
 		});
+		document.addEventListener('keydown', e => {
+				if (e.key.toLowerCase() === 'D') location.href = 'diary.html';
+				if (e.key.toLowerCase() === 'h') location.href = 'index.html';
+				if (e.key.toLowerCase() === 'p') location.href = 'about.html';
+			});
 	</script>
 </body>
 
